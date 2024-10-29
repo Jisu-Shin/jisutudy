@@ -4,12 +4,12 @@ package com.jisutudy.customer;
 public class Cust {
     private Long id;
     private String phoneNumber;
-    private MsgConsentType msgConsentType;
+    private CustSmsConsentType smsConsentType;
 
-    public Cust(Long id, String phoneNumber, MsgConsentType msgConsentType) {
+    public Cust(Long id, String phoneNumber, CustSmsConsentType smsConsentType) {
         this.id = id;
         this.phoneNumber = phoneNumber;
-        this.msgConsentType = msgConsentType;
+        this.smsConsentType = smsConsentType;
     }
 
     public Long getId() {
@@ -28,11 +28,11 @@ public class Cust {
         this.phoneNumber = phoneNumber;
     }
 
-    public MsgConsentType getMsgConsentType() {
-        return msgConsentType;
+    public CustSmsConsentType getMsgConsentType() {
+        return smsConsentType;
     }
 
-    public void setMsgConsentType(MsgConsentType msgConsentType) {
-        this.msgConsentType = msgConsentType;
+    public void setMsgConsentType(CustSmsConsentType smsConsentType) {
+        this.smsConsentType = smsConsentType;
     }
 }
