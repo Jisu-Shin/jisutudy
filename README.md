@@ -3,6 +3,8 @@
 ---
 
 ### [1. 문자 발송 서비스 설계 및 구현](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/문자%20발송%20서비스%20설계%20및%20구현.md)
+### [2. OCP, DIP 위반 해결방법](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/OCP,%20DIP%20위반%20해결방법.md)
+### [3. 스프링으로 전환하기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/스프링으로%20전환하기.md)
 
 
 # 🚫 문제-해결

@@ -10,6 +10,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,17 +21,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SmsFilterImplTest {
 
-    SmsFilter smsFilter;
-    SmsRepository smsRepository;
-    CustRepository custRepository;
+    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+    SmsFilter smsFilter = ac.getBean("smsFilter", SmsFilter.class);
+    SmsRepository smsRepository = ac.getBean("smsRepository", SmsRepository.class);
+    CustRepository custRepository = ac.getBean("custRepository", CustRepository.class);
 
     @BeforeEach
     void init() {
-        AppConfig appConfig = new AppConfig();
-        smsFilter = appConfig.smsFilter();
-        smsRepository = appConfig.getSmsRepository();
-        custRepository = appConfig.getCustRepository();
-
         Cust cust = new Cust(2L, "01012345678", CustSmsConsentType.ALL_ALLOW);
         custRepository.save(cust);
 

@@ -6,7 +6,10 @@ import com.jisutudy.customer.CustService;
 import com.jisutudy.customer.CustSmsConsentType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,12 +20,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SmsServiceImplTest {
 
-    static AppConfig appConfig = new AppConfig();
-    static CustService custService = appConfig.custService();
-    static SmsService smsService = appConfig.smsService();
+//    static AppConfig appConfig = new AppConfig();
+//    static CustService custService = appConfig.custService();
+//    static SmsService smsService = appConfig.smsService();
+    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+    CustService custService = ac.getBean("custService", CustService.class);
+    SmsService smsService = ac.getBean("smsService", SmsService.class);
 
-    @BeforeAll
-    static void sendSmsList() {
+    @BeforeEach
+    void sendSmsList() {
         Cust c6 = new Cust(6L, "666", CustSmsConsentType.ALL_ALLOW);
         Cust c7 = new Cust(7L, "777", CustSmsConsentType.ALL_ALLOW);
         Cust c8 = new Cust(8L, "888", CustSmsConsentType.ALL_DENY);
@@ -49,7 +55,6 @@ class SmsServiceImplTest {
     void findSmsList() {
         sendSms();
         List<Sms> smsList = smsService.findSmsList(LocalDate.now().atTime(0, 0), LocalDate.now().plusDays(1).atTime(0, 0));
-
         Assertions.assertThat(smsList.size()).isEqualTo(5);
     }
 }

@@ -10,32 +10,41 @@ import com.jisutudy.sms.SmsService;
 import com.jisutudy.sms.SmsServiceImpl;
 import com.jisutudy.sms.filter.SmsFilter;
 import com.jisutudy.sms.filter.SmsFilterImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class AppConfig {
+
+    @Bean
     public SmsService smsService() {
         return new SmsServiceImpl(
-                getSmsRepository(),
-                getCustRepository(),
+                smsRepository(),
+                custRepository(),
                 smsFilter()
         );
     }
 
+    @Bean
     public CustService custService() {
-        return new CustServiceImpl(getCustRepository());
+        return new CustServiceImpl(custRepository());
     }
 
+    @Bean
     public SmsFilter smsFilter() {
         return  new SmsFilterImpl(
-                getSmsRepository(),
-                getCustRepository()
+                smsRepository(),
+                custRepository()
         );
     }
 
-    public CustRepository getCustRepository() {
+    @Bean
+    public CustRepository custRepository() {
         return new MemoryCustRepository();
     }
 
-    public SmsRepository getSmsRepository() {
+    @Bean
+    public SmsRepository smsRepository() {
         return new MemorySmsRepository();
     }
 

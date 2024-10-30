@@ -3,13 +3,17 @@ package com.jisutudy.customer;
 import com.jisutudy.AppConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.*;
 
 class CustServiceImplTest {
 
-    AppConfig appConfig = new AppConfig();
-    CustService custService = appConfig.custService();
+//    AppConfig appConfig = new AppConfig();
+//    CustService custService = appConfig.custService();
+    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+    CustService custService = ac.getBean("custService",CustService.class);
 
     @Test
     @DisplayName("고객 등록하기")
