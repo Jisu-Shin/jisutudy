@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MemorySmsRepository implements SmsRepository{
-    private final Map<Long, Sms> store = new ConcurrentHashMap<>();
+    private static Map<Long, Sms> store = new ConcurrentHashMap<>();
 
     @Override
     public void save(Sms sms) {
