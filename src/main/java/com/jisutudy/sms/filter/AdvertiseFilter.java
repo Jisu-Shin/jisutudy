@@ -1,15 +1,21 @@
 package com.jisutudy.sms.filter;
 
 import com.jisutudy.sms.Sms;
+import com.jisutudy.sms.SmsType;
 
 import java.util.List;
 
 public class AdvertiseFilter {
     // 한 고객에게 광고성 문자는 하루에 2개만 발송할 수 있다.
-    public boolean isSendable(List<Sms> todaySmsList, Long custId){
+    public boolean isSendable(List<Sms> todaySmsList, Sms sms){
+        if (SmsType.ADVERTISING != sms.getSmsType()) {
+            return true;
+        }
+
         int cnt = 0;
-        for (Sms sms : todaySmsList) {
-            if (sms.getCustId().equals(custId)) {
+        for (Sms todaySms : todaySmsList) {
+            if (sms.getCustId().equals(todaySms.getCustId()) &&
+                    SmsType.ADVERTISING == todaySms.getSmsType()) {
                 cnt++;
             }
         }
