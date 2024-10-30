@@ -1,5 +1,6 @@
 package com.jisutudy.customer;
 
+import com.jisutudy.AppConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,8 @@ import static org.assertj.core.api.Assertions.*;
 
 class CustServiceImplTest {
 
-    CustService custService = new CustServiceImpl();
+    AppConfig appConfig = new AppConfig();
+    CustService custService = appConfig.custService();
 
     @Test
     @DisplayName("고객 등록하기")

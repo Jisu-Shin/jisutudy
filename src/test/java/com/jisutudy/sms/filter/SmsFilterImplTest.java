@@ -1,5 +1,6 @@
 package com.jisutudy.sms.filter;
 
+import com.jisutudy.AppConfig;
 import com.jisutudy.customer.Cust;
 import com.jisutudy.customer.CustRepository;
 import com.jisutudy.customer.CustSmsConsentType;
@@ -18,12 +19,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SmsFilterImplTest {
 
-    private final CustRepository custRepository = new MemoryCustRepository();
-    private final SmsRepository smsRepository = new MemorySmsRepository();
-    private final SmsFilter smsFilter = new SmsFilterImpl();
+    SmsFilter smsFilter;
+    SmsRepository smsRepository;
+    CustRepository custRepository;
 
     @BeforeEach
     void init() {
+        AppConfig appConfig = new AppConfig();
+        smsFilter = appConfig.smsFilter();
+        smsRepository = appConfig.getSmsRepository();
+        custRepository = appConfig.getCustRepository();
+
         Cust cust = new Cust(2L, "01012345678", CustSmsConsentType.ALL_ALLOW);
         custRepository.save(cust);
 
@@ -35,7 +41,8 @@ class SmsFilterImplTest {
     @Test
     @DisplayName("정상")
     void filter() {
-        Sms sms = new Sms(1L, 2L, null, "문자발송", LocalDateTime.now(), SmsType.INFORMAITONAL);
+        LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(19,0));
+        Sms sms = new Sms(1L, 2L, null, "문자발송", ldt, SmsType.INFORMAITONAL);
         SmsResult smsResult = smsFilter.filter(sms);
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.SUCCESS);
     }
@@ -52,7 +59,8 @@ class SmsFilterImplTest {
     @Test
     @DisplayName("고객동의 필터링")
     void filterByCustConsent() {
-        Sms sms = new Sms(1L, 3L, null, "문자발송", LocalDateTime.now(), SmsType.INFORMAITONAL);
+        LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(19,0));
+        Sms sms = new Sms(1L, 3L, null, "문자발송", ldt, SmsType.INFORMAITONAL);
         SmsResult smsResult = smsFilter.filter(sms);
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.CUST_REJECT);
     }
@@ -60,9 +68,10 @@ class SmsFilterImplTest {
     @Test
     @DisplayName("광고메시지 필터링")
     void filterByAdvertise() {
-        Sms sms1 = new Sms(1L, 2L, null, "문자발송", LocalDateTime.now(), SmsType.ADVERTISING);
-        Sms sms2 = new Sms(2L, 2L, null, "문자발송", LocalDateTime.now(), SmsType.ADVERTISING);
-        Sms sms3 = new Sms(3L, 2L, null, "문자발송", LocalDateTime.now(), SmsType.ADVERTISING);
+        LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(19,0));
+        Sms sms1 = new Sms(1L, 2L, null, "문자발송", ldt, SmsType.ADVERTISING);
+        Sms sms2 = new Sms(2L, 2L, null, "문자발송", ldt, SmsType.ADVERTISING);
+        Sms sms3 = new Sms(3L, 2L, null, "문자발송", ldt, SmsType.ADVERTISING);
         smsRepository.save(sms1);
         smsRepository.save(sms2);
         SmsResult smsResult = smsFilter.filter(sms3);

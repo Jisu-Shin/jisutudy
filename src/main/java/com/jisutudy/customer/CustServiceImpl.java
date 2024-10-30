@@ -2,7 +2,11 @@ package com.jisutudy.customer;
 
 public class CustServiceImpl implements CustService{
 
-    private final CustRepository repository = new MemoryCustRepository();
+    private final CustRepository repository;
+
+    public CustServiceImpl(CustRepository custRepository) {
+        this.repository = new MemoryCustRepository();
+    }
 
     @Override
     public void join(Cust cust) {

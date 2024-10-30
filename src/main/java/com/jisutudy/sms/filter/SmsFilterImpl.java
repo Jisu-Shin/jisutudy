@@ -15,8 +15,13 @@ import java.util.List;
 
 public class SmsFilterImpl implements SmsFilter{
 
-    private final SmsRepository smsRepository = new MemorySmsRepository();
-    private final CustRepository custRepository = new MemoryCustRepository();
+    private final SmsRepository smsRepository;
+    private final CustRepository custRepository;
+
+    public SmsFilterImpl(SmsRepository smsRepository, CustRepository custRepository) {
+        this.smsRepository = new MemorySmsRepository();
+        this.custRepository = new MemoryCustRepository();
+    }
 
     @Override
     public SmsResult filter(Sms sms) {
