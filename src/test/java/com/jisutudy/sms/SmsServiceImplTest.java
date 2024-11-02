@@ -20,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SmsServiceImplTest {
 
-//    static AppConfig appConfig = new AppConfig();
-//    static CustService custService = appConfig.custService();
-//    static SmsService smsService = appConfig.smsService();
+//  AppConfig appConfig = new AppConfig();
+//  CustService custService = appConfig.custService();
+//  SmsService smsService = appConfig.smsService();
     ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
     CustService custService = ac.getBean("custService", CustService.class);
     SmsService smsService = ac.getBean("smsService", SmsService.class);
