@@ -1,9 +1,9 @@
 # 스프링 핵심원리 개인 공부
 
-### [1. 문자 발송 서비스 설계 및 구현](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/문자%20발송%20서비스%20설계%20및%20구현.md)
-### [2. OCP, DIP 위반 해결방법](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/OCP,%20DIP%20위반%20해결방법.md)
-### [3. 스프링으로 전환하기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/스프링으로%20전환하기.md)
-### [4. 싱글톤 컨테이너](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/싱글톤%20컨테이너.md)
+### [1. 문자 발송 서비스 설계 및 구현](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/1.%20문자%20발송%20서비스%20설계%20및%20구현.md)
+### [2. OCP, DIP 위반 해결방법](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/2.%20OCP,%20DIP%20위반%20해결방법.md)
+### [3. 스프링으로 전환하기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/3.%20스프링으로%20전환하기.md)
+### [4. 싱글톤 컨테이너](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/4.%20싱글톤%20컨테이너.md)
 
 # 🚫 문제-해결
 <details> 
