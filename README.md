@@ -4,6 +4,7 @@
 ### [2. OCP, DIP 위반 해결방법](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/2.%20OCP,%20DIP%20위반%20해결방법.md)
 ### [3. 스프링으로 전환하기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/3.%20스프링으로%20전환하기.md)
 ### [4. 싱글톤 컨테이너](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/4.%20싱글톤%20컨테이너.md)
+### [5. 컴포넌트 스캔](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/5.%20컴포넌트%20스캔.md)
 
 # 🚫 문제-해결
 <details> 
