@@ -23,7 +23,7 @@
 <details> 
 	<summary><b>🔍 5) NoSuchBeanDefinitonException</b></summary>
 	<div markdown = "1">
-	![스크린샷 2024-11-10 오후 9 52 43](https://github.com/user-attachments/assets/0d7a47b7-9e69-4fec-b983-513bcd884f12)
+	<img src ="https://github.com/user-attachments/assets/0d7a47b7-9e69-4fec-b983-513bcd884f12">
 		<ul>
 		<li>원인 : 스프링컨테이너에서 빈 이름을 찾을때 custService로 찾고 있었다</li>
 		<li>해결책 : 빈이름 파라미터를 빼고 클래스로만 스프링빈을 찾게 코드를 수정했다</li>
