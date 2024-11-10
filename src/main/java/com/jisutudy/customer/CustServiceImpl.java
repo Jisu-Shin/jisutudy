@@ -1,9 +1,14 @@
 package com.jisutudy.customer;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class CustServiceImpl implements CustService{
 
     private final CustRepository repository;
 
+    @Autowired
     public CustServiceImpl(CustRepository custRepository) {
         this.repository = new MemoryCustRepository();
     }

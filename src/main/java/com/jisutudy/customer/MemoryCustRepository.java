@@ -1,8 +1,11 @@
 package com.jisutudy.customer;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Component
 public class MemoryCustRepository implements CustRepository{
 
     // 동시성 이슈로 HashMap대신 ConcurrentHashMap 사용

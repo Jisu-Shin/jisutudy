@@ -17,10 +17,10 @@ public class SingtletonTest {
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
         //1. 조회: 호출할 때마다 같은 객체를 반환
-        SmsService smsService1 = ac.getBean("smsService", SmsService.class);
+        SmsService smsService1 = ac.getBean(SmsService.class);
 
         //2. 조회: 호출할 때마다 같은 객체를 반환
-        SmsService smsService2 = ac.getBean("smsService", SmsService.class);
+        SmsService smsService2 = ac.getBean(SmsService.class);
 
         //참조값이 같은 것을 확인
         assertThat(smsService1).isSameAs(smsService2);

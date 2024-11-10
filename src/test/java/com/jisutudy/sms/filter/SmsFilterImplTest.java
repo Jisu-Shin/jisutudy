@@ -4,7 +4,6 @@ import com.jisutudy.AppConfig;
 import com.jisutudy.customer.Cust;
 import com.jisutudy.customer.CustRepository;
 import com.jisutudy.customer.CustSmsConsentType;
-import com.jisutudy.customer.MemoryCustRepository;
 import com.jisutudy.sms.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,14 +16,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SmsFilterImplTest {
 
     ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
     SmsFilter smsFilter = ac.getBean("smsFilter", SmsFilter.class);
-    SmsRepository smsRepository = ac.getBean("smsRepository", SmsRepository.class);
-    CustRepository custRepository = ac.getBean("custRepository", CustRepository.class);
+    SmsRepository smsRepository = ac.getBean(SmsRepository.class);
+    CustRepository custRepository = ac.getBean(CustRepository.class);
 
     @BeforeEach
     void init() {

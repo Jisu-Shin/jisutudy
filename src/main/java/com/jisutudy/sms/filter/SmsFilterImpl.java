@@ -7,17 +7,21 @@ import com.jisutudy.sms.MemorySmsRepository;
 import com.jisutudy.sms.Sms;
 import com.jisutudy.sms.SmsRepository;
 import com.jisutudy.sms.SmsResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+@Component("smsFilter")
 public class SmsFilterImpl implements SmsFilter{
 
     private final SmsRepository smsRepository;
     private final CustRepository custRepository;
 
+    @Autowired
     public SmsFilterImpl(SmsRepository smsRepository, CustRepository custRepository) {
         this.smsRepository = new MemorySmsRepository();
         this.custRepository = new MemoryCustRepository();

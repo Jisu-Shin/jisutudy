@@ -13,7 +13,7 @@ class CustServiceImplTest {
 //    AppConfig appConfig = new AppConfig();
 //    CustService custService = appConfig.custService();
     ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    CustService custService = ac.getBean("custService",CustService.class);
+    CustService custService = ac.getBean(CustService.class);
 
     @Test
     @DisplayName("고객 등록하기")

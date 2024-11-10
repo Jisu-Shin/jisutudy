@@ -24,8 +24,8 @@ class SmsServiceImplTest {
 //  CustService custService = appConfig.custService();
 //  SmsService smsService = appConfig.smsService();
     ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    CustService custService = ac.getBean("custService", CustService.class);
-    SmsService smsService = ac.getBean("smsService", SmsService.class);
+    CustService custService = ac.getBean(CustService.class);
+    SmsService smsService = ac.getBean(SmsService.class);
 
     @BeforeEach
     void sendSmsList() {
