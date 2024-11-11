@@ -29,7 +29,7 @@
 		<li>원인 : 스프링컨테이너에서 빈 이름을 찾을때 custService로 찾고 있었다</li>
 		<li>해결책 : 빈이름 파라미터를 빼고 클래스로만 스프링빈을 찾게 코드를 수정했다</li>
 			<ul>
-				<li>또 다른 해결책 : value를 이용해 빈이름을 지정해준다 @Component("smsFilter") </li>
+				<li>또 다른 해결책 : value를 이용해 빈이름을 지정해준다 @Component("smsFilter") </li>
 			</ul>
 		</ul>
 	</div>
