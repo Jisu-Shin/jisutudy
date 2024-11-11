@@ -5,6 +5,7 @@
 ### [3. 스프링으로 전환하기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/3.%20스프링으로%20전환하기.md)
 ### [4. 싱글톤 컨테이너](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/4.%20싱글톤%20컨테이너.md)
 ### [5. 컴포넌트 스캔](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/5.%20컴포넌트%20스캔.md)
+### [6. 의존관계 자동주입](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/6.%20의존관계%20자동주입.md)
 
 # 🚫 문제-해결
 <details> 

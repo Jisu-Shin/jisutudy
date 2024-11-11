@@ -10,7 +10,7 @@ public class CustServiceImpl implements CustService{
 
     @Autowired
     public CustServiceImpl(CustRepository custRepository) {
-        this.repository = new MemoryCustRepository();
+        this.repository = custRepository;
     }
 
     @Override

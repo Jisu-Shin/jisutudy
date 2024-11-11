@@ -3,6 +3,7 @@ package com.jisutudy.sms;
 import com.jisutudy.customer.Cust;
 import com.jisutudy.customer.CustRepository;
 import com.jisutudy.sms.filter.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,17 +11,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class SmsServiceImpl implements SmsService{
     private final SmsRepository smsRepository;
     private final CustRepository custRepository;
     private final SmsFilter smsFilter;
-
-    @Autowired
-    public SmsServiceImpl(SmsRepository smsRepository, CustRepository custRepository, SmsFilter smsFilter) {
-        this.smsRepository = smsRepository;
-        this.custRepository = custRepository;
-        this.smsFilter = smsFilter;
-    }
 
     @Override
     public SmsResult sendSms(Sms sms) {

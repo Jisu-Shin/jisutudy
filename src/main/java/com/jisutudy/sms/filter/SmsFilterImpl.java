@@ -2,12 +2,11 @@ package com.jisutudy.sms.filter;
 
 import com.jisutudy.customer.Cust;
 import com.jisutudy.customer.CustRepository;
-import com.jisutudy.customer.MemoryCustRepository;
-import com.jisutudy.sms.MemorySmsRepository;
 import com.jisutudy.sms.Sms;
 import com.jisutudy.sms.SmsRepository;
 import com.jisutudy.sms.SmsResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -18,13 +17,15 @@ import java.util.List;
 @Component("smsFilter")
 public class SmsFilterImpl implements SmsFilter{
 
-    private final SmsRepository smsRepository;
-    private final CustRepository custRepository;
+    private SmsRepository smsRepository;
+    private CustRepository custRepository;
+    private TimeSmsFilter timeSmsFilter;
 
     @Autowired
-    public SmsFilterImpl(SmsRepository smsRepository, CustRepository custRepository) {
-        this.smsRepository = new MemorySmsRepository();
-        this.custRepository = new MemoryCustRepository();
+    public SmsFilterImpl(SmsRepository smsRepository, CustRepository custRepository,TimeSmsFilter prodTimeSmsFilter) {
+        this.smsRepository = smsRepository;
+        this.custRepository = custRepository;
+        this.timeSmsFilter = prodTimeSmsFilter;
     }
 
     @Override
@@ -33,7 +34,6 @@ public class SmsFilterImpl implements SmsFilter{
 
         // sms 필터링
         // 1. 시간
-        TimeSmsFilter timeSmsFilter = new ProdTimeSmsFilter();
             if(!timeSmsFilter.isSendable(sms.getSendDt())){
             return SmsResult.NOT_SEND_TIME;
         }
