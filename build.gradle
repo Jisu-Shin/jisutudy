@@ -25,6 +25,16 @@ dependencies {
 	//lombok 라이브러리 추가 시작
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// 웹
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//JPA
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+	implementation('com.h2database:h2')
+
+	//머스테치
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
 }
 
 tasks.named('test') {
