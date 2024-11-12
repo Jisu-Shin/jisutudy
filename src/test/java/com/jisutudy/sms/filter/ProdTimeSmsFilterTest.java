@@ -1,5 +1,6 @@
 package com.jisutudy.sms.filter;
 
+import com.jisutudy.domain.sms.filter.ProdTimeSmsFilter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,12 +1,17 @@
-# 스프링 핵심원리 개인 공부
+# ✏️ 스프링 핵심원리 개인 공부
 
-### [1. 문자 발송 서비스 설계 및 구현](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/1.%20문자%20발송%20서비스%20설계%20및%20구현.md)
-### [2. OCP, DIP 위반 해결방법](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/2.%20OCP,%20DIP%20위반%20해결방법.md)
-### [3. 스프링으로 전환하기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/3.%20스프링으로%20전환하기.md)
-### [4. 싱글톤 컨테이너](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/4.%20싱글톤%20컨테이너.md)
-### [5. 컴포넌트 스캔](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/5.%20컴포넌트%20스캔.md)
-### [6. 의존관계 자동주입](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/6.%20의존관계%20자동주입.md)
+[1. 문자 발송 서비스 설계 및 구현](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/spring/1.%20문자%20발송%20서비스%20설계%20및%20구현.md)
+[2. OCP, DIP 위반 해결방법](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/spring/2.%20OCP,%20DIP%20위반%20해결방법.md)
+[3. 스프링으로 전환하기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/spring/3.%20스프링으로%20전환하기.md)
+[4. 싱글톤 컨테이너](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/spring/4.%20싱글톤%20컨테이너.md)
+[5. 컴포넌트 스캔](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/spring/5.%20컴포넌트%20스캔.md)
+[6. 의존관계 자동주입](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/spring/6.%20의존관계%20자동주입.md)
+<br><br>
+# ✏️ 스프링 부트와 AWS로 혼자 구현하는 서비스
 
+[1. 테스트 코드 작성하기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/springboot+AWS/1.%20테스트%20코드%20작성하기.md)
+[2. JPA로 데이터베이스 다루기](https://github.com/Jisu-Shin/jisutudy/blob/main/docs/springboot+AWS/2.%20JPA로%20데이터베이스%20다루기.md)
+<br><br>
 # 🚫 문제-해결
 <details> 
 	<summary><b>🔍 1) 광고 필터링 테스트 중 저장된 문자 내역이 조회가 되지 않음</b></summary>
@@ -27,7 +32,7 @@
 	<img src ="https://github.com/user-attachments/assets/0d7a47b7-9e69-4fec-b983-513bcd884f12">
 		<ul>
 		<li>원인 : 스프링컨테이너에서 빈 이름을 찾을때 custService로 찾고 있었다</li>
-		<li>해결책 : 빈이름 파라미터를 빼고 클래스로만 스프링빈을 찾게 코드를 수정했다</li>
+		<li>해결책 : 빈이름 파라미터를 빼고 타입으로만 스프링빈을 찾게 코드를 수정했다</li>
 			<ul>
 				<li>또 다른 해결책 : value를 이용해 빈이름을 지정해준다 @Component("smsFilter") </li>
 			</ul>

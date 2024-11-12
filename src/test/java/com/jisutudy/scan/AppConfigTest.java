@@ -1,14 +1,12 @@
 package com.jisutudy.scan;
 
 import com.jisutudy.AppConfig;
-import com.jisutudy.customer.CustService;
-import com.jisutudy.sms.Sms;
-import com.jisutudy.sms.SmsService;
+import com.jisutudy.domain.customer.CustService;
+import com.jisutudy.domain.sms.SmsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppConfigTest {

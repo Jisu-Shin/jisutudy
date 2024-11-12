@@ -1,10 +1,14 @@
 package com.jisutudy.sms.filter;
 
 import com.jisutudy.AppConfig;
-import com.jisutudy.customer.Cust;
-import com.jisutudy.customer.CustRepository;
-import com.jisutudy.customer.CustSmsConsentType;
-import com.jisutudy.sms.*;
+import com.jisutudy.domain.customer.Cust;
+import com.jisutudy.domain.customer.CustRepository;
+import com.jisutudy.domain.customer.CustSmsConsentType;
+import com.jisutudy.domain.sms.Sms;
+import com.jisutudy.domain.sms.SmsRepository;
+import com.jisutudy.domain.sms.SmsResult;
+import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.domain.sms.filter.SmsFilter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,10 +29,10 @@ class SmsFilterImplTest {
 
     @BeforeEach
     void init() {
-        Cust cust = new Cust(2L, "01012345678", CustSmsConsentType.ALL_ALLOW);
+        Cust cust = new Cust(2L,"홍길동", "01012345678", CustSmsConsentType.ALL_ALLOW);
         custRepository.save(cust);
 
-        Cust cust2 = new Cust(3L, "01012345678", CustSmsConsentType.ALL_DENY);
+        Cust cust2 = new Cust(3L,"홍길동", "01012345678", CustSmsConsentType.ALL_DENY);
         custRepository.save(cust2);
 
     }
