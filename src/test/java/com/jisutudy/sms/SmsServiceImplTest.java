@@ -2,10 +2,10 @@ package com.jisutudy.sms;
 
 import com.jisutudy.AppConfig;
 import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.CustService;
+import com.jisutudy.domain.customer.springstudy.CustService;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.SmsService;
+import com.jisutudy.domain.sms.springstudy.SmsService;
 import com.jisutudy.domain.sms.SmsType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

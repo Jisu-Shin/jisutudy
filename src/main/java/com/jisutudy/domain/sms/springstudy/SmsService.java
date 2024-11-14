@@ -1,4 +1,7 @@
-package com.jisutudy.domain.sms;
+package com.jisutudy.domain.sms.springstudy;
+
+import com.jisutudy.domain.sms.Sms;
+import com.jisutudy.domain.sms.SmsResult;
 
 import java.time.LocalDateTime;
 import java.util.List;

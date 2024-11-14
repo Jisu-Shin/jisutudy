@@ -1,9 +1,9 @@
 package com.jisutudy.domain.sms.filter;
 
 import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.CustRepository;
+import com.jisutudy.domain.customer.springstudy.CustRepository;
 import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.SmsRepository;
+import com.jisutudy.domain.sms.springstudy.SmsRepository;
 import com.jisutudy.domain.sms.SmsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

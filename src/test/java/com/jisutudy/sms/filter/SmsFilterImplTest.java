@@ -2,10 +2,10 @@ package com.jisutudy.sms.filter;
 
 import com.jisutudy.AppConfig;
 import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.CustRepository;
+import com.jisutudy.domain.customer.springstudy.CustRepository;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.SmsRepository;
+import com.jisutudy.domain.sms.springstudy.SmsRepository;
 import com.jisutudy.domain.sms.SmsResult;
 import com.jisutudy.domain.sms.SmsType;
 import com.jisutudy.domain.sms.filter.SmsFilter;
