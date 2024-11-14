@@ -1,7 +1,7 @@
 package com.jisutudy.singleton;
 
 import com.jisutudy.AppConfig;
-import com.jisutudy.domain.sms.SmsService;
+import com.jisutudy.domain.sms.springstudy.SmsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;

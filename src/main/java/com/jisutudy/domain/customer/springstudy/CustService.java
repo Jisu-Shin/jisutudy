@@ -1,4 +1,6 @@
-package com.jisutudy.domain.customer;
+package com.jisutudy.domain.customer.springstudy;
+
+import com.jisutudy.domain.customer.Cust;
 
 public interface CustService {
     void join(Cust cust);

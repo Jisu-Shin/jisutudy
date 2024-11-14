@@ -1,5 +1,6 @@
-package com.jisutudy.domain.customer;
+package com.jisutudy.domain.customer.springstudy;
 
+import com.jisutudy.domain.customer.Cust;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

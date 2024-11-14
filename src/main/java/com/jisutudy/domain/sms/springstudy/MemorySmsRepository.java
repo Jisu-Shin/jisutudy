@@ -1,5 +1,6 @@
-package com.jisutudy.domain.sms;
+package com.jisutudy.domain.sms.springstudy;
 
+import com.jisutudy.domain.sms.Sms;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -9,12 +10,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class MemorySmsRepository implements SmsRepository{
+public class MemorySmsRepository implements SmsRepository {
     private static Map<Long, Sms> store = new ConcurrentHashMap<>();
 
     @Override
     public void save(Sms sms) {
-        store.put(sms.smsId, sms);
+        store.put(sms.getSmsId(), sms);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class MemorySmsRepository implements SmsRepository{
     public List<Sms> findListBySendDt(LocalDateTime startDt, LocalDateTime endDt) {
         List<Sms> findSmsList = new ArrayList<>();
         for (Sms s : store.values()) {
-            if (s.sendDt.isAfter(startDt) && s.sendDt.isBefore(endDt)) {
+            if (s.getSendDt().isAfter(startDt) && s.getSendDt().isBefore(endDt)) {
                 findSmsList.add(s);
             }
         }
