@@ -20,13 +20,18 @@ public class CustApiController {
     }
 
     @PutMapping("/api/v1/cust/{id}")
-    public Long update(@PathVariable("id") Long id, @RequestBody CustUpdateRequestDto requestDto){
+    public Long update(@PathVariable("id") Long id, @RequestBody CustUpdateRequestDto requestDto) {
         return jpaCustService.update(id, requestDto);
     }
 
     @GetMapping("/api/v1/cust/{id}")
-    public CustResponseDto findById(@PathVariable("id") Long id){
+    public CustResponseDto findById(@PathVariable("id") Long id) {
         return jpaCustService.findById(id);
+    }
+
+    @PostMapping("/api/v1/cust/byPhoneNumber")
+    public CustResponseDto findByPhoneNumber(@RequestBody String phoneNumber) {
+        return jpaCustService.findByPhoneNumber(phoneNumber);
     }
 
 }

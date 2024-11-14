@@ -1,8 +1,10 @@
 package com.jisutudy.domain.customer;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
+import lombok.Getter;
 
+import java.util.Arrays;
+
+@Getter
 public enum CustSmsConsentType {
     ALL_ALLOW("01"),  // 전체허용
     ALL_DENY("02");   // 전체거부
@@ -18,9 +20,5 @@ public enum CustSmsConsentType {
                 .filter(val -> label.equals(val.label))
                 .findFirst()
                 .orElse(null);
-    }
-
-    public String getLabel() {
-        return label;
     }
 }

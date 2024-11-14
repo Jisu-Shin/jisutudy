@@ -46,7 +46,7 @@ class JpaCustRepositoryTest {
 
     @Test
     public void BaseTimeEntity등록() {
-        //givne
+        //given
         LocalDateTime now = LocalDateTime.now();
         custRepository.save(Cust.builder()
                 .name("홍길동")
@@ -58,7 +58,7 @@ class JpaCustRepositoryTest {
         Cust cust = custRepository.findAll().get(0);
 
         //then
-        System.out.println(">>>>>>>>> createDate= "+cust.getCreatedDate()+ ", modifiedDate= " + cust.getModifiedDate());
+        System.out.println(">>>>>>>>> createDate = "+cust.getCreatedDate()+ ", modifiedDate = " + cust.getModifiedDate());
 
         assertThat(cust.getCreatedDate()).isAfter(now);
         assertThat(cust.getModifiedDate()).isAfter(now);

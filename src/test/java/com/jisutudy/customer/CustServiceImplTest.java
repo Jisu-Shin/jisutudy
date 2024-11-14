@@ -2,7 +2,7 @@ package com.jisutudy.customer;
 
 import com.jisutudy.AppConfig;
 import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.CustService;
+import com.jisutudy.domain.customer.springstudy.CustService;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

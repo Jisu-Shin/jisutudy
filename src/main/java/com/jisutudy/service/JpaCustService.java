@@ -21,7 +21,7 @@ public class JpaCustService {
     }
 
     @Transactional
-    public Long update(Long id, CustUpdateRequestDto requestDto){
+    public Long update(Long id, CustUpdateRequestDto requestDto) {
         Cust cust = custRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 고객이 없습니다. id = " + id));
         cust.update(requestDto.getPhoneNumber(), CustSmsConsentType.of(requestDto.getSmsConsentType()));
@@ -32,6 +32,13 @@ public class JpaCustService {
         Cust entity = custRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 고객이 없습니다. id = " + id));
 
+        return new CustResponseDto(entity);
+    }
+
+    public CustResponseDto findByPhoneNumber(String phoneNumber) {
+        String subStringPhoneNumber = phoneNumber.substring(phoneNumber.length()-4);
+        Cust entity = custRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(()->new IllegalArgumentException("해당 고객이 없습니다. 전화번호 = " + subStringPhoneNumber));
         return new CustResponseDto(entity);
     }
 }

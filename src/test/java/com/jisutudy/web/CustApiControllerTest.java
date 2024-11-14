@@ -123,4 +123,25 @@ class CustApiControllerTest {
 
     }
 
+    @Test
+    public void cust전화번호로조회() throws Exception {
+        //given
+        cust등록된다();
+        Cust c = jpaCustRepository.findAll().get(0);
+        String findByPhoneNumber = c.getPhoneNumber();
+
+        String url = "http://localhost:" + port + "/api/v1/cust/byPhoneNumber";
+
+        //when
+        ResponseEntity<CustResponseDto> responseEntity = restTemplate.postForEntity(url, findByPhoneNumber, CustResponseDto.class);
+
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        System.out.println(responseEntity.getBody());
+
+        assertThat(responseEntity.getBody().getName()).isEqualTo("신지수");
+        assertThat(responseEntity.getBody().getPhoneNumber()).isEqualTo("01012345678");
+        assertThat(responseEntity.getBody().getSmsConsentType()).isEqualTo(CustSmsConsentType.ALL_ALLOW.getLabel());
+    }
+
 }

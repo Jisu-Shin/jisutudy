@@ -1,8 +1,8 @@
 package com.jisutudy.scan;
 
 import com.jisutudy.AppConfig;
-import com.jisutudy.domain.customer.CustService;
-import com.jisutudy.domain.sms.SmsService;
+import com.jisutudy.domain.customer.springstudy.CustService;
+import com.jisutudy.domain.sms.springstudy.SmsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
