@@ -8,10 +8,6 @@ import java.util.List;
 public class AdvertiseFilter {
     // 한 고객에게 광고성 문자는 하루에 2개만 발송할 수 있다.
     public boolean isSendable(List<Sms> todaySmsList, Sms sms){
-        if (SmsType.ADVERTISING != sms.getSmsType()) {
-            return true;
-        }
-
         int cnt = 0;
         for (Sms todaySms : todaySmsList) {
             if (sms.getCustId().equals(todaySms.getCustId()) &&

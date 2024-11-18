@@ -1,6 +1,9 @@
 package com.jisutudy.domain.sms;
 
 import com.jisutudy.domain.BaseTimeEntity;
+import com.jisutudy.domain.customer.Cust;
+import com.jisutudy.domain.customer.JpaCustRepository;
+import com.jisutudy.domain.sms.filter.SmsFilter;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,8 +11,12 @@ import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+
+import static com.jisutudy.domain.sms.QSms.sms;
 
 @Getter
 @NoArgsConstructor
@@ -42,24 +49,8 @@ public class Sms extends BaseTimeEntity {
         this.smsType = smsType;
     }
 
-    public void setCustId(Long custId) {
-        this.custId = custId;
-    }
-
-    public void setSendPhoneNumber(String sendPhoneNumber) {
-        this.sendPhoneNumber = sendPhoneNumber;
-    }
-
-    public void setSmsContent(String smsContent) {
-        this.smsContent = smsContent;
-    }
-
-    public void setSendDt(LocalDateTime sendDt) {
-        this.sendDt = sendDt;
-    }
-
-    public void setSmsType(SmsType smsType) {
-        this.smsType = smsType;
+    public void setCustPhoneNumber(String phoneNumber){
+        this.sendPhoneNumber = phoneNumber;
     }
 
     public void setSmsResult(SmsResult smsResult) {

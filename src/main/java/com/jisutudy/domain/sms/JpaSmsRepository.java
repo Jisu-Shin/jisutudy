@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface JpaSmsRepository extends JpaRepository<Sms, Long> {
+public interface JpaSmsRepository extends JpaRepository<Sms, Long>{
     List<Sms> findByCustId(Long custId);
-//
-//    @Query("SELECT")
-//    List<Sms> findBySendDt();
+
+    @Query(value = "select * from sms where send_dt between ? and ?", nativeQuery = true)
+    List<Sms> findSmsListBySendDt(LocalDateTime startDt, LocalDateTime endDt);
+
+    List<Sms> findAllBySendDtBetween(LocalDateTime startDt, LocalDateTime endDt);
 }

@@ -24,7 +24,7 @@ public class SmsServiceImpl implements SmsService{
 
         // 고객 전화번호 세팅
         Cust cust = custRepository.findById(sms.getCustId());
-        sms.setSendPhoneNumber(cust.getPhoneNumber());
+        sms.setCustPhoneNumber(cust.getPhoneNumber());
 
         // 필터링
         SmsResult smsResult = smsFilter.filter(sms);

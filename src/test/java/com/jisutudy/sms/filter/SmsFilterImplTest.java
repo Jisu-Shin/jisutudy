@@ -23,7 +23,7 @@ import java.time.LocalTime;
 class SmsFilterImplTest {
 
     ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    SmsFilter smsFilter = ac.getBean("smsFilter", SmsFilter.class);
+    SmsFilter smsFilter = ac.getBean(SmsFilter.class);
     SmsRepository smsRepository = ac.getBean(SmsRepository.class);
     CustRepository custRepository = ac.getBean(CustRepository.class);
 

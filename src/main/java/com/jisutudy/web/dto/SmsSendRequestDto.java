@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class SmsSendRequestDto {
     Long custId;
-    String smsConent;
+    String smsContent;
     LocalDateTime sendDt;
     SmsType smsType;
 
     @Builder
-    public SmsSendRequestDto(Long custId, String smsConent, LocalDateTime sendDt, SmsType smsType) {
+    public SmsSendRequestDto(Long custId, String smsContent, LocalDateTime sendDt, SmsType smsType) {
         this.custId = custId;
-        this.smsConent = smsConent;
+        this.smsContent = smsContent;
         this.sendDt = sendDt;
         this.smsType = smsType;
     }
@@ -27,7 +27,7 @@ public class SmsSendRequestDto {
     public Sms toEntity(){
         return Sms.builder()
                 .custId(custId)
-                .smsContent(smsConent)
+                .smsContent(smsContent)
                 .sendDt(sendDt)
                 .smsType(smsType)
                 .build();
