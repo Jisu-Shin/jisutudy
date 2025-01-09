@@ -47,7 +47,7 @@ public class JpaSmsService {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyMMddHHmm");
         LocalDateTime startLdt = LocalDateTime.parse(startDt,format);
         LocalDateTime endLdt = LocalDateTime.parse(endDt,format);
-        return jpaSmsRepository.findSmsListBySendDt(startLdt, endLdt).stream()
+        return jpaSmsRepository.findAllBySendDtBetween(startLdt, endLdt).stream()
                 .map(SmsFindListResponseDto::new)
                 .collect(Collectors.toList());
     }

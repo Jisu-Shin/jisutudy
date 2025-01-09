@@ -5,7 +5,6 @@ import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.domain.customer.JpaCustRepository;
 import com.jisutudy.domain.sms.JpaSmsRepository;
 import com.jisutudy.domain.sms.SmsType;
-import com.jisutudy.web.dto.SmsFindListResponseDto;
 import com.jisutudy.web.dto.SmsSendRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,20 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SmsApiControllerTest {
@@ -49,6 +43,8 @@ class SmsApiControllerTest {
         jpaSmsRepository.deleteAll();
     }
 
+    static Long custId;
+
     @BeforeEach
     public void makeCust() {
         jpaCustRepository.save(Cust.builder()
@@ -57,6 +53,9 @@ class SmsApiControllerTest {
                 .smsConsentType(CustSmsConsentType.ALL_ALLOW)
                 .build());
 
+        Cust c = jpaCustRepository.findAll().get(0);
+        custId = c.getId();
+
     }
 
     @Test
@@ -64,7 +63,7 @@ class SmsApiControllerTest {
         //given
         LocalDateTime ldt = LocalDateTime.of(2024,11,18,19,30);
         SmsSendRequestDto requestDto = SmsSendRequestDto.builder()
-                                        .custId(1L)
+                                        .custId(custId)
                                         .smsContent("메시지발송")
                                         .smsType(SmsType.INFORMAITONAL)
                                         .sendDt(ldt)
