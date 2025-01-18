@@ -10,6 +10,10 @@
     font-size:0.8rem;
 }
 
+div#menu {
+    margin-bottom : 10px;
+}
+
 .wrap {
     padding : 10px;
 }

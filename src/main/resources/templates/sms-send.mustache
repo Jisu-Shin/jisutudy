@@ -1,0 +1,41 @@
+{{>layout/header}}
+<span class="badge text-bg-primary">카카오톡</span> > <span class="badge text-bg-warning">알림톡</span>
+{{>layout/menu}}
+<div class="container">
+    <div class="row h-300">
+        <div class="col-6">
+            <div class="border border-primary">카카오톡 미리보기 박스창</div>
+        </div>
+
+        <div class="col-3">
+            <div class="border border-warning">
+                <label for="content"> 내용 </label>
+                <div class="wrap">
+                    <textarea class="message" id="content" placeholder="내용을 입력하세요"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="border border-secondary">
+<!--                전화번호 목록-->
+                <div class="wrap">
+                    <div>
+                        <table class="table">
+                            <thead> <tr> <th scope="col">전화번호 목록</th></tr></thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div >
+                        <input type="text" placeholder="전화번호를 입력하세요" id="txt-phonenumber">
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-outline-primary" id="btn-add">추가</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{>layout/footer}}

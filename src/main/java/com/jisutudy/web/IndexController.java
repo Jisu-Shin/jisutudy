@@ -10,4 +10,9 @@ public class IndexController {
     public String index(){
         return "index";
     }
+
+    @GetMapping("/sms/send")
+    public String smsSend() {
+        return "sms-send";
+    }
 }
