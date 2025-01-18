@@ -34,6 +34,8 @@
             </li>
             <li> 전화번호 입력시 빈값인 경우 alert창 뜨게 세팅 
             </li>
+            <li> 고객등록페이지 만들고 + ajax 연결
+            </li>
 		</ul>
 	</div>
 </details>

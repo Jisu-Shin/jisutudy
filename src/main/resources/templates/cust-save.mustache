@@ -1,0 +1,28 @@
+{{>layout/header}}
+{{>layout/menu}}
+<div class="container">
+    <h1>고객 등록하기</h1>
+    <div class="col-6">
+        <form>
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" class="form-control" id="name" placeholder="이름을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="phonenumber">전화번호</label>
+                <input type="number" class="form-control" id="phonenumber" placeholder="전화번호를 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="smsConsentType">고객SMS수신유형</label>
+                <select class="form-control" id="smsConsentType">
+                    <option selected>선택해주세요</option>
+                    <option value="01">전체수신</option>
+                    <option value="02">전체거부</option>
+                </select>
+            </div>
+        </form>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+    </div>
+</div>
+{{>layout/footer}}

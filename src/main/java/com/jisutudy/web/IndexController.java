@@ -12,7 +12,12 @@ public class IndexController {
     }
 
     @GetMapping("/sms/send")
-    public String smsSend() {
+    public String sendSms() {
         return "sms-send";
+    }
+
+    @GetMapping("/cust/save")
+    public String saveCust() {
+        return "cust-save";
     }
 }
