@@ -1,16 +1,42 @@
 <div class="container" id="menu">
-    <div class="col-6">
-        <div class="btn-group" role="group">
-            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                메뉴
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                <li><a class="dropdown-item" href="/">메인메뉴</a></li>
-                <li><a class="dropdown-item" href="/sms/send">알림톡 발송하기</a></li>
-                <li><a class="dropdown-item" href="/cust/save">고객 등록하기</a></li>
-            </ul>
+    <div class="row">
+        <div class="col-6">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    메뉴
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <li><a class="dropdown-item" href="/">메인메뉴</a></li>
+                    <li><a class="dropdown-item" href="/sms/send">알림톡 발송하기</a></li>
+                </ul>
+            </div>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop3" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    고객
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop3">
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" >고객 등록하기</a></li>
+                    <li><a class="dropdown-item" href="/cust/save">고객 조회하기</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Modal -->
+       {{>layout/modal-cust-save}}
+
+        <div class="col-3">
+        </div>
+
+        <div class="col-3">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    선택하기
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                    <li><a class="dropdown-item" id ="btn-addPhoneNumber">직접 전화번호 추가하기</a></li>
+                    <li><a class="dropdown-item" id ="btn-choiceCust">고객 선택하기</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="col-3"> </div>
-    <div class="col-3"> </div>
 </div>

@@ -1,12 +1,14 @@
 package com.jisutudy.web;
 
 import com.jisutudy.service.JpaCustService;
+import com.jisutudy.web.dto.CustListResponseDto;
 import com.jisutudy.web.dto.CustResponseDto;
 import com.jisutudy.web.dto.CustSaveRequestDto;
 import com.jisutudy.web.dto.CustUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.service.annotation.PutExchange;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,5 +35,16 @@ public class CustApiController {
     public CustResponseDto findByPhoneNumber(@RequestBody String phoneNumber) {
         return jpaCustService.findByPhoneNumber(phoneNumber);
     }
+
+    @GetMapping("/custs")
+    public List<CustListResponseDto> findAllCust() {
+        System.out.println("컨트롤러메서드호출");
+//        System.out.println("Retrieved data: " + jpaCustService.findAll());
+        List<CustListResponseDto> list = jpaCustService.findAll();
+        System.out.println("***************** 확인=> " + list.getClass());
+        return list;
+    }
+
+
 
 }

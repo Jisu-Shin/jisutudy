@@ -39,6 +39,21 @@
 		</ul>
 	</div>
 </details>
+<details> 
+	<summary><b>🔍 @Controller 와 @RestController 차이</b></summary>
+	<div markdown = "1">
+1. **`@Controller`**
+    - 웹 애플리케이션에서 뷰(HTML)를 반환할 때 사용됩니다.
+    - `Model` 객체를 사용해 데이터를 뷰로 전달하고, 메서드의 반환값은 뷰의 이름이 됩니다.
+    - 주로 Mustache, Thymeleaf와 같은 템플릿 엔진과 함께 사용됩니다.
 
+2. **`@RestController`**
+    - REST API를 작성할 때 사용됩니다.
+    - `@Controller`에 `@ResponseBody`를 추가한 형태로, 메서드의 반환값이 JSON, XML 같은 데이터로 변환되어 클라이언트에 전송됩니다.
+    - 뷰를 렌더링하지 않습니다.
 
-
+**사용 예시**:
+- 웹 페이지 렌더링 → `@Controller`
+- 데이터 API 응답 → `@RestController`
+	</div>
+</details>

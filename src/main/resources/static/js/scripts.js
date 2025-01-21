@@ -1,5 +1,10 @@
 var main = {
     init : function () {
+
+        /* 초기화 섹션 */
+        $('#div-choiceCust').hide();
+        /* 끝 */
+
         var _this = this;
         $('#btn-add').on('click', function () {
             _this.add();
@@ -7,6 +12,18 @@ var main = {
 
         $('#btn-save').on('click', function () {
             _this.saveCust();
+        });
+
+        $('#btn-addPhoneNumber').on('click', function () {
+            $('#div-addPhoneNumber').show();
+            $('#div-choiceCust').hide();
+        });
+
+        $('#btn-choiceCust').on('click', function () {
+            $('#div-addPhoneNumber').hide();
+            $('#div-choiceCust').show();
+            console.log("고객 조회 시작");
+            oper.ajax('GET','','/custs',main.choiceCustCallback);
         });
 
     },
@@ -33,7 +50,26 @@ var main = {
             phoneNumber: $('#phonenumber').val(),
             smsConsentType: $('#smsConsentType').val()
         }
-        oper.ajax("POST",data,'/api/v1/cust');
+        oper.ajax("POST",data,'/api/v1/cust', main.saveCustCallback);
+    },
+
+    saveCustCallback : function () {
+        alert("고객 등록이 완료되었습니다");
+        window.location.href='/cust/save';
+    } ,
+
+    choiceCustCallback : function (data) {
+        console.log("고객 조회 완료");
+        var tbody = $('#tbody');
+        tbody.empty();
+        data.forEach(cust => {
+            var row = '<tr>'
+            row+='<td><input type="checkbox" value="" </td>'
+            row+='<td>'+cust.name+'</td>'
+            row+='<td>'+cust.phoneNumber+'</td>'
+            row+='</tr>'
+            tbody.append(row);
+        });
     }
 
 };
@@ -47,15 +83,15 @@ var oper = {
         }
     },
 
-    ajax : function (type, data, url) {
+    ajax : function (type, data, url, callback) {
         $.ajax({
             'type': type,
             'url':url,
            'dataType':'json',
             'contentType':'application/json; charset=utf-8',
             'data':JSON.stringify(data)
-        }).done(function() {
-            alert("완료되었습니다.");
+        }).done(function (response){
+            callback(response);
         });
     }
 }

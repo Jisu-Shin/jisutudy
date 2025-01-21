@@ -3,12 +3,16 @@ package com.jisutudy.service;
 import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.domain.customer.JpaCustRepository;
+import com.jisutudy.web.dto.CustListResponseDto;
 import com.jisutudy.web.dto.CustResponseDto;
 import com.jisutudy.web.dto.CustSaveRequestDto;
 import com.jisutudy.web.dto.CustUpdateRequestDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -40,5 +44,11 @@ public class JpaCustService {
         Cust entity = custRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(()->new IllegalArgumentException("해당 고객이 없습니다. 전화번호 = " + subStringPhoneNumber));
         return new CustResponseDto(entity);
+    }
+
+    public List<CustListResponseDto> findAll() {
+        return custRepository.findAll().stream()
+                .map(CustListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
