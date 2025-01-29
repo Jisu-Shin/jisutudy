@@ -63,8 +63,9 @@
 		<ul>
             <li> Swagger 를 사용해 HTTP API 문서화하기
             </li>
-            <li> 고객 저장하고 조회하는 기능까지 연결
+            <li> 고객 전체 조회 페이지 생성
             </li>
+            <li> 문자 발송 기능 프론트 연결 </li>
 		</ul>
 	</div>
 </details>
