@@ -50,7 +50,7 @@ class CustApiControllerTest {
                 .smsConsentType(consetType)
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/cust";
+        String url = "http://localhost:" + port + "/api/custs";
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
@@ -83,7 +83,7 @@ class CustApiControllerTest {
                 .smsConsentType(expectType.getLabel())
                 .build();
 
-        String url = "http://localhost:" + port + "/api/v1/cust/" + updateId;
+        String url = "http://localhost:" + port + "/api/custs/" + updateId;
 
         HttpEntity<CustUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
@@ -108,7 +108,7 @@ class CustApiControllerTest {
         Cust c = jpaCustRepository.findAll().get(0);
         Long findId = c.getId();
 
-        String url = "http://localhost:" + port + "/api/v1/cust/" + findId;
+        String url = "http://localhost:" + port + "/api/custs/" + findId;
 
         //when
         ResponseEntity<CustResponseDto> responseEntity = restTemplate.getForEntity(url, CustResponseDto.class);
@@ -130,7 +130,7 @@ class CustApiControllerTest {
         Cust c = jpaCustRepository.findAll().get(0);
         String findByPhoneNumber = c.getPhoneNumber();
 
-        String url = "http://localhost:" + port + "/api/v1/cust/byPhoneNumber";
+        String url = "http://localhost:" + port + "/api/custs/search";
 
         //when
         ResponseEntity<CustResponseDto> responseEntity = restTemplate.postForEntity(url, findByPhoneNumber, CustResponseDto.class);
