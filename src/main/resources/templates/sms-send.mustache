@@ -2,23 +2,26 @@
 <span class="badge text-bg-primary">카카오톡</span> > <span class="badge text-bg-warning">알림톡</span>
 {{>layout/menu}}
 <div class="container">
-    <div class="row h-300">
-        <div class="col-6">
+    <div class="row">
+        <div class="col-6 h-300">
             <div class="border border-primary">카카오톡 미리보기 박스창</div>
         </div>
 
         <div class="col-3">
-            <div class="border border-warning">
+            <div class="border border-warning div-send">
                 <label for="content"> 내용 </label>
                 <div class="wrap">
                     <textarea class="message" id="content" placeholder="내용을 입력하세요"></textarea>
                 </div>
             </div>
+            <div>
+                <button type="button" class="btn btn-warning button-send" id="btn-send">발송</button>
+            </div>
         </div>
 
-        <div class="col-3">
+        <div class="col-3 h-300">
             <div class="border border-secondary">
-<!--                전화번호 목록-->
+                <!-- 전화번호 직접 추가 -->
                 <div class="wrap" id="div-addPhoneNumber">
                     <div>
                         <table class="table">
@@ -34,15 +37,15 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- 등록된 고객 선택하기 -->
                 <div class="wrap" id="div-choiceCust" >
                     고객선택하기
                     <table class="table">
                         <thead class="thead-strong">
                         <tr>
                             <th>선택</th>
-                            <th>고객이름</th>
-                            <th>고객전화번호</th>
+                            <th>id</th>
+                            <th>이름</th>
                         </tr>
                         </thead>
                         <tbody id ="tbody">
