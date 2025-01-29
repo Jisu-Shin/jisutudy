@@ -7,17 +7,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @NoArgsConstructor
 public class SmsSendRequestDto {
     Long custId;
     String smsContent;
-    LocalDateTime sendDt;
-    SmsType smsType;
+    String sendDt;
+    String smsType;
 
     @Builder
-    public SmsSendRequestDto(Long custId, String smsContent, LocalDateTime sendDt, SmsType smsType) {
+    public SmsSendRequestDto(Long custId, String smsContent, String sendDt, String smsType) {
         this.custId = custId;
         this.smsContent = smsContent;
         this.sendDt = sendDt;
@@ -25,11 +26,12 @@ public class SmsSendRequestDto {
     }
 
     public Sms toEntity(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         return Sms.builder()
                 .custId(custId)
                 .smsContent(smsContent)
-                .sendDt(sendDt)
-                .smsType(smsType)
+                .sendDt(LocalDateTime.parse(sendDt,formatter))
+                .smsType(SmsType.of(smsType))
                 .build();
     }
 }

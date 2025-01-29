@@ -61,15 +61,14 @@ class SmsApiControllerTest {
     @Test
     void sms발송(){
         //given
-        LocalDateTime ldt = LocalDateTime.of(2024,11,18,19,30);
         SmsSendRequestDto requestDto = SmsSendRequestDto.builder()
                                         .custId(custId)
                                         .smsContent("메시지발송")
-                                        .smsType(SmsType.INFORMAITONAL)
-                                        .sendDt(ldt)
+                                        .smsType("01") // SmsType.INFORMAITONAL
+                                        .sendDt("202411181930")
                                         .build();
 
-        String url = "http://localhost:"+port+"/api/v1/sms/send";
+        String url = "http://localhost:"+port+"/api/sms/send";
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url,requestDto, Long.class);
@@ -87,7 +86,7 @@ class SmsApiControllerTest {
         String startDt = "2411180000";
         String endDt = "2411200000";
 
-        String url = UriComponentsBuilder.fromHttpUrl("http://localhost:" + port + "/api/v1/sms/sendList")
+        String url = UriComponentsBuilder.fromHttpUrl("http://localhost:" + port + "/api/sms/sendList")
                 .queryParam("startDt", startDt)
                 .queryParam("endDt", endDt)
                 .toUriString();
