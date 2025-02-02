@@ -83,13 +83,15 @@ class SmsApiControllerTest {
     void sms목록확인() {
         //given
         sms발송();
-        String startDt = "2411180000";
-        String endDt = "2411200000";
+        String startDt = "202411180000";
+        String endDt = "202411200000";
 
         String url = UriComponentsBuilder.fromHttpUrl("http://localhost:" + port + "/api/sms/sendList")
                 .queryParam("startDt", startDt)
                 .queryParam("endDt", endDt)
                 .toUriString();
+
+        System.out.println(url);
 
         //when
         ResponseEntity<String> responseEntity = restTemplate.exchange(url,

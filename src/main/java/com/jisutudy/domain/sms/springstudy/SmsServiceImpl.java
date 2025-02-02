@@ -20,8 +20,6 @@ public class SmsServiceImpl implements SmsService{
 
     @Override
     public SmsResult sendSms(Sms sms) {
-//        Sms sms = new Sms(1L,2L,null,"문자내용",LocalDateTime.now(), SmsType.INFORMAITONAL);
-
         // 고객 전화번호 세팅
         Cust cust = custRepository.findById(sms.getCustId());
         sms.setCustPhoneNumber(cust.getPhoneNumber());

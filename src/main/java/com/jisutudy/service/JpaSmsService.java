@@ -30,6 +30,7 @@ public class JpaSmsService {
         Sms sms = requestDto.toEntity();
 
         // 고객 정보 세팅
+        // TODO 해당 고객이 없을 경우 처리는 ?
         Optional<Cust> cust = jpaCustRepository.findById(sms.getCustId());
         sms.setCustPhoneNumber(cust.get().getPhoneNumber());
 
@@ -42,14 +43,19 @@ public class JpaSmsService {
         return jpaSmsRepository.save(sms).getSmsId();
     }
 
+    /**
+     * sms 발송 목록을 조회하는 서비스
+     *
+     * @param startDt yyyyMMddHHmm 형식
+     * @param endDt yyyyMMddHHmm 형식
+     */
     @Transactional
     public List<SmsFindListResponseDto> findSmsList(String startDt, String endDt) {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyMMddHHmm");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime startLdt = LocalDateTime.parse(startDt,format);
         LocalDateTime endLdt = LocalDateTime.parse(endDt,format);
         return jpaSmsRepository.findAllBySendDtBetween(startLdt, endLdt).stream()
                 .map(SmsFindListResponseDto::new)
                 .collect(Collectors.toList());
     }
-
 }

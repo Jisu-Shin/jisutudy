@@ -2,8 +2,10 @@ package com.jisutudy.sms.filter;
 
 import com.jisutudy.AppConfig;
 import com.jisutudy.domain.customer.Cust;
+import com.jisutudy.domain.customer.JpaCustRepository;
 import com.jisutudy.domain.customer.springstudy.CustRepository;
 import com.jisutudy.domain.customer.CustSmsConsentType;
+import com.jisutudy.domain.sms.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.springstudy.SmsRepository;
 import com.jisutudy.domain.sms.SmsResult;
@@ -19,20 +21,33 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 
 class SmsFilterImplTest {
 
     ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
     SmsFilter smsFilter = ac.getBean(SmsFilter.class);
-    SmsRepository smsRepository = ac.getBean(SmsRepository.class);
-    CustRepository custRepository = ac.getBean(CustRepository.class);
+
+    //    SmsRepository smsRepository = ac.getBean(SmsRepository.class);
+    JpaSmsRepository smsRepository = ac.getBean(JpaSmsRepository.class);
+
+//    CustRepository custRepository = ac.getBean(CustRepository.class);
+    JpaCustRepository custRepository = ac.getBean(JpaCustRepository.class);
 
     @BeforeEach
     void init() {
-        Cust cust = new Cust(2L,"홍길동", "01012345678", CustSmsConsentType.ALL_ALLOW);
+        Cust cust = Cust.builder()
+                .name("홍길동")
+                .phoneNumber("01012345678")
+                .smsConsentType(CustSmsConsentType.ALL_ALLOW)
+                .build();
         custRepository.save(cust);
 
-        Cust cust2 = new Cust(3L,"홍길동", "01012345678", CustSmsConsentType.ALL_DENY);
+        Cust cust2 = Cust.builder()
+                .name("고길동")
+                .phoneNumber("01098765432")
+                .smsConsentType(CustSmsConsentType.ALL_DENY)
+                .build();
         custRepository.save(cust2);
 
     }
@@ -42,7 +57,11 @@ class SmsFilterImplTest {
     void filter() {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(19,0));
         Sms sms = new Sms(1L, 2L, null, "문자발송", ldt, SmsType.INFORMAITONAL);
-        SmsResult smsResult = smsFilter.filter(sms);
+//        SmsResult smsResult = smsFilter.filter(sms);
+
+        Optional<Cust> cust = custRepository.findByPhoneNumber("01012345678");
+
+        SmsResult smsResult = smsFilter.filter(sms, cust.get());
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.SUCCESS);
     }
 
@@ -51,7 +70,10 @@ class SmsFilterImplTest {
     void filterByTime() {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(21,0));
         Sms sms = new Sms(1L, 2L, null, "문자발송", ldt, SmsType.INFORMAITONAL);
-        SmsResult smsResult = smsFilter.filter(sms);
+
+        Optional<Cust> cust = custRepository.findByPhoneNumber("01012345678");
+
+        SmsResult smsResult = smsFilter.filter(sms, cust.get());
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.NOT_SEND_TIME);
     }
 
@@ -60,7 +82,10 @@ class SmsFilterImplTest {
     void filterByCustConsent() {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(19,0));
         Sms sms = new Sms(1L, 3L, null, "문자발송", ldt, SmsType.INFORMAITONAL);
-        SmsResult smsResult = smsFilter.filter(sms);
+
+        Optional<Cust> cust = custRepository.findByPhoneNumber("01098765432");
+
+        SmsResult smsResult = smsFilter.filter(sms, cust.get());
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.CUST_REJECT);
     }
 
@@ -70,10 +95,13 @@ class SmsFilterImplTest {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(19,0));
         Sms sms1 = new Sms(1L, 2L, null, "문자발송", ldt, SmsType.ADVERTISING);
         Sms sms2 = new Sms(2L, 2L, null, "문자발송", ldt, SmsType.ADVERTISING);
-        Sms sms3 = new Sms(3L, 2L, null, "문자발송", ldt, SmsType.ADVERTISING);
         smsRepository.save(sms1);
         smsRepository.save(sms2);
-        SmsResult smsResult = smsFilter.filter(sms3);
+
+        Sms sms3 = new Sms(3L, 2L, null, "문자발송", ldt, SmsType.ADVERTISING);
+        Optional<Cust> cust = custRepository.findByPhoneNumber("01012345678");
+        SmsResult smsResult = smsFilter.filter(sms3, cust.get());
+
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.AD_COUNT_OVER);
     }
 }
