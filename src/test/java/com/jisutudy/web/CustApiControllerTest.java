@@ -16,10 +16,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CustApiControllerTest {
@@ -34,12 +38,12 @@ class CustApiControllerTest {
     private JpaCustRepository jpaCustRepository;
 
     @AfterEach
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         jpaCustRepository.deleteAll();
     }
 
     @Test
-    public void cust등록된다() throws Exception{
+    public void cust등록된다() throws Exception {
         //given
         String name = "신지수";
         String phoneNumber = "01012345678";
@@ -63,6 +67,25 @@ class CustApiControllerTest {
         assertThat(sample.getName()).isEqualTo(name);
         assertThat(sample.getPhoneNumber()).isEqualTo(phoneNumber);
         assertThat(sample.getSmsConsentType()).isEqualTo(CustSmsConsentType.of(consetType));
+    }
+
+    @Test
+    public void cust등록_빈고객() throws Exception {
+        //given
+        String name = "";
+        String phoneNumber = "";
+        String consetType = null;
+        CustSaveRequestDto requestDto = CustSaveRequestDto.builder()
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .smsConsentType(consetType)
+                .build();
+
+        String url = "http://localhost:" + port + "/api/custs";
+
+        assertThrows(RestClientException.class, () -> {
+            restTemplate.postForEntity(url, requestDto, Long.class);
+        });
     }
 
     @Test

@@ -52,6 +52,9 @@ dependencies {
 
 	// swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
+	// 필수값 검증
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.3.0.RELEASE'
 }
 
 tasks.named('test') {

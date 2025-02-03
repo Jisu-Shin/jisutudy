@@ -7,6 +7,7 @@ import com.jisutudy.web.dto.CustSaveRequestDto;
 import com.jisutudy.web.dto.CustUpdateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class CustApiController {
 
     @Operation(summary="고객 등록")
     @PostMapping("")
-    public Long save(@RequestBody CustSaveRequestDto requestDto) {
+    public Long save(@RequestBody @Valid CustSaveRequestDto requestDto) {
         return jpaCustService.save(requestDto);
     }
 
