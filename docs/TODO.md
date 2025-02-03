@@ -12,7 +12,7 @@
 ### [문자파트]
 - [ ] #{고객명} 과 같이 동적상용구를 만들어서 문자 내용 바꾸기 <br>
 - [ ] 하루에 발송할 수 있는 광고개수 제한하기 <br>
-- [ ] 문자 발송 조회 페이지 필요 <br>
+- [x] 문자 발송 조회 페이지 필요 <br>
 - [ ] 문자 발송시 동일 문자 내용에 고객은 리스트로 받을 수 있게 처리 하기 <br> 
 - [ ] smstype 처리 어떻게 할지 고민하고 적용하기. 현재 script에 "01" 로 고정되어 있음 <br>
 
@@ -23,7 +23,7 @@
 - [ ] 네비게이션 바 사용하기
 
 <details> 
-	<summary><b>🏷️ 24.1.9.</b></summary>
+	<summary><b>🏷️ 25.1.9.</b></summary>
 	<div markdown = "1">
 		<ul>
             <li> 마크다운보면서 복습 및 기술블로그 포스팅할만한 것들을 기록
@@ -34,7 +34,7 @@
 	</div>
 </details>
 <details> 
-	<summary><b>🏷️ 24.1.18.</b></summary>
+	<summary><b>🏷️ 25.1.18.</b></summary>
 	<div markdown = "1">
 		<ul>
             <li> JS+제이쿼리 찾아보면서 기본 페이지 세팅
@@ -47,7 +47,7 @@
 	</div>
 </details>
 <details> 
-	<summary><b>🏷️ 24.1.21.</b></summary>
+	<summary><b>🏷️ 25.1.21.</b></summary>
 	<div markdown = "1">
 		<ul>
             <li> @RestController랑 @Controller 차이를 알 수 있었다
@@ -58,7 +58,7 @@
 	</div>
 </details>
 <details> 
-	<summary><b>🏷️ 24.1.29.</b></summary>
+	<summary><b>🏷️ 25.1.29.</b></summary>
 	<div markdown = "1">
 		<ul>
             <li> Swagger 를 사용해 HTTP API 문서화하기
@@ -69,3 +69,17 @@
 		</ul>
 	</div>
 </details>
+<details> 
+	<summary><b>🏷️ 25.2.4.</b></summary>
+	<div markdown = "1">
+		<ul>
+            <li> Bean validation 적용
+            </li>
+            <li> @profile과 application.proterties에 작성하는 걸로 TimeSmsFilter 환경에 따라 의존성 주입 가능
+            </li>            
+            <li> 프론트단... 모달에서 고객 등록하면 모달 form 값 초기화
+            </li>
+		</ul>
+	</div>
+</details>
+

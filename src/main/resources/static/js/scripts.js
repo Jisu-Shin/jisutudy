@@ -84,7 +84,7 @@ var main = {
 var callback = {
     saveCust : function () {
         alert("고객 등록이 완료되었습니다");
-        window.location.href='/cust/save';
+        $("#frm-reset")[0].reset();
     } ,
 
     choiceCust : function (data) {
