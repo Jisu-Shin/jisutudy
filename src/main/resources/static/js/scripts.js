@@ -14,6 +14,10 @@ var main = {
             _this.saveCust();
         });
 
+        $('#btn-close').on('click', function() {
+            _this.closeModal();
+        });
+
         $('#btn-addPhoneNumber').on('click', function () {
             $('#div-addPhoneNumber').show();
             $('#div-choiceCust').hide();
@@ -33,6 +37,10 @@ var main = {
 
             _this.sendSms();
         });
+
+        $('#phonenumber').on('input', function() {
+            $(this).val($(this).val().replace(/[^0-9]/g, "").replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/\-{1,2}$/g, ""));
+        })
 
     },
 
@@ -55,7 +63,7 @@ var main = {
     saveCust : function () {
         var data = {
             name: $('#name').val(),
-            phoneNumber: $('#phonenumber').val(),
+            phoneNumber: $('#phonenumber').val().replace(/-/g,""),
             smsConsentType: $('#smsConsentType').val()
         }
         oper.ajax("POST",data,'/api/custs', callback.saveCust);
@@ -77,6 +85,10 @@ var main = {
                 smsType : "01"
             }
         oper.ajax("POST",data,'/api/sms/send', callback.sendSms);
+    },
+
+    closeModal : function() {
+        window.location.href='/cust/findAll';
     }
 
 };
