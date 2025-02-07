@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-@Profile("test")
+@Profile("dev")
 @Component
 public class TestTimeSmsFilter implements TimeSmsFilter{
     @Override
