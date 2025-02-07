@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### 25.02.08 ###
+.properties

@@ -23,11 +23,11 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	//lombok 라이브러리 추가 시작
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok:1.18.30'
+	annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-	testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor('org.projectlombok:lombok')
+	testImplementation 'org.projectlombok:lombok:1.18.30'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 
 	// 웹
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -38,6 +38,9 @@ dependencies {
 
 	//머스테치
 	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+
+	// swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 
 	//Querydsl
 	// query dsl 버전 명시해야 jakarta사용 (javax X)
@@ -50,12 +53,25 @@ dependencies {
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
-	// swagger
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-
 	// 필수값 검증
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.3.0.RELEASE'
+
+	// Spring Cloud Config Client (Config Server에서 설정 가져오기)
+	implementation 'org.springframework.cloud:spring-cloud-starter-config:4.1.5'
+
 }
+
+// spring cloud 를 위해 config client
+ext {
+	set('springCloudVersion', "2023.0.1")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
 
 tasks.named('test') {
 	useJUnitPlatform()
