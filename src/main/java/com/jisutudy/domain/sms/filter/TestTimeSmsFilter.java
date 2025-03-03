@@ -11,11 +11,7 @@ import java.time.LocalTime;
 public class TestTimeSmsFilter implements TimeSmsFilter{
     @Override
     public boolean isSendable(LocalDateTime sendDt) {
-        LocalTime smsTime = sendDt.toLocalTime();
-//        if (smsTime.isBefore(LocalTime.of(8,0))
-//            || smsTime.isAfter(LocalTime.of(20,0))) {
-//            return false;
-//        }
+        // 시간제한이 없다
         return true;
     }
 }

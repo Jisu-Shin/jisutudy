@@ -1,19 +1,22 @@
 package com.jisutudy.scan;
 
-import com.jisutudy.AppConfig;
 import com.jisutudy.domain.customer.springstudy.CustService;
 import com.jisutudy.domain.sms.springstudy.SmsService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest
 public class AppConfigTest {
+
+    @Autowired ApplicationContext ac;
 
     @Test
     void basicScan() {
-        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+//        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         SmsService smsService = ac.getBean(SmsService.class);
         CustService custService = ac.getBean(CustService.class);
 

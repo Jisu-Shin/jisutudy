@@ -1,38 +1,44 @@
 package com.jisutudy.sms.filter;
 
-import com.jisutudy.AppConfig;
 import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.JpaCustRepository;
-import com.jisutudy.domain.customer.springstudy.CustRepository;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.domain.sms.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.springstudy.SmsRepository;
 import com.jisutudy.domain.sms.SmsResult;
 import com.jisutudy.domain.sms.SmsType;
 import com.jisutudy.domain.sms.filter.SmsFilter;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
 
+@SpringBootTest(properties = "spring.profiles.active=prod")
 class SmsFilterImplTest {
 
-    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    SmsFilter smsFilter = ac.getBean(SmsFilter.class);
+//    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+//    SmsFilter smsFilter = ac.getBean(SmsFilter.class);
+//    TimeSmsFilter timeSmsFilter = ac.getBean(ProdTimeSmsFilter.class);
 
     //    SmsRepository smsRepository = ac.getBean(SmsRepository.class);
-    JpaSmsRepository smsRepository = ac.getBean(JpaSmsRepository.class);
+//    JpaSmsRepository smsRepository = ac.getBean(JpaSmsRepository.class);
 
 //    CustRepository custRepository = ac.getBean(CustRepository.class);
-    JpaCustRepository custRepository = ac.getBean(JpaCustRepository.class);
+//    JpaCustRepository custRepository = ac.getBean(JpaCustRepository.class);
+
+    @Autowired
+    SmsFilter smsFilter;
+
+    @Autowired
+    JpaSmsRepository smsRepository;
+
+    @Autowired
+    JpaCustRepository custRepository;
 
     @BeforeEach
     void init() {
@@ -50,6 +56,11 @@ class SmsFilterImplTest {
                 .build();
         custRepository.save(cust2);
 
+    }
+
+    @AfterEach
+    void destroy() {
+        custRepository.deleteAll();
     }
 
     @Test
@@ -77,6 +88,15 @@ class SmsFilterImplTest {
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.NOT_SEND_TIME);
     }
 
+//    @Test
+//    @DisplayName("timesmsfilter 필터링")
+//    void filterByTimeSmsFilter() {
+//        LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(21,0));
+//        boolean sendable = timeSmsFilter.isSendable(ldt);
+//        Assertions.assertThat(sendable).isEqualTo(false);
+//    }
+
+
     @Test
     @DisplayName("고객동의 필터링")
     void filterByCustConsent() {
@@ -86,6 +106,7 @@ class SmsFilterImplTest {
         Optional<Cust> cust = custRepository.findByPhoneNumber("01098765432");
 
         SmsResult smsResult = smsFilter.filter(sms, cust.get());
+
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.CUST_REJECT);
     }
 

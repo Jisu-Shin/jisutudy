@@ -10,6 +10,8 @@ import com.jisutudy.domain.sms.SmsType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -18,14 +20,22 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+@SpringBootTest
 class SmsServiceImplTest {
 
 //  AppConfig appConfig = new AppConfig();
 //  CustService custService = appConfig.custService();
 //  SmsService smsService = appConfig.smsService();
-    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    CustService custService = ac.getBean(CustService.class);
-    SmsService smsService = ac.getBean(SmsService.class);
+
+//    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+//    CustService custService = ac.getBean(CustService.class);
+//    SmsService smsService = ac.getBean(SmsService.class);
+
+    @Autowired
+    CustService custService;
+
+    @Autowired
+    SmsService smsService;
 
     @BeforeEach
     void sendSmsList() {
