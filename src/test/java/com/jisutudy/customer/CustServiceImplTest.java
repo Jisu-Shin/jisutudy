@@ -1,22 +1,26 @@
 package com.jisutudy.customer;
 
-import com.jisutudy.AppConfig;
 import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.springstudy.CustService;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.*;
 
+@SpringBootTest
 class CustServiceImplTest {
 
 //    AppConfig appConfig = new AppConfig();
 //    CustService custService = appConfig.custService();
-    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    CustService custService = ac.getBean(CustService.class);
+
+//    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+//    CustService custService = ac.getBean(CustService.class);
+
+    @Autowired
+    CustService custService;
 
     @Test
     @DisplayName("고객 등록하기")
