@@ -1,0 +1,37 @@
+{{>layout/home-header}}
+
+<div class="container">
+    {{>layout/bodyheader}}
+
+    <div class="jumbotron">
+        <p class="lead">회원 기능</p>
+        <p>
+            <a class="btn btn-secondary" href="/custs/new">회원 가입</a>
+            <a class="btn btn-secondary" href="/custs">회원 목록</a>
+        </p>
+        <p class="lead">공연 기능</p>
+        <p>
+            <a class="btn btn-dark" href="/items/new">상품 등록</a>
+            <a class="btn btn-dark" href="/items">상품 목록</a>
+        </p>
+        <p class="lead">주문 기능</p>
+        <p>
+            <a class="btn btn-lg btn-info" href="/order">상품 주문</a>
+            <a class="btn btn-lg btn-info" href="/orders">주문 내역</a>
+        </p>
+        <p class="lead">문자 기능</p>
+        <p>
+            <a class="btn btn-warning" href="/order">문자 발송</a>
+            <a class="btn btn-warning" href="/orders">문자 내역</a>
+        </p>
+        <p class="lead">템플릿 기능</p>
+        <p>
+            <a class="btn btn-success" href="/templates/new">템플릿 등록 및 조회</a>
+        </p>
+    </div>
+
+    {{>layout/bodyfooter}}
+</div> <!-- /container -->
+
+
+{{>layout/footer}}
