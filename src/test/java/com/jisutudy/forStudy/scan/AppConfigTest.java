@@ -1,7 +1,7 @@
-package com.jisutudy.scan;
+package com.jisutudy.forStudy.scan;
 
 import com.jisutudy.domain.customer.springstudy.CustService;
-import com.jisutudy.domain.sms.springstudy.SmsService;
+import com.jisutudy.service.SmsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.jisutudy.singleton;
+package com.jisutudy.forStudy.singleton;
 
 public class StatefulService {
 

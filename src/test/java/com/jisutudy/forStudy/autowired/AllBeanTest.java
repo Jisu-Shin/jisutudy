@@ -1,4 +1,4 @@
-package com.jisutudy.autowired;
+package com.jisutudy.forStudy.autowired;
 
 import com.jisutudy.AppConfig;
 import com.jisutudy.domain.sms.filter.TimeSmsFilter;

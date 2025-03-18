@@ -1,4 +1,4 @@
-package com.jisutudy.singleton;
+package com.jisutudy.forStudy.singleton;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

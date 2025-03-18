@@ -1,19 +1,17 @@
-package com.jisutudy.sms;
+package com.jisutudy.forStudy;
 
-import com.jisutudy.AppConfig;
 import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.springstudy.CustService;
 import com.jisutudy.domain.customer.CustSmsConsentType;
-import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.springstudy.SmsService;
 import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.domain.sms.springstudy.Sms;
+import com.jisutudy.domain.sms.springstudy.TestSmsService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,7 +19,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @SpringBootTest
-class SmsServiceImplTest {
+class TestSmsServiceImplTest {
 
 //  AppConfig appConfig = new AppConfig();
 //  CustService custService = appConfig.custService();
@@ -35,7 +33,7 @@ class SmsServiceImplTest {
     CustService custService;
 
     @Autowired
-    SmsService smsService;
+    TestSmsService testSmsService;
 
     @BeforeEach
     void sendSmsList() {
@@ -48,6 +46,7 @@ class SmsServiceImplTest {
     }
 
     @Test
+    @Disabled
     void sendSms() {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.of(19,0));
         Sms[] smsList = new Sms[5];
@@ -57,14 +56,14 @@ class SmsServiceImplTest {
         smsList[3] = new Sms(4L, 7L, null ,"문자내용4", ldt,SmsType.ADVERTISING);
         smsList[4] = new Sms(5L, 7L, null ,"문자내용5", ldt,SmsType.ADVERTISING);
         for (Sms sms : smsList) {
-            System.out.println(smsService.sendSms(sms));
+            System.out.println(testSmsService.sendSms(sms));
         }
     }
 
     @Test
     void findSmsList() {
         sendSms();
-        List<Sms> smsList = smsService.findSmsList(LocalDate.now().atTime(0, 0), LocalDate.now().plusDays(1).atTime(0, 0));
+        List<Sms> smsList = testSmsService.findSmsList(LocalDate.now().atTime(0, 0), LocalDate.now().plusDays(1).atTime(0, 0));
         Assertions.assertThat(smsList.size()).isEqualTo(5);
     }
 }
