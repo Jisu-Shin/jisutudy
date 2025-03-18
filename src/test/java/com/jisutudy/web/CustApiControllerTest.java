@@ -2,7 +2,7 @@ package com.jisutudy.web;
 
 import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.CustSmsConsentType;
-import com.jisutudy.domain.customer.JpaCustRepository;
+import com.jisutudy.repository.JpaCustRepository;
 import com.jisutudy.web.dto.CustResponseDto;
 import com.jisutudy.web.dto.CustSaveRequestDto;
 import com.jisutudy.web.dto.CustUpdateRequestDto;
@@ -16,7 +16,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
 import java.util.List;

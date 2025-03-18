@@ -1,55 +1,72 @@
 package com.jisutudy.domain.sms;
 
 import com.jisutudy.domain.BaseTimeEntity;
+import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.JpaCustRepository;
-import com.jisutudy.domain.sms.filter.SmsFilter;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.time.format.DateTimeFormatter;
 
-import static com.jisutudy.domain.sms.QSms.sms;
+import static jakarta.persistence.FetchType.*;
 
-@Getter
-@NoArgsConstructor
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Sms extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long smsId;
-    private Long custId;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "cust_id")
+    private Cust cust;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "sms_tmplt_id")
+    private SmsTemplate smsTemplate;
+
     private String sendPhoneNumber;
     private String smsContent;
     private LocalDateTime sendDt;
-    private SmsType smsType;
+
+    @Enumerated(EnumType.STRING)
     private SmsResult smsResult;
 
-    @Builder
-    public Sms(Long custId, String smsContent, LocalDateTime sendDt, SmsType smsType) {
-        this.custId = custId;
+    private Sms(String smsContent, String sendDt) {
         this.smsContent = smsContent;
-        this.sendDt = sendDt;
-        this.smsType = smsType;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+        this.sendDt = LocalDateTime.parse(sendDt,formatter);
     }
 
-    public Sms(Long smsId, Long custId, String sendPhoneNumber, String smsContent, LocalDateTime sendDt, SmsType smsType) {
-        this.smsId = smsId;
-        this.custId = custId;
-        this.sendPhoneNumber = sendPhoneNumber;
-        this.smsContent = smsContent;
-        this.sendDt = sendDt;
-        this.smsType = smsType;
+    // ==연관관계메서드==
+    public void setCust(Cust cust) {
+        this.cust = cust;
+        cust.getSmsList().add(this);
     }
 
-    public void setCustPhoneNumber(String phoneNumber){
+    // TODO 근데 이 연관관계가 꼭 필요한가? 싶은 생각은 들긴하는데 FK이긴함
+    public void setSmsTemplate(SmsTemplate smsTemplate) {
+        this.smsTemplate = smsTemplate;
+        smsTemplate.getSmsList().add(this);
+    }
+
+    // == 생성 메서드 ==
+    public static Sms createSms(Cust cust, SmsTemplate smsTemplate, String smsContent, String sendDt) {
+        Sms sms = new Sms(smsContent, sendDt);
+        sms.setCust(cust);
+        sms.setSmsTemplate(smsTemplate);
+        sms.setSendPhoneNumber(cust.getPhoneNumber());
+
+        return sms;
+    }
+
+    //== setter==
+    private void setSendPhoneNumber(String phoneNumber){
         this.sendPhoneNumber = phoneNumber;
     }
 

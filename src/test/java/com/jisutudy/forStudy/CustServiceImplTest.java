@@ -1,4 +1,4 @@
-package com.jisutudy.customer;
+package com.jisutudy.forStudy;
 
 import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.springstudy.CustService;

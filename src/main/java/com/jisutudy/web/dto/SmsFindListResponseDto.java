@@ -21,11 +21,11 @@ public class SmsFindListResponseDto {
 
     public SmsFindListResponseDto(Sms sms) {
         this.smsId = sms.getSmsId();
-        this.custId = sms.getCustId();
+        this.custId = sms.getCust().getId();
         this.sendPhoneNumber = sms.getSendPhoneNumber();
         this.smsContent = sms.getSmsContent();
         this.sendDt = sms.getSendDt();
-        this.smsType = sms.getSmsType();
+        this.smsType = sms.getSmsTemplate().getSmsType();
         this.smsResult = sms.getSmsResult();
     }
 }

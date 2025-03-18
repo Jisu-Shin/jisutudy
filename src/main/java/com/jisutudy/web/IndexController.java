@@ -1,25 +1,37 @@
 package com.jisutudy.web;
 
-import com.jisutudy.service.JpaCustService;
-import com.jisutudy.service.JpaSmsService;
+import com.jisutudy.service.CustService;
+import com.jisutudy.service.SmsService;
+import com.jisutudy.service.SmsTemplateService;
+import com.jisutudy.web.dto.CustSaveRequestDto;
+import com.jisutudy.web.dto.SmsTemplateRequestDto;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@RequiredArgsConstructor
 @Controller
+@Slf4j
+@RequiredArgsConstructor
 public class IndexController {
 
-    private final JpaCustService custService;
-    private final JpaSmsService smsService;
+    private final CustService custService;
+    private final SmsService smsService;
+    private final SmsTemplateService smsTemplateService;
 
-    @GetMapping
+    @GetMapping("/")
     public String index(){
-        return "index";
+        return "home";
     }
 
     @GetMapping("/sms/send")
@@ -40,9 +52,27 @@ public class IndexController {
         return "cust-save";
     }
 
-    @GetMapping("/cust/findAll")
+    @GetMapping("/custs/new")
+    public String createCust() {
+        return "cust-createForm";
+    }
+
+    @GetMapping("/custs")
     public String findAllCust(Model model) {
         model.addAttribute("custs",custService.findAll());
         return "cust-findAll";
+    }
+
+    @GetMapping("/templates/new")
+    public String getTemplates(Model model) {
+        model.addAttribute("templates", smsTemplateService.findAll());
+        return "template-create";
+    }
+
+    @PostMapping("/templates/new")
+    public String createTemplate(SmsTemplateRequestDto requestDto) {
+        System.out.println(requestDto);
+        smsTemplateService.create(requestDto);
+        return "redirect:/templates/new";
     }
 }

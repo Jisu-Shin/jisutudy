@@ -1,6 +1,5 @@
 package com.jisutudy.domain.sms.springstudy;
 
-import com.jisutudy.domain.sms.Sms;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

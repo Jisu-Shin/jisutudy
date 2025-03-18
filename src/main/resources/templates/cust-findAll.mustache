@@ -1,28 +1,30 @@
-{{>layout/header}}
-{{>layout/menu}}
+{{>layout/home-header}}
+
 <div class="container">
-    <h1>고객 전체 조회하기</h1>
-    <div class="col-6">
-        <table class="table table-striped">
-            <thead class = "thead strong">
+    {{>layout/bodyheader}}
+
+    <table class="table table-striped">
+        <thead class = "thead strong">
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>전화번호</th>
+            <th>고객SMS수신동의유형</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#custs}}
             <tr>
-                <th>번호</th>
-                <th>이름</th>
-                <th>전화번호</th>
-                <th>고객SMS수신동의유형</th>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{phoneNumber}}</td>
+                <td>{{consentType}}</td>
             </tr>
-            </thead>
-            <tbody id="tbody">
-            {{#custs}}
-                <tr>
-                    <td>{{id}}</td>
-                    <td>{{name}}</td>
-                    <td>{{phoneNumber}}</td>
-                    <td>{{consentType}}</td>
-                </tr>
-            {{/custs}}
-            </tbody>
-        </table>
-    </div>
+        {{/custs}}
+        </tbody>
+    </table>
+
+    {{>layout/bodyfooter}}
 </div>
+
 {{>layout/footer}}

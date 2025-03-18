@@ -66,6 +66,7 @@ var main = {
             phoneNumber: $('#phonenumber').val().replace(/-/g,""),
             smsConsentType: $('#smsConsentType').val()
         }
+        console.log("고객저장시작")
         oper.ajax("POST",data,'/api/custs', callback.saveCust);
     },
 
@@ -78,8 +79,11 @@ var main = {
 //        console.log(td.eq(2).text());
         console.log(oper.getTodayDt());
 
+        var custIdList = [];
+        custIdList.push(td.eq(1).text());
+
         var data = {
-                custId: td.eq(1).text(),
+                custIdList: custIdList,
                 smsContent: $('#content').val(),
                 sendDt : oper.getTodayDt() ,
                 smsType : "01"
@@ -94,9 +98,11 @@ var main = {
 };
 
 var callback = {
-    saveCust : function () {
+    saveCust : function (data) {
+        console.log("고객저장콜백시작");
         alert("고객 등록이 완료되었습니다");
-        $("#frm-reset")[0].reset();
+        window.location.href = "/";
+//        $("#frm-reset")[0].reset();
     } ,
 
     choiceCust : function (data) {
@@ -133,12 +139,20 @@ var oper = {
         $.ajax({
             'type': type,
             'url':url,
-           'dataType':'json',
+            'dataType':'json',
             'contentType':'application/json; charset=utf-8',
             'data':JSON.stringify(data)
-        }).done(function (response){
+        })
+        .done(function (response){
             callback(response);
-        });
+        })
+        .fail(function(xhr, status, error) {
+            // 요청이 실패했을 때 실행되는 코드
+            console.error('요청 실패:', error);
+        })
+//        .always(function (){
+//            console.log("ajax always 로그");
+//        });
     },
 
     getTodayDt : function() {

@@ -1,9 +1,13 @@
-package com.jisutudy.domain.customer;
+package com.jisutudy.repository;
 
+import com.jisutudy.domain.customer.Cust;
+import com.jisutudy.domain.customer.CustSmsConsentType;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,13 +22,13 @@ class JpaCustRepositoryTest {
 
     @AfterEach
     public void cleanup() {
-        custRepository.deleteAll();
+//        custRepository.deleteAll();
     }
 
     @Test
     public void 게시글저장불러오기() {
         //given
-        String name = "홍길동";
+        String name = "고길동";
         String phoneNumber = "01012345678";
         CustSmsConsentType type = CustSmsConsentType.ALL_ALLOW;
 
@@ -45,6 +49,8 @@ class JpaCustRepositoryTest {
     }
 
     @Test
+    @Transactional
+    @Rollback(false)
     public void BaseTimeEntity등록() {
         //given
         LocalDateTime now = LocalDateTime.now();

@@ -1,4 +1,4 @@
-package com.jisutudy.sms.filter;
+package com.jisutudy.domain.sms.filter;
 
 import com.jisutudy.domain.sms.filter.ProdTimeSmsFilter;
 import org.assertj.core.api.Assertions;

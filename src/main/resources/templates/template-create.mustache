@@ -1,0 +1,48 @@
+{{>layout/home-header}}
+
+<div class="container">
+    {{>layout/bodyheader}}
+    <div class="template">
+        <table class="table table-striped">
+            <thead class = "thead strong">
+            <tr>
+                <th>번호</th>
+                <th>템플릿내용</th>
+                <th>SMS유형</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            {{#templates}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{templateContent}}</td>
+                    <td>{{smsType}}</td>
+                </tr>
+            {{/templates}}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form role="form" action="/templates/new" method="post">
+            <div class="form-group">
+                <label for="templateContent">템플릿내용</label>
+                <textarea class="form-control" placeholder="내용을 입력하세요" id="templateContent" name ="templateContent"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="smsType">SMS유형</label>
+                <select class="form-control" name="smsType" id="smsType">
+                    <option selected>선택해주세요</option>
+                    <option value="01">정보</option>
+                    <option value="02">광고</option>
+                    <option value="03">인증</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">등록</button>
+        </form>
+        <br/>
+    </div>
+
+    {{>layout/bodyfooter}}
+</div> <!-- /container -->
+
+{{>layout/footer}}
