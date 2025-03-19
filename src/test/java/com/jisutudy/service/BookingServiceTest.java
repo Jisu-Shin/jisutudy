@@ -64,7 +64,7 @@ public class BookingServiceTest {
     }
 
     private Cust createCust(String name, String phoneNumber) {
-        Cust cust = new Cust(name, phoneNumber, CustSmsConsentType.ALL_ALLOW);
+        Cust cust = Cust.createCust(name, phoneNumber, CustSmsConsentType.ALL_ALLOW);
         em.persist(cust);
         return cust;
     }

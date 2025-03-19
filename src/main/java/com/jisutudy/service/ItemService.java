@@ -2,6 +2,7 @@ package com.jisutudy.service;
 
 import com.jisutudy.domain.performance.Item;
 import com.jisutudy.repository.JpaItemRepository;
+import com.jisutudy.web.dto.ItemUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,7 @@ public class ItemService {
         jpaItemRepository.save(item);
     }
 
-    public List<Item> findItems() {
+    public List<Item> findAll() {
         return jpaItemRepository.findAll();
     }
 
@@ -28,5 +29,12 @@ public class ItemService {
         Item item = jpaItemRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 공연이 없습니다."));
         return item;
+    }
+
+    @Transactional
+    public void updateItem(ItemUpdateRequestDto requestDto) {
+        Item findItem = jpaItemRepository.findById(requestDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException(""));
+        findItem.update(requestDto.getName(), requestDto.getPrice(), requestDto.getStockQuantity());
     }
 }
