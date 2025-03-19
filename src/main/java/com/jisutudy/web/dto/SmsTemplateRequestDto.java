@@ -1,5 +1,6 @@
 package com.jisutudy.web.dto;
 
+import com.jisutudy.domain.sms.SmsType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,10 @@ import lombok.Setter;
 public class SmsTemplateRequestDto {
 
     private String templateContent;
-    private String smsType;
+    private SmsType smsType;
 
     @Builder
-    public SmsTemplateRequestDto(String templateContent, String smsType) {
+    public SmsTemplateRequestDto(String templateContent, SmsType smsType) {
         this.templateContent = templateContent;
         this.smsType = smsType;
     }

@@ -10,11 +10,11 @@ import lombok.Getter;
 public class SmsTemplateListResponseDto {
     private Long id;
     private String templateContent;
-    private SmsType smsType;
+    private String smsType;
 
     public SmsTemplateListResponseDto(SmsTemplate entity) {
         this.id = entity.getId();
         this.templateContent = entity.getTemplateContent();
-        this.smsType = entity.getSmsType();
+        this.smsType = entity.getSmsType().getDisplayName();
     }
 }
