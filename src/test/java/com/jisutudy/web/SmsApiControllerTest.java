@@ -1,11 +1,14 @@
 package com.jisutudy.web;
 
+import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.CustSmsConsentType;
+import com.jisutudy.domain.sms.SmsType;
 import com.jisutudy.repository.JpaCustRepository;
 import com.jisutudy.repository.JpaSmsRepository;
+import com.jisutudy.repository.JpaSmsTemplateRepository;
 import com.jisutudy.web.dto.SmsSendRequestDto;
-import org.junit.jupiter.api.AfterEach;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
@@ -37,24 +41,19 @@ class SmsApiControllerTest {
     @Autowired
     private JpaCustRepository jpaCustRepository;
 
-    @AfterEach
-    public void tearDown() throws Exception {
-        jpaSmsRepository.deleteAll();
-    }
+    @Autowired
+    private JpaSmsTemplateRepository jpaSmsTemplateRepository;
 
-    static Long custId;
+    private Long custId;
+    private Long smsTemplateId;
 
     @BeforeEach
-    public void makeCust() {
-        jpaCustRepository.save(Cust.builder()
-                .name("신지수")
-                .phoneNumber("01012345678")
-                .smsConsentType(CustSmsConsentType.ALL_ALLOW)
-                .build());
+    void setUp() {
+        Cust cust = createCust();
+        SmsTemplate smsTemplate = createSmsTemplate();
 
-        Cust c = jpaCustRepository.findAll().get(0);
-        custId = c.getId();
-
+        custId = cust.getId();
+        smsTemplateId = smsTemplate.getId();
     }
 
     @Test
@@ -62,20 +61,31 @@ class SmsApiControllerTest {
         //given
         SmsSendRequestDto requestDto = SmsSendRequestDto.builder()
                                         .custIdList(List.of(custId))
-                                        .smsContent("메시지발송")
-                                        .smsType("01") // SmsType.INFORMAITONAL
+                                        .templateId(smsTemplateId)
                                         .sendDt("202411181930")
                                         .build();
 
         String url = "http://localhost:"+port+"/api/sms/send";
 
         //when
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url,requestDto, Long.class);
+        ResponseEntity<Boolean> responseEntity = restTemplate.postForEntity(url,requestDto, Boolean.class);
         System.out.println("responseEntity = " + responseEntity);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 //        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+    }
+
+    private SmsTemplate createSmsTemplate() {
+        SmsTemplate smsTemplate = SmsTemplate.createSmsTemplate("문자테스트발송", SmsType.INFORMAITONAL);
+        jpaSmsTemplateRepository.save(smsTemplate);
+        return smsTemplate;
+    }
+
+    private Cust createCust() {
+        Cust cust = Cust.createCust("테스트고객","01012345678",CustSmsConsentType.ALL_ALLOW);
+        jpaCustRepository.save(cust);
+        return cust;
     }
 
     @Test

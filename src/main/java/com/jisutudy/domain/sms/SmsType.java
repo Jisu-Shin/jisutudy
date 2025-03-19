@@ -5,20 +5,17 @@ import com.jisutudy.domain.customer.CustSmsConsentType;
 import java.util.Arrays;
 
 public enum SmsType {
-    INFORMAITONAL("01"), // 정보성
-    ADVERTISING("02"),  // 광고성
-    VERIFICATION("03"); // 인증
+    INFORMAITONAL("정보성 문자"), // 정보성
+    ADVERTISING("광고성 문자"),  // 광고성
+    VERIFICATION("인증 문자"); // 인증
 
-    private final String label;
+    private final String displayName;
 
-    SmsType(String label) {
-        this.label = label;
+    SmsType(String displayName) {
+        this.displayName = displayName;
     }
 
-    public static SmsType of(String label) {
-        return Arrays.stream(values())
-                .filter(val -> label.equals(val.label))
-                .findFirst()
-                .orElse(null);
+    public String getDisplayName() {
+        return displayName;
     }
 }

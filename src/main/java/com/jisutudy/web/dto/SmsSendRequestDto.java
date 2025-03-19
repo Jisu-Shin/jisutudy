@@ -17,10 +17,10 @@ public class SmsSendRequestDto {
     String smsContent;
     String sendDt;
     String smsType;
-    String templateId;
+    Long templateId;
 
     @Builder
-    public SmsSendRequestDto(List<Long> custIdList, String smsContent, String sendDt, String smsType, String templateId) {
+    public SmsSendRequestDto(List<Long> custIdList, String smsContent, String sendDt, String smsType, Long templateId) {
         this.custIdList = custIdList;
         this.smsContent = smsContent;
         this.sendDt = sendDt;

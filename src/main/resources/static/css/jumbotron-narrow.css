@@ -70,6 +70,10 @@ body {
     margin-bottom: 15px;
 }
 
+.form-group{
+    margin-bottom: 10px;
+}
+
 /* Supporting marketing content */
 .marketing {
     margin: 40px 0;

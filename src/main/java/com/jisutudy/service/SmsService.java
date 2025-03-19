@@ -38,10 +38,13 @@ public class SmsService {
                     .orElseThrow(() -> new IllegalArgumentException("해당 고객이 없습니다: "+custId));
 
             // 템플릿 엔티티 조회
-            SmsTemplate smsTemplate = jpaSmsTemplateRepository.findById(Long.parseLong(requestDto.getTemplateId()))
+            SmsTemplate smsTemplate = jpaSmsTemplateRepository.findById(requestDto.getTemplateId())
                     .orElseThrow(() -> new IllegalArgumentException("해당 SMS 템플릿이 없습니다: " + requestDto.getTemplateId()));
 
-            Sms sms = Sms.createSms(cust, smsTemplate, requestDto.getSmsContent(), requestDto.getSendDt());
+            // 템플릿 결합
+
+            // 문자 엔티티 생성
+            Sms sms = Sms.createSms(cust, smsTemplate, smsTemplate.getTemplateContent(), requestDto.getSendDt());
 
             // 필터링
             SmsResult smsResult = smsFilter.filter(sms);
@@ -63,6 +66,8 @@ public class SmsService {
      */
     @Transactional
     public List<SmsFindListResponseDto> findSmsList(String startDt, String endDt) {
+        System.out.println("***********************");
+        System.out.println(startDt+" "+endDt);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime startLdt = LocalDateTime.parse(startDt,format);
         LocalDateTime endLdt = LocalDateTime.parse(endDt,format);

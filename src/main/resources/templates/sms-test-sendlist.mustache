@@ -1,16 +1,17 @@
-{{>layout/home-header}}
+{{>layout/header}}
+{{>layout/menu}}
 
 <div class="container">
-    {{>layout/bodyheader}}
+    <h1>SMS 전체 조회하기</h1>
     <div class="col-10">
         <table class="table table-striped">
             <thead class = "thead strong">
             <tr>
-                <th>id</th>
-                <th>고객명</th>
+                <th>sms_id</th>
+                <th>고객_id</th>
                 <th>전화번호</th>
+                <th>문자유형</th>
                 <th>메시지내용</th>
-                <th>발송일시</th>
                 <th>발송결과</th>
             </tr>
             </thead>
@@ -18,18 +19,16 @@
             {{#sms}}
                 <tr>
                     <td>{{smsId}}</td>
-                    <td>{{custName}}</td>
+                    <td>{{custId}}</td>
                     <td>{{sendPhoneNumber}}</td>
+                    <td>{{smsType}}</td>
                     <td>{{smsContent}}</td>
-                    <td>{{sendDt}}</td>
                     <td>{{smsResult}}</td>
                 </tr>
             {{/sms}}
             </tbody>
         </table>
     </div>
-
-    {{>layout/bodyfooter}}
-</div> <!-- /container -->
+</div>
 
 {{>layout/footer}}

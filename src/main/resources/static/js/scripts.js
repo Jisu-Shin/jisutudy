@@ -32,8 +32,7 @@ var main = {
 
         $('#btn-send').on('click', function () {
             console.log("체크된 고객 id");
-            var checkbox = $("input[name=chb_cust]:checked");
-            console.log(checkbox);
+            let custIdList = [];
 
             _this.sendSms();
         });
@@ -71,22 +70,38 @@ var main = {
     },
 
     sendSms : function () {
-        var checkbox = $("input[name=chb_cust]:checked");
-//        checkbox.each({})
-        var tr = checkbox.parent().parent();
-        var td = tr.children();
+        let custIdList = [];
+        $(".cust-checkbox:checked").each(function() {
+            let custId = $(this).closest("tr").find("td").eq(1).text().trim();
+            custIdList.push(custId);
+        });
+
+        let selectedRow = $(".template-radio:checked").closest("tr");
+
+        if (selectedRow.length === 0) {
+            console.log("선택된 행이 없습니다.");
+            return;
+        }
+
+        let template = {
+            id: selectedRow.find("td").eq(1).text().trim(),
+            smsType: selectedRow.find("td").eq(3).text().trim(),
+        };
+
+        console.log(selectedRow);
+        console.log(template);
+
 //        console.log(td.eq(1).text());
 //        console.log(td.eq(2).text());
         console.log(oper.getTodayDt());
 
-        var custIdList = [];
-        custIdList.push(td.eq(1).text());
+//        var custIdList = [];
+//        custIdList.push(td.eq(1).text());
 
         var data = {
                 custIdList: custIdList,
-                smsContent: $('#content').val(),
+                templateId: template.id,
                 sendDt : oper.getTodayDt() ,
-                smsType : "01"
             }
         oper.ajax("POST",data,'/api/sms/send', callback.sendSms);
     },
