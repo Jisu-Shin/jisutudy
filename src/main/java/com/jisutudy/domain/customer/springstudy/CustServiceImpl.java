@@ -1,6 +1,5 @@
 package com.jisutudy.domain.customer.springstudy;
 
-import com.jisutudy.domain.customer.Cust;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

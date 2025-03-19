@@ -1,6 +1,6 @@
 package com.jisutudy.forStudy;
 
-import com.jisutudy.domain.customer.Cust;
+import com.jisutudy.domain.customer.springstudy.Cust;
 import com.jisutudy.domain.customer.springstudy.CustService;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import org.junit.jupiter.api.DisplayName;
@@ -53,7 +53,7 @@ class CustServiceImplTest {
     @Test
     void enum고객세팅() {
         System.out.println("CustSmsConsentType = " + CustSmsConsentType.of("01"));
-        System.out.println(CustSmsConsentType.ALL_ALLOW.getLabel());
+        System.out.println(CustSmsConsentType.ALL_ALLOW.getDisplayName());
     }
 
 }

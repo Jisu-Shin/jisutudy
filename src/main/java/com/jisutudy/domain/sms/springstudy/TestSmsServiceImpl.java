@@ -1,6 +1,6 @@
 package com.jisutudy.domain.sms.springstudy;
 
-import com.jisutudy.domain.customer.Cust;
+import com.jisutudy.domain.customer.springstudy.Cust;
 import com.jisutudy.domain.customer.springstudy.CustRepository;
 import com.jisutudy.domain.sms.SmsResult;
 import com.jisutudy.domain.sms.filter.SmsFilter;
