@@ -1,4 +1,4 @@
-package com.jisutudy.web;
+package com.jisutudy.web.controller;
 
 import com.jisutudy.web.dto.HelloResponseDto;
 import io.swagger.v3.oas.annotations.Hidden;
