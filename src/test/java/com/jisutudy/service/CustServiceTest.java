@@ -26,7 +26,7 @@ class CustServiceTest {
     @Test
     public void 회원가입() throws Exception {
         //given
-        CustSaveRequestDto custSaveRequestDto = new CustSaveRequestDto("kim","01012345678",CustSmsConsentType.ALL_ALLOW.getLabel());
+        CustSaveRequestDto custSaveRequestDto = new CustSaveRequestDto("kim","01012345678",CustSmsConsentType.ALL_ALLOW);
 
         //when
         Long saveId = custService.save(custSaveRequestDto);
@@ -39,8 +39,8 @@ class CustServiceTest {
     @Test
     public void 중복_회원_예외() throws Exception {
         //given
-        CustSaveRequestDto cust = new CustSaveRequestDto("kim1","1234",CustSmsConsentType.ALL_ALLOW.getLabel());
-        CustSaveRequestDto cust2 = new CustSaveRequestDto("kim1","4567",CustSmsConsentType.ALL_ALLOW.getLabel());
+        CustSaveRequestDto cust = new CustSaveRequestDto("kim1","1234",CustSmsConsentType.ALL_ALLOW);
+        CustSaveRequestDto cust2 = new CustSaveRequestDto("kim1","4567",CustSmsConsentType.ALL_ALLOW);
 
         //when
         custService.save(cust);

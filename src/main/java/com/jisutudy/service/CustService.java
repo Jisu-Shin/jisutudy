@@ -4,7 +4,6 @@ import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.repository.JpaCustRepository;
 import com.jisutudy.web.dto.CustListResponseDto;
-import com.jisutudy.web.dto.CustResponseDto;
 import com.jisutudy.web.dto.CustSaveRequestDto;
 import com.jisutudy.web.dto.CustUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -48,18 +47,18 @@ public class CustService {
         return id;
     }
 
-    public CustResponseDto findById(Long id) {
+    public CustListResponseDto findById(Long id) {
         Cust entity = custRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 고객이 없습니다. id = " + id));
 
-        return new CustResponseDto(entity);
+        return new CustListResponseDto(entity);
     }
 
-    public CustResponseDto findByPhoneNumber(String phoneNumber) {
+    public CustListResponseDto findByPhoneNumber(String phoneNumber) {
         String subStringPhoneNumber = phoneNumber.substring(phoneNumber.length()-4);
         Cust entity = custRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(()->new IllegalArgumentException("해당 고객이 없습니다. 전화번호 = " + subStringPhoneNumber));
-        return new CustResponseDto(entity);
+        return new CustListResponseDto(entity);
     }
 
     /**

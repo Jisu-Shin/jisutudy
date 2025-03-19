@@ -2,14 +2,12 @@ package com.jisutudy.web;
 
 import com.jisutudy.service.CustService;
 import com.jisutudy.web.dto.CustListResponseDto;
-import com.jisutudy.web.dto.CustResponseDto;
 import com.jisutudy.web.dto.CustSaveRequestDto;
 import com.jisutudy.web.dto.CustUpdateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +44,7 @@ public class CustApiController {
 
     @Operation(summary = "고객 단건 조회")
     @GetMapping("/{id}")
-    public CustResponseDto findById(@PathVariable("id") Long id) {
+    public CustListResponseDto findById(@PathVariable("id") Long id) {
         return custService.findById(id);
     }
 
@@ -58,7 +56,7 @@ public class CustApiController {
 
     @Operation(summary = "전화번호로 고객 찾기")
     @PostMapping("/search")
-    public CustResponseDto findByPhoneNumber(@RequestBody String phoneNumber) {
+    public CustListResponseDto findByPhoneNumber(@RequestBody String phoneNumber) {
         return custService.findByPhoneNumber(phoneNumber);
     }
 

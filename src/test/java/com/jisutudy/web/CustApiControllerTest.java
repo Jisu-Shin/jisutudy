@@ -3,7 +3,7 @@ package com.jisutudy.web;
 import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.repository.JpaCustRepository;
-import com.jisutudy.web.dto.CustResponseDto;
+import com.jisutudy.web.dto.CustListResponseDto;
 import com.jisutudy.web.dto.CustSaveRequestDto;
 import com.jisutudy.web.dto.CustUpdateRequestDto;
 import org.junit.jupiter.api.AfterEach;
@@ -22,7 +22,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CustApiControllerTest {
@@ -46,17 +45,20 @@ class CustApiControllerTest {
         //given
         String name = "신지수";
         String phoneNumber = "01012345678";
-        String consetType = "01";
+        CustSmsConsentType consentType = CustSmsConsentType.ALL_ALLOW;
+
         CustSaveRequestDto requestDto = CustSaveRequestDto.builder()
                 .name(name)
                 .phoneNumber(phoneNumber)
-                .smsConsentType(consetType)
+                .smsConsentType(consentType)
                 .build();
 
         String url = "http://localhost:" + port + "/api/custs";
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+//        System.out.println("Response Body: " + responseEntity.getBody());
+//        System.out.println("Status Code: " + responseEntity.getStatusCode());
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -65,7 +67,7 @@ class CustApiControllerTest {
         Cust sample = all.get(0);
         assertThat(sample.getName()).isEqualTo(name);
         assertThat(sample.getPhoneNumber()).isEqualTo(phoneNumber);
-        assertThat(sample.getSmsConsentType()).isEqualTo(CustSmsConsentType.of(consetType));
+        assertThat(sample.getSmsConsentType()).isEqualTo(consentType);
     }
 
     @Test
@@ -73,7 +75,7 @@ class CustApiControllerTest {
         //given
         String name = "";
         String phoneNumber = "";
-        String consetType = null;
+        CustSmsConsentType consetType = null;
         CustSaveRequestDto requestDto = CustSaveRequestDto.builder()
                 .name(name)
                 .phoneNumber(phoneNumber)
@@ -102,7 +104,7 @@ class CustApiControllerTest {
 
         CustUpdateRequestDto requestDto = CustUpdateRequestDto.builder()
                 .phoneNumber(expectPhoneNumber)
-                .smsConsentType(expectType.getLabel())
+                .smsConsentType(expectType.getDisplayName())
                 .build();
 
         String url = "http://localhost:" + port + "/api/custs/" + updateId;
@@ -133,7 +135,8 @@ class CustApiControllerTest {
         String url = "http://localhost:" + port + "/api/custs/" + findId;
 
         //when
-        ResponseEntity<CustResponseDto> responseEntity = restTemplate.getForEntity(url, CustResponseDto.class);
+        ResponseEntity<CustListResponseDto> responseEntity = restTemplate.getForEntity(url, CustListResponseDto.class);
+        System.out.println("Response Body: " + responseEntity.getBody());
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -141,7 +144,7 @@ class CustApiControllerTest {
 
         assertThat(responseEntity.getBody().getName()).isEqualTo("신지수");
         assertThat(responseEntity.getBody().getPhoneNumber()).isEqualTo("01012345678");
-        assertThat(responseEntity.getBody().getSmsConsentType()).isEqualTo(CustSmsConsentType.ALL_ALLOW.getLabel());
+        assertThat(responseEntity.getBody().getConsentType()).isEqualTo(CustSmsConsentType.ALL_ALLOW.getDisplayName());
 
     }
 
@@ -155,7 +158,7 @@ class CustApiControllerTest {
         String url = "http://localhost:" + port + "/api/custs/search";
 
         //when
-        ResponseEntity<CustResponseDto> responseEntity = restTemplate.postForEntity(url, findByPhoneNumber, CustResponseDto.class);
+        ResponseEntity<CustListResponseDto> responseEntity = restTemplate.postForEntity(url, findByPhoneNumber, CustListResponseDto.class);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -163,7 +166,7 @@ class CustApiControllerTest {
 
         assertThat(responseEntity.getBody().getName()).isEqualTo("신지수");
         assertThat(responseEntity.getBody().getPhoneNumber()).isEqualTo("01012345678");
-        assertThat(responseEntity.getBody().getSmsConsentType()).isEqualTo(CustSmsConsentType.ALL_ALLOW.getLabel());
+        assertThat(responseEntity.getBody().getConsentType()).isEqualTo(CustSmsConsentType.ALL_ALLOW.getDisplayName());
     }
 
 }
