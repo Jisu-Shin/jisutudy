@@ -1,4 +1,4 @@
-package com.jisutudy.web;
+package com.jisutudy.web.controller;
 
 
 import com.jisutudy.service.SmsService;
