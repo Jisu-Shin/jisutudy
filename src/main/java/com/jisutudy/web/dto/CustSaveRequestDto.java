@@ -7,8 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class CustSaveRequestDto {
 
@@ -29,7 +30,7 @@ public class CustSaveRequestDto {
     public Cust toEntity() {
         return Cust.builder()
                 .name(name)
-                .phoneNumber(phoneNumber)
+                .phoneNumber(phoneNumber.replaceAll("-",""))
                 .smsConsentType(smsConsentType)
                 .build();
     }
