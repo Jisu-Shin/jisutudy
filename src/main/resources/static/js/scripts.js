@@ -32,14 +32,16 @@ var main = {
 
         $('#btn-send').on('click', function () {
             console.log("체크된 고객 id");
-            let custIdList = [];
-
             _this.sendSms();
         });
 
         $('#phonenumber').on('input', function() {
             $(this).val($(this).val().replace(/[^0-9]/g, "").replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/\-{1,2}$/g, ""));
-        })
+        });
+
+        $('.cancel-booking').on('click', function () {
+            _this.cancelBooking(this);
+        });
 
     },
 
@@ -90,24 +92,27 @@ var main = {
 
         console.log(selectedRow);
         console.log(template);
-
-//        console.log(td.eq(1).text());
-//        console.log(td.eq(2).text());
         console.log(oper.getTodayDt());
-
-//        var custIdList = [];
-//        custIdList.push(td.eq(1).text());
 
         var data = {
                 custIdList: custIdList,
                 templateId: template.id,
-                sendDt : oper.getTodayDt() ,
-            }
+                sendDt : oper.getTodayDt()
+                }
         oper.ajax("POST",data,'/api/sms/send', callback.sendSms);
     },
 
     closeModal : function() {
         window.location.href='/cust/findAll';
+    },
+
+    cancelBooking : function (btn) {
+        let bookingRow = $(btn).closest("tr");
+        console.log(bookingRow);
+        var bookingId = bookingRow.find("td").eq(0).text().trim();
+        console.log(bookingId)
+        var data = {}
+        oper.ajax("POST",data,'/api/bookings/'+bookingId+'/cancel', callback.cancelBooking);
     }
 
 };
@@ -137,6 +142,11 @@ var callback = {
     sendSms : function () {
         alert("sms 발송이 완료되었습니다");
         window.location.href='/sms/send';
+    } ,
+
+    cancelBooking : function () {
+        alert("예매가 취소 되었습니다");
+        window.location.href='/bookings';
     }
 
 }

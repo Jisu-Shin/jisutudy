@@ -2,6 +2,7 @@ package com.jisutudy.service;
 
 import com.jisutudy.domain.performance.Item;
 import com.jisutudy.repository.JpaItemRepository;
+import com.jisutudy.web.dto.ItemGetResponseDto;
 import com.jisutudy.web.dto.ItemUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,16 +26,16 @@ public class ItemService {
         return jpaItemRepository.findAll();
     }
 
-    public Item findById(Long id) {
+    public ItemGetResponseDto findById(Long id) {
         Item item = jpaItemRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 공연이 없습니다."));
-        return item;
+        return new ItemGetResponseDto(item);
     }
 
     @Transactional
     public void updateItem(ItemUpdateRequestDto requestDto) {
         Item findItem = jpaItemRepository.findById(requestDto.getId())
-                .orElseThrow(() -> new IllegalArgumentException(""));
+                .orElseThrow(() -> new IllegalArgumentException("해당 공연이 없습니다."));
         findItem.update(requestDto.getName(), requestDto.getPrice(), requestDto.getStockQuantity());
     }
 }

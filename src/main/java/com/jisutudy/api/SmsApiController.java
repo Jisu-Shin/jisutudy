@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Tag(name="SmsApiController", description = "sms 관련 rest api")
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/sms")
 public class SmsApiController {
 
