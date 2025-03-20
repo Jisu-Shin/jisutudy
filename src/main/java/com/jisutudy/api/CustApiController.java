@@ -1,4 +1,4 @@
-package com.jisutudy.web;
+package com.jisutudy.api;
 
 import com.jisutudy.service.CustService;
 import com.jisutudy.web.dto.CustListResponseDto;
