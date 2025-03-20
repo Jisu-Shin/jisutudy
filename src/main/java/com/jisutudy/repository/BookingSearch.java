@@ -2,10 +2,11 @@ package com.jisutudy.repository;
 
 import com.jisutudy.domain.BookingStatus;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor
 public class BookingSearch {
 
     private String custName; // 고객명

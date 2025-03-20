@@ -30,7 +30,6 @@ public class BookingController {
     public String bookingList(Model model, BookingSearch bookingSearch) {
         List<BookingListResponseDto> bookings = bookingService.findBooking(bookingSearch);
         model.addAttribute("bookings",bookings);
-
         return "booking-getList";
     }
 

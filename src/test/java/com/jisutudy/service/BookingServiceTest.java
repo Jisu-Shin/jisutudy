@@ -9,6 +9,7 @@ import com.jisutudy.domain.performance.Item;
 import com.jisutudy.exception.NotEnoughStockException;
 import com.jisutudy.repository.BookingSearch;
 import com.jisutudy.repository.JpaBookingRepository;
+import com.jisutudy.web.dto.BookingListResponseDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,7 +144,7 @@ public class BookingServiceTest {
 
         //when
         BookingSearch bookingSearch = new BookingSearch();
-        List<Booking> bookings = bookingService.findBooking(bookingSearch);
+        List<BookingListResponseDto> bookings = bookingService.findBooking(bookingSearch);
 
         //then
         assertEquals(3,bookings.size());
@@ -164,7 +165,7 @@ public class BookingServiceTest {
         //when
         BookingSearch bookingSearch = new BookingSearch();
         bookingSearch.setBookingStatus(BookingStatus.BOOK);
-        List<Booking> bookings = bookingService.findBooking(bookingSearch);
+        List<BookingListResponseDto> bookings = bookingService.findBooking(bookingSearch);
         System.out.println(bookings.size());
 
         //then
@@ -188,12 +189,12 @@ public class BookingServiceTest {
         //when
         BookingSearch bookingSearch = new BookingSearch();
         bookingSearch.setBookingStatus(BookingStatus.BOOK);
-        List<Booking> bookings = bookingService.findBooking(bookingSearch);
+        List<BookingListResponseDto> bookings = bookingService.findBooking(bookingSearch);
         System.out.println(bookings.size());
 
         bookingSearch = new BookingSearch();
         bookingSearch.setBookingStatus(BookingStatus.CANCEL);
-        List<Booking> cancelBookings = bookingService.findBooking(bookingSearch);
+        List<BookingListResponseDto> cancelBookings = bookingService.findBooking(bookingSearch);
 
         //then
         assertEquals(3,cancelBookings.size());
