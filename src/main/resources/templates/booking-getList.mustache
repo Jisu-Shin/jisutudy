@@ -2,6 +2,24 @@
 
 <div class="container">
     {{>layout/bodyheader}}
+    <div>
+        <form class="row" action="/bookings" method="GET">
+            <div class="col-auto">
+                <input type="text" name="custName" class="form-control" placeholder="고객명을 입력해주세요"
+                       value="{{#bookingSearch}}{{custName}}{{/bookingSearch}}">
+            </div>
+            <div class="col-auto">
+                <select class="form-select" name="bookingStatus">
+                    <option value="">주문상태</option>
+                    <option value="BOOK">예매 완료</option>
+                    <option value="CANCEL">예매 취소</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">검색</button>
+            </div>
+        </form>
+    </div>
 
     <table class="table table-striped">
         <thead class = "thead strong">

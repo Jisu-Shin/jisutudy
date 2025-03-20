@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 public class BookingSearch {
-
     private String custName; // 고객명
     private BookingStatus bookingStatus; // 예약상태 [BOOK, CANCEL]
 }

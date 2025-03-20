@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,9 +28,14 @@ public class BookingController {
     private final ItemService itemService;
 
     @GetMapping("")
-    public String bookingList(Model model, BookingSearch bookingSearch) {
+    public String bookingList(Model model, @ModelAttribute("bookingSearch") BookingSearch bookingSearch) {
+        if (bookingSearch.getCustName() == null) {
+            bookingSearch.setCustName("");
+        }
+
         List<BookingListResponseDto> bookings = bookingService.findBooking(bookingSearch);
-        model.addAttribute("bookings",bookings);
+        model.addAttribute("bookings", bookings);
+        model.addAttribute("bookingSearch", bookingSearch);
         return "booking-getList";
     }
 
