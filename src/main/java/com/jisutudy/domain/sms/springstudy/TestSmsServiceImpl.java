@@ -3,7 +3,7 @@ package com.jisutudy.domain.sms.springstudy;
 import com.jisutudy.domain.customer.springstudy.Cust;
 import com.jisutudy.domain.customer.springstudy.CustRepository;
 import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.domain.sms.filter.SmsFilter;
+import com.jisutudy.service.filter.SmsFilter;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;

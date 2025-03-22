@@ -1,10 +1,9 @@
-package com.jisutudy.domain.sms.filter;
+package com.jisutudy.service.filter;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Profile("dev")
 @Component

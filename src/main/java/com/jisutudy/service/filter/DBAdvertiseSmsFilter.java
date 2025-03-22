@@ -1,4 +1,4 @@
-package com.jisutudy.domain.sms.filter;
+package com.jisutudy.service.filter;
 
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;
@@ -14,10 +14,11 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class DatabaseSmsFilter implements AdvertiseSmsFilter {
+public class DBAdvertiseSmsFilter implements AdvertiseSmsFilter {
 
     // 리포지토리 버전2) JPA 리포지토리
     private final JpaSmsRepository jpaSmsRepository;
+    private final int LIMIT_SMS = 5;
 
     @Override
     public boolean isSendable(Sms sms) {
@@ -34,7 +35,7 @@ public class DatabaseSmsFilter implements AdvertiseSmsFilter {
 //        List<Sms> todaySmsList = jpaSmsRepository.findAllBySendDtBetween(startDt, endDt);
 
         // 한 고객에게 광고성 문자는 하루에 2개만 발송할 수 있다.
-        if (smsList.size() >= 2) return false;
+        if (smsList.size() >= LIMIT_SMS) return false;
         return true;
     }
 }

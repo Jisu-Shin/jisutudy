@@ -6,6 +6,7 @@ import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.SmsResult;
 import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.service.filter.SmsFilter;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
