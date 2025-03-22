@@ -74,6 +74,11 @@ body {
     margin-bottom: 10px;
 }
 
+.placeholders {
+    border-bottom: 3px solid #e5e5e5;
+    margin-bottom: 15px;
+}
+
 /* Supporting marketing content */
 .marketing {
     margin: 40px 0;
