@@ -6,16 +6,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Embeddable
-@Getter
-@Setter
+@Getter @Setter
 @EqualsAndHashCode
-public class TemplatePlaceholderPK {
+public class SmsTemplateVariableRelPK {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="sms_tmplt_id")
     private SmsTemplate smsTemplate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="plhd_id")
-    private Placeholder placeholder;
+    @JoinColumn(name="tmplt_var_id")
+    private TemplateVariable templateVariable;
 }

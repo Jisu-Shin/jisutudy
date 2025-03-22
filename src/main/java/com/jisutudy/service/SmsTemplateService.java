@@ -23,6 +23,7 @@ public class SmsTemplateService {
     // 템플릿 추가
     @Transactional
     public Long create(SmsTemplateRequestDto requestDto) {
+        System.out.println(requestDto);
         SmsTemplate smsTemplate = SmsTemplate.createSmsTemplate(requestDto.getTemplateContent(), requestDto.getSmsType());
         repository.save(smsTemplate);
         return smsTemplate.getId();

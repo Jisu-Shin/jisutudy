@@ -43,6 +43,10 @@ var main = {
             _this.cancelBooking(this);
         });
 
+        $('#placeholdersTable tbody').on('dblclick','tr', function () {
+            _this.insertPlaceholder(this);
+        });
+
     },
 
     add : function () {
@@ -113,6 +117,12 @@ var main = {
         console.log(bookingId)
         var data = {}
         oper.ajax("POST",data,'/api/bookings/'+bookingId+'/cancel', callback.cancelBooking);
+    },
+
+    insertPlaceholder : function (tr) {
+        var koText = $(tr).find("td").eq(2).text().trim();
+        var curr = $('#templateContent').val();
+        $('#templateContent').val(curr+"#{{"+koText+"}} ");
     }
 
 };

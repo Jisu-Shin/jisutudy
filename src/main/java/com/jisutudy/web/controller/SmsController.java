@@ -30,8 +30,7 @@ public class SmsController {
 
     @GetMapping("/sendList")
     public String getSmsList(Model model) {
-        System.out.println("sms목록조회");
-        LocalDate startDt = LocalDate.now();
+        LocalDate startDt = LocalDate.now().minusDays(6);
         String parseStatDt = startDt.format(DateTimeFormatter.ofPattern("yyyyMMdd")).concat("0000");
 
         LocalDate endDt = LocalDate.now().plusDays(1);
