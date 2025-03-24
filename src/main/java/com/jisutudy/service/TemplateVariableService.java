@@ -1,7 +1,7 @@
 package com.jisutudy.service;
 
 import com.jisutudy.domain.TemplateVariable;
-import com.jisutudy.repository.JpaPlaceholderRepository;
+import com.jisutudy.repository.JpaTemplateVariableRepository;
 import com.jisutudy.web.dto.TemplateVariableDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,18 +15,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TemplateVariableService {
 
-    private final JpaPlaceholderRepository jpaPlaceholderRepository;
+    private final JpaTemplateVariableRepository jpaTemplateVariableRepository;
 
     @Transactional
-    public Long createPlaceholder(TemplateVariableDto dto) {
-        TemplateVariable templateVariable = TemplateVariable.createPlaceholder(dto);
-        jpaPlaceholderRepository.save(templateVariable);
+    public Long create(TemplateVariableDto dto) {
+        TemplateVariable templateVariable = TemplateVariable.create(dto.getEnText(), dto.getKoText(), dto.getVariableType());
+        jpaTemplateVariableRepository.save(templateVariable);
 
         return templateVariable.getId();
     }
 
     public List<TemplateVariableDto> findAll() {
-        return jpaPlaceholderRepository.findAll().stream()
+        return jpaTemplateVariableRepository.findAll().stream()
                 .map(TemplateVariableDto::new)
                 .collect(Collectors.toList());
     }

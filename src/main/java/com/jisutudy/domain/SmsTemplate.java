@@ -13,7 +13,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SmsTemplate {
 
@@ -28,6 +27,9 @@ public class SmsTemplate {
 
     @OneToMany(mappedBy = "smsTemplate")
     private List<Sms> smsList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "smsTemplate")
+    private List<SmsTmpltVarRel> tmpltVarRelList = new ArrayList<>();
 
     private SmsTemplate(String templateContent, SmsType smsType) {
         this.templateContent = templateContent;

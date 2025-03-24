@@ -6,8 +6,9 @@ import com.jisutudy.repository.JpaCustRepository;
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.domain.sms.filter.SmsFilter;
+import com.jisutudy.service.filter.SmsFilter;
 import com.jisutudy.repository.JpaSmsTemplateRepository;
+import com.jisutudy.service.smsTemplateVarBind.SmsTmpltVarBinder;
 import com.jisutudy.web.dto.SmsFindListResponseDto;
 import com.jisutudy.web.dto.SmsSendRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -27,24 +28,24 @@ public class SmsService {
     private final JpaCustRepository jpaCustRepository;
     private final JpaSmsTemplateRepository jpaSmsTemplateRepository;
     private final SmsFilter smsFilter;
+    private final SmsTmpltVarBinder smsTmpltVarBinder;
 
     @Transactional
     public boolean send(SmsSendRequestDto requestDto) {
-        for (Long custId : requestDto.getCustIdList()) {
-//            Sms sms = requestDto.toEntity(custId);
+        // 템플릿 엔티티 조회
+        SmsTemplate smsTemplate = jpaSmsTemplateRepository.findById(requestDto.getTemplateId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 SMS 템플릿이 없습니다: " + requestDto.getTemplateId()));
 
+        for (Long custId : requestDto.getCustIdList()) {
             // 고객 엔티티 조회
             Cust cust = jpaCustRepository.findById(custId)
                     .orElseThrow(() -> new IllegalArgumentException("해당 고객이 없습니다: "+custId));
 
-            // 템플릿 엔티티 조회
-            SmsTemplate smsTemplate = jpaSmsTemplateRepository.findById(requestDto.getTemplateId())
-                    .orElseThrow(() -> new IllegalArgumentException("해당 SMS 템플릿이 없습니다: " + requestDto.getTemplateId()));
-
-            // 템플릿 결합
+            // TODO 템플릿 결합
+            String bindSmsContent = smsTmpltVarBinder.bind(smsTemplate);
 
             // 문자 엔티티 생성
-            Sms sms = Sms.createSms(cust, smsTemplate, smsTemplate.getTemplateContent(), requestDto.getSendDt());
+            Sms sms = Sms.createSms(cust, smsTemplate, bindSmsContent, requestDto.getSendDt());
 
             // 필터링
             SmsResult smsResult = smsFilter.filter(sms);
@@ -66,8 +67,6 @@ public class SmsService {
      */
     @Transactional
     public List<SmsFindListResponseDto> findSmsList(String startDt, String endDt) {
-        System.out.println("***********************");
-        System.out.println(startDt+" "+endDt);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         LocalDateTime startLdt = LocalDateTime.parse(startDt,format);
         LocalDateTime endLdt = LocalDateTime.parse(endDt,format);

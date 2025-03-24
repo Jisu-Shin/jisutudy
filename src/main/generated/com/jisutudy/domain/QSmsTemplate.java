@@ -28,6 +28,8 @@ public class QSmsTemplate extends EntityPathBase<SmsTemplate> {
 
     public final StringPath templateContent = createString("templateContent");
 
+    public final ListPath<SmsTmpltVarRel, QSmsTmpltVarRel> tmpltVarRelList = this.<SmsTmpltVarRel, QSmsTmpltVarRel>createList("tmpltVarRelList", SmsTmpltVarRel.class, QSmsTmpltVarRel.class, PathInits.DIRECT2);
+
     public QSmsTemplate(String variable) {
         super(SmsTemplate.class, forVariable(variable));
     }

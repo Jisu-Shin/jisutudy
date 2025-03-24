@@ -16,7 +16,7 @@ public class TemplateVariableController {
 
     @PostMapping("/new")
     public String create(TemplateVariableDto requestDto) {
-        templateVariableService.createPlaceholder(requestDto);
+        templateVariableService.create(requestDto);
         return "redirect:/smsTemplates/new";
     }
 

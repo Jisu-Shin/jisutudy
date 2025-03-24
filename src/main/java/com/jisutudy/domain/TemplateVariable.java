@@ -1,10 +1,12 @@
 package com.jisutudy.domain;
 
-import com.jisutudy.web.dto.TemplateVariableDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,14 +22,26 @@ public class TemplateVariable {
     @Enumerated(EnumType.STRING)
     private TemplateVariableType variableType;
 
+    @OneToMany(mappedBy ="templateVariable")
+    private List<SmsTmpltVarRel> tmpltVarRelList = new ArrayList<>();
+
     private TemplateVariable(String enText, String koText, TemplateVariableType type) {
         this.enText = enText;
         this.koText = koText;
         this.variableType = type;
     }
 
-    public static TemplateVariable createPlaceholder(TemplateVariableDto dto){
-        TemplateVariable templateVariable = new TemplateVariable(dto.getEnText(), dto.getKoText(), dto.getVariableType());
+    public static TemplateVariable create(String enText, String koText, TemplateVariableType type){
+        TemplateVariable templateVariable = new TemplateVariable(enText, koText, type);
         return templateVariable;
+    }
+
+    @Override
+    public String toString() {
+        return "TemplateVariable{" +
+                "id=" + id +
+                ", enText='" + enText + '\'' +
+                ", koText='" + koText + '\'' +
+                '}';
     }
 }
