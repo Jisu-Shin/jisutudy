@@ -42,7 +42,7 @@ public class SmsService {
                     .orElseThrow(() -> new IllegalArgumentException("해당 고객이 없습니다: "+custId));
 
             // TODO 템플릿 결합
-            String bindSmsContent = smsTmpltVarBinder.bind(smsTemplate);
+            String bindSmsContent = smsTmpltVarBinder.bind(smsTemplate, cust);
 
             // 문자 엔티티 생성
             Sms sms = Sms.createSms(cust, smsTemplate, bindSmsContent, requestDto.getSendDt());

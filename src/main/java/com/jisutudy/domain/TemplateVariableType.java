@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum TemplateVariableType {
-    CUST("고객", "CustVariableBindImpl")
+    CUST("고객", "custVariableBindImpl")
     ,ITEM("공연", "itemVariableBindImpl")
     ;
 
