@@ -47,6 +47,10 @@ var main = {
             _this.insertPlaceholder(this);
         });
 
+        $('#selectItem').on('change', function() {
+            _this.searchbooking();
+        });
+
     },
 
     add : function () {
@@ -123,6 +127,21 @@ var main = {
         var koText = $(tr).find("td").eq(2).text().trim();
         var curr = $('#templateContent').val();
         $('#templateContent').val(curr+"#{{"+koText+"}} ");
+    },
+
+    searchbooking : function () {
+        var itemId = $("#selectItem").val();
+
+        if(!itemId){
+            var tbody = $('#custBody');
+            tbody.empty();
+        } else {
+            var data = {
+                        'itemId' : itemId ,
+                        'bookingStatus' : 'BOOK'
+                       };
+            oper.ajax("POST",data,'/api/bookings/search', callback.searchbooking);
+        }
     }
 
 };
@@ -157,6 +176,19 @@ var callback = {
     cancelBooking : function () {
         alert("예매가 취소 되었습니다");
         window.location.href='/bookings';
+    } ,
+
+    searchbooking : function (data) {
+        var tbody = $('#custBody');
+        tbody.empty();
+        data.forEach(cust => {
+            var row = '<tr>'
+            row+='<td><input type="checkbox" class="cust-checkbox"> </td>'
+            row+='<td>'+cust.custId+'</td>'
+            row+='<td>'+cust.custName+'</td>'
+            row+='</tr>'
+            tbody.append(row);
+        });
     }
 
 }

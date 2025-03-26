@@ -29,6 +29,18 @@
 
         <!--고객-->
         <div class="col-3">
+            <div>
+                <form class="row">
+                    <div class="col-auto">
+                        <select class="form-select" id="selectItem">
+                            <option value="">공연 선택</option>
+                            {{#items}}
+                            <option value="{{id}}">{{name}}</option>
+                            {{/items}}
+                        </select>
+                    </div>
+                </form>
+            </div>
             <table class="table table-striped">
                 <thead class = "thead strong">
                 <tr>
@@ -38,13 +50,7 @@
                 </tr>
                 </thead>
                 <tbody id="custBody">
-                {{#custs}}
-                    <tr>
-                        <td><input type="checkbox" class="cust-checkbox"></td>
-                        <td>{{id}}</td>
-                        <td>{{name}}</td>
-                    </tr>
-                {{/custs}}
+
                 </tbody>
             </table>
         </div>

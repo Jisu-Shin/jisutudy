@@ -1,8 +1,6 @@
 package com.jisutudy.web.controller;
 
-import com.jisutudy.service.CustService;
-import com.jisutudy.service.SmsService;
-import com.jisutudy.service.SmsTemplateService;
+import com.jisutudy.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +16,13 @@ import java.time.format.DateTimeFormatter;
 public class SmsController {
 
     private final SmsService smsService;
-    private final CustService custService;
     private final SmsTemplateService smsTemplateService;
+    private final ItemService itemService;
 
     @GetMapping("/send")
     public String sendSms(Model model) {
-        model.addAttribute("custs",custService.findAll());
         model.addAttribute("templates", smsTemplateService.findAll());
+        model.addAttribute("items", itemService.findAll());
         return "sms-sendForm";
     }
 
