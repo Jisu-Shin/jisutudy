@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 import static jakarta.persistence.FetchType.*;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Booking {
 

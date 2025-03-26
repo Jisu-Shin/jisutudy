@@ -10,4 +10,5 @@ import lombok.Setter;
 public class BookingSearch {
     private String custName; // 고객명
     private BookingStatus bookingStatus; // 예약상태 [BOOK, CANCEL]
+    private Long itemId;
 }

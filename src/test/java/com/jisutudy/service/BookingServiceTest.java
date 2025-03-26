@@ -38,7 +38,6 @@ public class BookingServiceTest {
     public void 상품주문() throws Exception {
         //given
         Cust cust = createCust("고객1", "01012345678");
-
         Item item = createItem("콘서트", 150000, 20);
 
         int bookingCount = 2;
@@ -198,6 +197,26 @@ public class BookingServiceTest {
 
         //then
         assertEquals(3,cancelBookings.size());
+    }
+
+    @Test
+    public void itemId로검색() throws Exception {
+        //given
+        Cust cust1 = createCust("고객1", "01012345678");
+        Item item = createItem("지디콘서트",10000,20);
+        Cust cust2 = createCust("고객2", "01098745612");
+        Item item2 = createItem("에스파콘서트",10000,20);
+        Long bookId1 = bookingService.book(cust1.getId(), item.getId(), 1);
+        Long bookId2 = bookingService.book(cust2.getId(), item2.getId(), 4);
+
+        //when
+        BookingSearch bookingSearch = new BookingSearch();
+        bookingSearch.setItemId(item.getId());
+
+        List<BookingListResponseDto> booking = bookingService.findBooking(bookingSearch);
+        booking.stream().forEach(b->System.out.println(b.getCustName()+","+b.getItemName()));
+
+        //then
     }
 
 

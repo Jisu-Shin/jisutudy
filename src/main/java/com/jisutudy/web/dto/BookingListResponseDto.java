@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class BookingListResponseDto {
 
     private Long bookId;
+    private Long custId;
     private String custName;
     private String itemName;
     private int count;
@@ -22,6 +23,7 @@ public class BookingListResponseDto {
 
     public BookingListResponseDto(Booking booking) {
         this.bookId = booking.getId();
+        this.custId = booking.getCust().getId();
         this.custName = booking.getCust().getName();
         this.itemName = booking.getItem().getName();
         this.count = booking.getCount();

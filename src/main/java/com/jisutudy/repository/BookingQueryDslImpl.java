@@ -4,7 +4,6 @@ import com.jisutudy.domain.Booking;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,6 +29,10 @@ public class BookingQueryDslImpl implements BookingQueryDsl {
 
         if (bookingSearch.getBookingStatus() != null) {
             builder.and(booking.status.eq(bookingSearch.getBookingStatus()));
+        }
+
+        if (bookingSearch.getItemId() != null) {
+            builder.and(booking.item.id.eq(bookingSearch.getItemId()));
         }
 
         return queryFactory

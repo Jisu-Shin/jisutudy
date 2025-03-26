@@ -1,11 +1,12 @@
 package com.jisutudy.api;
 
+import com.jisutudy.repository.BookingSearch;
 import com.jisutudy.service.BookingService;
+import com.jisutudy.web.dto.BookingListResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,5 +18,10 @@ public class BookingApiController {
     @PostMapping("/{id}/cancel")
     public Long cancelBooking(@PathVariable("id")Long id) {
         return bookingService.cancelBooking(id);
+    }
+
+    @PostMapping("/search")
+    public List<BookingListResponseDto> searchBooking(@RequestBody BookingSearch bookingSearch) {
+        return bookingService.findBooking(bookingSearch);
     }
 }
