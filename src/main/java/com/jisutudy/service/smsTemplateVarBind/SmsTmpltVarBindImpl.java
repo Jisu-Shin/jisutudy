@@ -21,7 +21,7 @@ public class SmsTmpltVarBindImpl implements SmsTmpltVarBinder {
     private final Map<String, VariableBinder> variableBinderMap;
 
     @Override
-    public String bind(SmsTemplate smsTemplate, Cust cust) {
+    public String bind(SmsTemplate smsTemplate, BindingDto bindingDto) {
         Map<String, String> replacements = new HashMap<>();
 
 //         템플릿변수... 치환
@@ -40,7 +40,7 @@ public class SmsTmpltVarBindImpl implements SmsTmpltVarBinder {
             VariableBinder variableBinding = null;
             if (tmpltVarList.size() > 0) {
                 variableBinding = variableBinderMap.get(entry.getValue());
-                variableBinding.getValues(tmpltVarList, cust).forEach((k, v) -> replacements.put(k, v));
+                variableBinding.getValues(tmpltVarList, bindingDto).forEach((k, v) -> replacements.put(k, v));
             }
         }
 

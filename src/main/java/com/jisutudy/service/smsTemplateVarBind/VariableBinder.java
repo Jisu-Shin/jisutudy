@@ -8,5 +8,5 @@ import java.util.Map;
 
 public interface VariableBinder {
 
-    public Map<String, String> getValues(List<TemplateVariable> tmpltVarList, Cust cust);
+    public Map<String, String> getValues(List<TemplateVariable> tmpltVarList, BindingDto bindingDto);
 }

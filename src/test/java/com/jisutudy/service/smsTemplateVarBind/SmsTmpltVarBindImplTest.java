@@ -85,7 +85,8 @@ class SmsTmpltVarBindImplTest {
         Cust cust = createCust("홍길동", "01012345678", CustSmsConsentType.ALL_ALLOW);
 
         //when
-        String result = smsTmpltVarBinder.bind(smsTemplate, cust);
+        BindingDto bindingDto = BindingDto.create(cust, null);
+        String result = smsTmpltVarBinder.bind(smsTemplate, bindingDto);
         System.out.println(result);
 
         //then
