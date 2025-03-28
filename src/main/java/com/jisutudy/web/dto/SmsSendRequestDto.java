@@ -1,23 +1,21 @@
 package com.jisutudy.web.dto;
 
-import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.SmsType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 public class SmsSendRequestDto {
+
     List<Long> custIdList;
     String smsContent;
     String sendDt;
     String smsType;
     Long templateId;
+    Long itemId;
 
     @Builder
     public SmsSendRequestDto(List<Long> custIdList, String smsContent, String sendDt, String smsType, Long templateId) {

@@ -8,6 +8,7 @@ import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.SmsResult;
 import com.jisutudy.service.filter.SmsFilter;
 import com.jisutudy.repository.JpaSmsTemplateRepository;
+import com.jisutudy.service.smsTemplateVarBind.BindingDto;
 import com.jisutudy.service.smsTemplateVarBind.SmsTmpltVarBinder;
 import com.jisutudy.web.dto.SmsFindListResponseDto;
 import com.jisutudy.web.dto.SmsSendRequestDto;
@@ -33,16 +34,21 @@ public class SmsService {
     @Transactional
     public boolean send(SmsSendRequestDto requestDto) {
         // 템플릿 엔티티 조회
-        SmsTemplate smsTemplate = jpaSmsTemplateRepository.findById(requestDto.getTemplateId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 SMS 템플릿이 없습니다: " + requestDto.getTemplateId()));
+        SmsTemplate smsTemplate = getSmsTemplate(requestDto);
+
+        //todo 고객 id가 안들어왔을 경우 exception
+        if (requestDto.getCustIdList().size()==0) {
+            throw new IllegalArgumentException("sms 발송할 고객이 없습니다");
+        }
 
         for (Long custId : requestDto.getCustIdList()) {
             // 고객 엔티티 조회
-            Cust cust = jpaCustRepository.findById(custId)
-                    .orElseThrow(() -> new IllegalArgumentException("해당 고객이 없습니다: "+custId));
+            Cust cust = getCust(custId);
 
             // TODO 템플릿 결합
-            String bindSmsContent = smsTmpltVarBinder.bind(smsTemplate, cust);
+            // todo 템플릿변수가 없는 템플릿문자도 발송이 가능해야함
+            // bind 메소드를 안타게 해야함
+            String bindSmsContent = smsTmpltVarBinder.bind(smsTemplate, BindingDto.create(cust, requestDto));
 
             // 문자 엔티티 생성
             Sms sms = Sms.createSms(cust, smsTemplate, bindSmsContent, requestDto.getSendDt());
@@ -57,6 +63,18 @@ public class SmsService {
             jpaSmsRepository.save(sms).getSmsId();
         }
         return true;
+    }
+
+
+
+    private Cust getCust(Long custId) {
+        return jpaCustRepository.findById(custId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 고객이 없습니다: " + custId));
+    }
+
+    private SmsTemplate getSmsTemplate(SmsSendRequestDto requestDto) {
+        return jpaSmsTemplateRepository.findById(requestDto.getTemplateId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 SMS 템플릿이 없습니다: " + requestDto.getTemplateId()));
     }
 
     /**

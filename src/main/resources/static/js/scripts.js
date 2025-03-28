@@ -102,10 +102,14 @@ var main = {
         console.log(template);
         console.log(oper.getTodayDt());
 
+        var itemId = $("#selectItem").val();
+        console.log(itemId);
+
         var data = {
                 custIdList: custIdList,
                 templateId: template.id,
-                sendDt : oper.getTodayDt()
+                sendDt : oper.getTodayDt(),
+                itemId : itemId
                 }
         oper.ajax("POST",data,'/api/sms/send', callback.sendSms);
     },
@@ -126,22 +130,21 @@ var main = {
     insertPlaceholder : function (tr) {
         var koText = $(tr).find("td").eq(2).text().trim();
         var curr = $('#templateContent').val();
-        $('#templateContent').val(curr+"#{{"+koText+"}} ");
+        $('#templateContent').val(curr+"#{"+koText+"} ");
     },
 
     searchbooking : function () {
         var itemId = $("#selectItem").val();
 
         if(!itemId){
-            var tbody = $('#custBody');
-            tbody.empty();
+         var data = {};
         } else {
             var data = {
                         'itemId' : itemId ,
                         'bookingStatus' : 'BOOK'
                        };
-            oper.ajax("POST",data,'/api/bookings/search', callback.searchbooking);
         }
+        oper.ajax("POST",data,'/api/bookings/search', callback.searchbooking);
     }
 
 };
