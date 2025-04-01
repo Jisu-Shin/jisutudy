@@ -1,12 +1,10 @@
 package com.jisutudy.domain;
 
-import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.SmsType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +22,6 @@ public class SmsTemplate {
 
     @Enumerated(EnumType.STRING)
     private SmsType smsType;
-
-    @OneToMany(mappedBy = "smsTemplate")
-    private List<Sms> smsList = new ArrayList<>();
 
     @OneToMany(mappedBy = "smsTemplate")
     private List<SmsTmpltVarRel> tmpltVarRelList = new ArrayList<>();

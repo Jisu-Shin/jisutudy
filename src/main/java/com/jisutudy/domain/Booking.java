@@ -39,12 +39,10 @@ public class Booking {
     //==연관관계 메서드==//
     public void setCust(Cust cust) {
         this.cust = cust;
-        cust.getBookingList().add(this);
     }
 
     public void setItem(Item item){
         this.item = item;
-        item.getBookingList().add(this);
     }
 
     //==생성 메서드==//

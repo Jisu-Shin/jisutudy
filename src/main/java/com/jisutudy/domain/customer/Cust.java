@@ -31,14 +31,8 @@ public class Cust extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private CustSmsConsentType smsConsentType;
 
-    @OneToMany(mappedBy = "cust")
-    private List<Booking> bookingList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "cust")
-    private List<Sms> smsList = new ArrayList<>();
-
     @Builder
-    public Cust(String name, String phoneNumber, CustSmsConsentType smsConsentType) {
+    private Cust(String name, String phoneNumber, CustSmsConsentType smsConsentType) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.smsConsentType = smsConsentType;

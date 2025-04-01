@@ -30,9 +30,6 @@ public class Item {
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item")
-    private List<Booking> bookingList = new ArrayList<>();
-
     //==연관관계==//
 
     //==비즈니스 로직==//
