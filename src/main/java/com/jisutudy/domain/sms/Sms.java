@@ -43,18 +43,6 @@ public class Sms extends BaseTimeEntity {
         this.sendDt = LocalDateTime.parse(sendDt,formatter);
     }
 
-    // ==연관관계메서드==
-    public void setCust(Cust cust) {
-        this.cust = cust;
-        cust.getSmsList().add(this);
-    }
-
-    // TODO 근데 이 연관관계가 꼭 필요한가? 싶은 생각은 들긴하는데 FK이긴함
-    public void setSmsTemplate(SmsTemplate smsTemplate) {
-        this.smsTemplate = smsTemplate;
-        smsTemplate.getSmsList().add(this);
-    }
-
     // == 생성 메서드 ==
     public static Sms createSms(Cust cust, SmsTemplate smsTemplate, String smsContent, String sendDt) {
         Sms sms = new Sms(smsContent, sendDt);
@@ -63,6 +51,15 @@ public class Sms extends BaseTimeEntity {
         sms.setSendPhoneNumber(cust.getPhoneNumber());
 
         return sms;
+    }
+
+    // ==연관관계메서드==
+    private void setCust(Cust cust) {
+        this.cust = cust;
+    }
+
+    private void setSmsTemplate(SmsTemplate smsTemplate) {
+        this.smsTemplate = smsTemplate;
     }
 
     //== setter==

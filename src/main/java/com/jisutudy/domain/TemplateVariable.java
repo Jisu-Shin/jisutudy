@@ -22,9 +22,6 @@ public class TemplateVariable {
     @Enumerated(EnumType.STRING)
     private TemplateVariableType variableType;
 
-    @OneToMany(mappedBy ="templateVariable")
-    private List<SmsTmpltVarRel> tmpltVarRelList = new ArrayList<>();
-
     private TemplateVariable(String enText, String koText, TemplateVariableType type) {
         this.enText = enText;
         this.koText = koText;

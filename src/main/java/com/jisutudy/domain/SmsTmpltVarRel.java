@@ -27,18 +27,7 @@ public class SmsTmpltVarRel {
         this.smsTmpltVarRelId = smsTmpltVarRelId;
     }
 
-    // == 연관관계 메서드 ==
-    public void setSmsTemplate(SmsTemplate smsTemplate) {
-        this.smsTemplate = smsTemplate;
-        this.smsTemplate.getTmpltVarRelList().add(this);
-    }
-
-    public void setTemplateVariable(TemplateVariable templateVariable) {
-        this.templateVariable = templateVariable;
-        this.templateVariable.getTmpltVarRelList().add(this);
-    }
-
-
+    // == 생성 메서드 ==
     public static SmsTmpltVarRel create(SmsTemplate smsTemplate, TemplateVariable templateVariable) {
         SmsTmpltVarRelId id = new SmsTmpltVarRelId(smsTemplate.getId(), templateVariable.getId());
 
@@ -48,4 +37,15 @@ public class SmsTmpltVarRel {
 
         return smsTmpltVarRel;
     }
+
+    // == 연관관계 메서드 ==
+    private void setSmsTemplate(SmsTemplate smsTemplate) {
+        this.smsTemplate = smsTemplate;
+        this.smsTemplate.getTmpltVarRelList().add(this);
+    }
+
+    private void setTemplateVariable(TemplateVariable templateVariable) {
+        this.templateVariable = templateVariable;
+    }
+
 }
