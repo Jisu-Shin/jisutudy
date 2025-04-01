@@ -38,3 +38,9 @@ out/
 
 ### 25.02.08 ###
 application.properties
+
+# QueryDSL 자동 생성 파일 무시
+**/generated/
+**/generated-sources/
+**/src/main/generated/
+**/Q*.java
