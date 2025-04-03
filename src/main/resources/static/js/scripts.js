@@ -218,7 +218,9 @@ var oper = {
         })
         .fail(function(xhr, status, error) {
             // 요청이 실패했을 때 실행되는 코드
-            console.error('요청 실패:', error);
+            console.error('요청 실패:', xhr.responseJSON);
+            var errMsg = xhr.responseJSON.message;
+            alert(errMsg);
         })
 //        .always(function (){
 //            console.log("ajax always 로그");
