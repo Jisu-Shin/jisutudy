@@ -6,8 +6,10 @@ import java.util.Arrays;
 
 @Getter
 public enum CustSmsConsentType {
-    ALL_ALLOW("전체 허용"),  // 전체허용
-    ALL_DENY("전체 거부");   // 전체거부
+    ALL_ALLOW("전체 허용"),
+    ALL_DENY("전체 거부"),
+    ADVERTISE_DENY("광고 거부")
+    ;
 
     private final String displayName;
 

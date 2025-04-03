@@ -8,6 +8,7 @@ import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.domain.customer.CustSmsConsentType;
 import com.jisutudy.domain.sms.SmsType;
 import com.jisutudy.service.SmsTemplateService;
+import com.jisutudy.web.dto.SmsSendRequestDto;
 import com.jisutudy.web.dto.SmsTemplateRequestDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
@@ -85,7 +86,7 @@ class SmsTmpltVarBindImplTest {
         Cust cust = createCust("홍길동", "01012345678", CustSmsConsentType.ALL_ALLOW);
 
         //when
-        BindingDto bindingDto = BindingDto.create(cust, null);
+        BindingDto bindingDto = BindingDto.create(cust, new SmsSendRequestDto());
         String result = smsTmpltVarBinder.bind(smsTemplate, bindingDto);
         System.out.println(result);
 

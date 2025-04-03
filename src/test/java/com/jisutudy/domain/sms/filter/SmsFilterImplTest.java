@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+//@SpringBootTest
 @SpringBootTest(properties = "spring.profiles.active=prod")
 @Transactional
 class SmsFilterImplTest {
@@ -43,7 +44,7 @@ class SmsFilterImplTest {
     }
 
     @Test
-    @DisplayName("발송시간 필터링")
+    @DisplayName("발송시간 필터링 - 발송불가")
     void filterByTime() {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.of(21, 0));
         String sendDt = ldt.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
@@ -79,12 +80,12 @@ class SmsFilterImplTest {
 
         Cust cust = createCust("고길동", "01098765432", CustSmsConsentType.ALL_ALLOW);
         SmsTemplate smsTemplate = createTemplate("광고문자입니다~", SmsType.ADVERTISING);
-        Sms sms1 = Sms.createSms(cust, smsTemplate, null, sendDt);
-        Sms sms2 = Sms.createSms(cust, smsTemplate, null, sendDt);
+        Sms sms1 = Sms.createSms(cust, smsTemplate, smsTemplate.getTemplateContent()+"1", sendDt);
+        Sms sms2 = Sms.createSms(cust, smsTemplate, smsTemplate.getTemplateContent()+"2", sendDt);
         em.persist(sms1);
         em.persist(sms2);
 
-        Sms sms3 = Sms.createSms(cust, smsTemplate, null, sendDt);
+        Sms sms3 = Sms.createSms(cust, smsTemplate, smsTemplate.getTemplateContent()+"3", sendDt);
         SmsResult smsResult = smsFilter.filter(sms3);
 
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.AD_COUNT_OVER);

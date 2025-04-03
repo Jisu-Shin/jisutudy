@@ -4,7 +4,7 @@ import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.SmsTmpltVarRel;
 import com.jisutudy.domain.TemplateVariable;
 import com.jisutudy.repository.JpaSmsTemplateRepository;
-import com.jisutudy.repository.JpaSmsTemplateVarRelRepository;
+import com.jisutudy.repository.JpaSmsTmpltVarRelRepository;
 import com.jisutudy.repository.JpaTemplateVariableRepository;
 import com.jisutudy.web.dto.SmsTemplateListResponseDto;
 import com.jisutudy.web.dto.SmsTemplateRequestDto;
@@ -25,7 +25,7 @@ public class SmsTemplateService {
 
     private final JpaSmsTemplateRepository smsTmpltRepository;
     private final JpaTemplateVariableRepository tmpltRepository;
-    private final JpaSmsTemplateVarRelRepository relRepository;
+    private final JpaSmsTmpltVarRelRepository relRepository;
 
     // 템플릿 추가
     @Transactional

@@ -18,7 +18,7 @@ public class DBAdvertiseSmsFilter implements AdvertiseSmsFilter {
 
     // 리포지토리 버전2) JPA 리포지토리
     private final JpaSmsRepository jpaSmsRepository;
-    private final int LIMIT_SMS = 5;
+    private final int LIMIT_SMS = 2;
 
     @Override
     public boolean isSendable(Sms sms) {
