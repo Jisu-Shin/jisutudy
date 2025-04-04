@@ -25,9 +25,7 @@ public class CustApiController {
     @GetMapping("")
     public List<CustListResponseDto> findAllCust() {
         System.out.println("컨트롤러메서드호출");
-//        System.out.println("Retrieved data: " + jpaCustService.findAll());
         List<CustListResponseDto> list = custService.findAll();
-        System.out.println("***************** 확인=> " + list.getClass());
         return list;
     }
 

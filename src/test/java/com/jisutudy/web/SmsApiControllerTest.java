@@ -8,7 +8,6 @@ import com.jisutudy.repository.JpaCustRepository;
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.repository.JpaSmsTemplateRepository;
 import com.jisutudy.web.dto.SmsSendRequestDto;
-import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
@@ -118,8 +116,26 @@ class SmsApiControllerTest {
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+    }
+    
+    @Test
+    public void sms발송유효성검사() throws Exception {
+        //given
+        String url = UriComponentsBuilder.fromHttpUrl("http://localhost:" + port + "/api/sms/send")
+                .toUriString();
+
+        SmsSendRequestDto smsSendRequestDto = SmsSendRequestDto.builder()
+                .custIdList(List.of(1L))
+                .sendDt("202504042030")
+                .build();
+
+        //when
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, smsSendRequestDto, String.class);
 
 
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        System.out.println(responseEntity.getBody());
     }
 
 }

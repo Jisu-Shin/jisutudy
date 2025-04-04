@@ -31,7 +31,6 @@ var main = {
         });
 
         $('#btn-send').on('click', function () {
-            console.log("체크된 고객 id");
             _this.sendSms();
         });
 
@@ -88,10 +87,10 @@ var main = {
 
         let selectedRow = $(".template-radio:checked").closest("tr");
 
-        if (selectedRow.length === 0) {
-            console.log("선택된 행이 없습니다.");
-            return;
-        }
+//        if (selectedRow.length === 0) {
+//            alert("선택된 행이 없습니다.");
+//            return;
+//        }
 
         let template = {
             id: selectedRow.find("td").eq(1).text().trim(),

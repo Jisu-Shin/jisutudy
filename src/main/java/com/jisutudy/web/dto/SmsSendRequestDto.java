@@ -1,5 +1,9 @@
 package com.jisutudy.web.dto;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,28 +15,20 @@ import java.util.List;
 public class SmsSendRequestDto {
 
     List<Long> custIdList;
-    String smsContent;
+
+    @NotBlank(message = "SMS 발송일시를 입력해주세요.")
     String sendDt;
-    String smsType;
+
+    @NotNull(message = "sms 템플릿을 선택해주세요.")
     Long templateId;
+
     Long itemId;
 
     @Builder
-    public SmsSendRequestDto(List<Long> custIdList, String smsContent, String sendDt, String smsType, Long templateId) {
+    public SmsSendRequestDto(List<Long> custIdList, String sendDt, Long templateId, Long itemId) {
         this.custIdList = custIdList;
-        this.smsContent = smsContent;
         this.sendDt = sendDt;
-        this.smsType = smsType;
         this.templateId = templateId;
+        this.itemId = itemId;
     }
-
-//    public Sms toEntity(Long custId){
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-//        return Sms.builder()
-//                .custId(custId)
-//                .smsContent(smsContent)
-//                .sendDt(LocalDateTime.parse(sendDt,formatter))
-//                .smsType(SmsType.of(smsType))
-//                .build();
-//    }
 }

@@ -6,6 +6,7 @@ import com.jisutudy.web.dto.SmsFindListResponseDto;
 import com.jisutudy.web.dto.SmsSendRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class SmsApiController {
 
     @Operation(summary="sms 발송")
     @PostMapping("/send")
-    public boolean send(@RequestBody SmsSendRequestDto requestDto) {
+    public boolean send(@Valid @RequestBody SmsSendRequestDto requestDto) {
         return smsService.send(requestDto);
     }
 
