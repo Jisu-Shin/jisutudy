@@ -1,19 +1,36 @@
 package com.jisutudy.api;
 
 import com.jisutudy.service.SmsTemplateService;
+import com.jisutudy.web.dto.SmsTemplateListResponseDto;
 import com.jisutudy.web.dto.SmsTemplateRequestDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
+@Tag(name="SmsTemplateApiController", description = "sms 템플릿 관련 rest api")
 @RestController
-@RequestMapping("/api/smsTemplate")
 @RequiredArgsConstructor
+@RequestMapping("/api/smsTemplates")
 public class SmsTemplateApiController {
 
     private final SmsTemplateService smsTemplateService;
 
+    @Operation(summary="sms 템플릿 생성")
     @PostMapping
     public Long create(@RequestBody SmsTemplateRequestDto requestDto) {
+        log.info("requestDto:{}", requestDto);
         return smsTemplateService.create(requestDto);
+    }
+
+    @Operation(summary="sms 템플릿 전체 조회")
+    @GetMapping
+    public List<SmsTemplateListResponseDto> getSmsTemplates() {
+        log.info("getSmsTemplates 메소드 시작");
+        return smsTemplateService.findAll();
     }
 }
