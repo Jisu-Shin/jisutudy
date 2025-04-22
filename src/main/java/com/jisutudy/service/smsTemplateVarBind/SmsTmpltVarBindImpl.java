@@ -19,17 +19,13 @@ public class SmsTmpltVarBindImpl implements SmsTmpltVarBinder {
 
     @Override
     public String bind(SmsTemplate smsTemplate, BindingDto bindingDto) {
-
         if (smsTemplate.getTmpltVarRelList().size() == 0) {
             return smsTemplate.getTemplateContent();
         }
 
         Map<String, String> replacements = new HashMap<>();
 
-//         템플릿변수... 치환
-        // TODO 반복적인 문장인데 조금 더 .. 클린 코드할 수 있는 방법은?
         // TODO QueryDsl 이랑 Stream 비교해보기
-
         Map<TemplateVariableType, List<TemplateVariable>> grouping = smsTemplate.getTmpltVarRelList().stream().
                 collect(Collectors.groupingBy(
                         rel -> rel.getTemplateVariable().getVariableType(),

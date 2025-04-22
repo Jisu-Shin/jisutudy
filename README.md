@@ -19,10 +19,10 @@ OO-SMS는 공연을 예매한 고객들에게 맞춤형 문자를 발송하기 �
 
 - Java 17, Spring Boot 3.3
 - Spring Cloud (Gateway, Config Server, Eureka) (진행 중)
-- Spring Data JPA, H2 Database
+- Spring Data JPA, QueryDSL,  H2 Database
 - Mustache (웹 프론트)
 - Docker, Docker Compose (진행 중)
-- OpenAPI (계획 중)
+- Swagger (OpenAPI 기반 API 문서 자동 생성)
 
 ---
 
