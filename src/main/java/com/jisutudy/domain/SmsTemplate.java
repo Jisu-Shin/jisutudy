@@ -36,4 +36,11 @@ public class SmsTemplate {
         SmsTemplate smsTemplate = new SmsTemplate(templateContent, smsType);
         return smsTemplate;
     }
+
+    // ==연관 메서드==
+    public void addRelation(List<TemplateVariable> tmpltVarList) {
+        for (TemplateVariable tmpltVar : tmpltVarList) {
+            SmsTmpltVarRel smsTmpltVarRel = SmsTmpltVarRel.create(this, tmpltVar);
+        }
+    }
 }

@@ -1,11 +1,8 @@
 package com.jisutudy.service;
 
 import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.domain.SmsTmpltVarRel;
 import com.jisutudy.domain.TemplateVariable;
-import com.jisutudy.repository.JpaSmsTemplateRepository;
-import com.jisutudy.repository.JpaSmsTmpltVarRelRepository;
-import com.jisutudy.repository.JpaTemplateVariableRepository;
+import com.jisutudy.repository.*;
 import com.jisutudy.web.dto.SmsTemplateListResponseDto;
 import com.jisutudy.web.dto.SmsTemplateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -24,26 +21,18 @@ import java.util.stream.Collectors;
 public class SmsTemplateService {
 
     private final JpaSmsTemplateRepository smsTmpltRepository;
-    private final JpaTemplateVariableRepository tmpltRepository;
-    private final JpaSmsTmpltVarRelRepository relRepository;
+    private final JpaTemplateVariableRepository tmpltVarRepository;
 
     // 템플릿 추가
     @Transactional
     public Long create(SmsTemplateRequestDto requestDto) {
         SmsTemplate smsTemplate = SmsTemplate.createSmsTemplate(requestDto.getTemplateContent(), requestDto.getSmsType());
-        smsTmpltRepository.save(smsTemplate);
 
         // sms템플릿에서 변수찾기
         List<String> koTextList = findVariableByTemplateContent(requestDto.getTemplateContent());
+        addRelation(koTextList, smsTemplate);
 
-        for (String koText : koTextList) {
-            TemplateVariable templateVariable = tmpltRepository.findByKoText(koText)
-                    .orElseThrow(() -> new IllegalArgumentException("해당 템플릿 변수는 없습니다 : " + koText));
-
-            SmsTmpltVarRel relEntity = SmsTmpltVarRel.create(smsTemplate, templateVariable);
-            relRepository.save(relEntity);
-        }
-
+        smsTmpltRepository.save(smsTemplate);
         return smsTemplate.getId();
     }
 
@@ -72,6 +61,19 @@ public class SmsTemplateService {
         }
 
         return varList;
+    }
+
+    private void addRelation(List<String> koTextList, SmsTemplate smsTemplate) {
+        if (!koTextList.isEmpty()) {
+            List<TemplateVariable> tmpltVarList = new ArrayList<>();
+            for (String koText : koTextList) {
+                // 템플릿 변수 검증
+                TemplateVariable tmpltVar = tmpltVarRepository.findByKoText(koText)
+                        .orElseThrow(() -> new IllegalArgumentException("해당 템플릿 변수는 없습니다 : " + koText));
+                tmpltVarList.add(tmpltVar);
+            }
+            smsTemplate.addRelation(tmpltVarList);
+        }
     }
 
 }
