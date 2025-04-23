@@ -1,11 +1,6 @@
 package com.jisutudy.domain.sms.filter;
 
-import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.CustSmsConsentType;
-import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.domain.*;
 import com.jisutudy.service.filter.SmsFilter;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
@@ -36,9 +31,9 @@ class SmsFilterImplTest {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 0));
         String sendDt = ldt.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
 
-        Cust cust = createCust("고길동", "01098765432", CustSmsConsentType.ALL_ALLOW);
+        Long custId = 1L;
         SmsTemplate smsTemplate = createTemplate("안녕하세요 문자발송요", SmsType.INFORMAITONAL);
-        Sms sms = Sms.createSms(cust, smsTemplate, null, sendDt);
+        Sms sms = Sms.createSms(custId, smsTemplate, null, sendDt, "01098765412");
 
         SmsResult smsResult = smsFilter.filter(sms);
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.SUCCESS);
@@ -50,11 +45,11 @@ class SmsFilterImplTest {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.of(21, 0));
         String sendDt = ldt.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
 
-        Cust cust = createCust("고길동", "01098765432", CustSmsConsentType.ALL_ALLOW);
+        Long custId = 1L;
         SmsTemplate smsTemplate = createTemplate("안녕하세요 문자발송요", SmsType.INFORMAITONAL);
-        Sms sms = Sms.createSms(cust, smsTemplate, null, sendDt);
+        Sms sms = Sms.createSms(custId, smsTemplate, null, sendDt, "01098765412");
 
-        SmsResult smsResult = smsFilter.filter(sms);
+        SmsResult smsResult = smsFilter.filter(sms, CustSmsConsentType.ALL_ALLOW);
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.NOT_SEND_TIME);
     }
 
@@ -64,11 +59,11 @@ class SmsFilterImplTest {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(19,0));
         String sendDt = ldt.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
 
-        Cust cust = createCust("고길동", "01098765432", CustSmsConsentType.ALL_DENY);
+        Long custId = 1L;
         SmsTemplate smsTemplate = createTemplate("안녕하세요 문자발송요", SmsType.INFORMAITONAL);
-        Sms sms = Sms.createSms(cust, smsTemplate, null, sendDt);
+        Sms sms = Sms.createSms(custId, smsTemplate, null, sendDt, "01098765412");
 
-        SmsResult smsResult = smsFilter.filter(sms);
+        SmsResult smsResult = smsFilter.filter(sms, CustSmsConsentType.ALL_DENY);
 
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.CUST_REJECT);
     }
@@ -79,15 +74,15 @@ class SmsFilterImplTest {
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(),LocalTime.of(19,0));
         String sendDt = ldt.format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
 
-        Cust cust = createCust("고길동", "01098765432", CustSmsConsentType.ALL_ALLOW);
+        Long custId = 1L;
         SmsTemplate smsTemplate = createTemplate("광고문자입니다~", SmsType.ADVERTISING);
-        Sms sms1 = Sms.createSms(cust, smsTemplate, smsTemplate.getTemplateContent()+"1", sendDt);
-        Sms sms2 = Sms.createSms(cust, smsTemplate, smsTemplate.getTemplateContent()+"2", sendDt);
+        Sms sms1 = Sms.createSms(custId, smsTemplate, smsTemplate.getTemplateContent()+"1", sendDt, "01098765412");
+        Sms sms2 = Sms.createSms(custId, smsTemplate, smsTemplate.getTemplateContent()+"2", sendDt, "01098765412");
         em.persist(sms1);
         em.persist(sms2);
 
-        Sms sms3 = Sms.createSms(cust, smsTemplate, smsTemplate.getTemplateContent()+"3", sendDt);
-        SmsResult smsResult = smsFilter.filter(sms3);
+        Sms sms3 = Sms.createSms(custId, smsTemplate, smsTemplate.getTemplateContent()+"3", sendDt, "01098765412");
+        SmsResult smsResult = smsFilter.filter(sms3, CustSmsConsentType.ALL_ALLOW);
 
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.AD_COUNT_OVER);
     }
@@ -96,15 +91,5 @@ class SmsFilterImplTest {
         SmsTemplate smsTemplate = SmsTemplate.createSmsTemplate(templateContent, smsType);
         em.persist(smsTemplate);
         return smsTemplate;
-    }
-
-    private Cust createCust(String custName, String phoneNumber, CustSmsConsentType custSmsConsentType) {
-        Cust cust = Cust.builder()
-                .name(custName)
-                .phoneNumber(phoneNumber)
-                .smsConsentType(custSmsConsentType)
-                .build();
-        em.persist(cust);
-        return cust;
     }
 }

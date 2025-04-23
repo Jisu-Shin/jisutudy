@@ -1,13 +1,11 @@
 package com.jisutudy.web;
 
 import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.CustSmsConsentType;
-import com.jisutudy.domain.sms.SmsType;
-import com.jisutudy.repository.JpaCustRepository;
+import com.jisutudy.domain.SmsType;
+import com.jisutudy.dto.CustInfo;
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.repository.JpaSmsTemplateRepository;
-import com.jisutudy.web.dto.SmsSendRequestDto;
+import com.jisutudy.dto.SmsSendRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +35,16 @@ class SmsApiControllerTest {
     private JpaSmsRepository jpaSmsRepository;
 
     @Autowired
-    private JpaCustRepository jpaCustRepository;
-
-    @Autowired
     private JpaSmsTemplateRepository jpaSmsTemplateRepository;
 
-    private Long custId;
+    private CustInfo custInfo;
     private Long smsTemplateId;
 
     @BeforeEach
     void setUp() {
-        Cust cust = createCust();
         SmsTemplate smsTemplate = createSmsTemplate();
 
-        custId = cust.getId();
+        custInfo = new CustInfo(1L, "01012345678", "ALL_ALLOW");
         smsTemplateId = smsTemplate.getId();
     }
 
@@ -58,7 +52,7 @@ class SmsApiControllerTest {
     void sms발송(){
         //given
         SmsSendRequestDto requestDto = SmsSendRequestDto.builder()
-                                        .custIdList(List.of(custId))
+                                        .custIdList(List.of(custInfo))
                                         .templateId(smsTemplateId)
                                         .sendDt("202411181930")
                                         .build();
@@ -78,12 +72,6 @@ class SmsApiControllerTest {
         SmsTemplate smsTemplate = SmsTemplate.createSmsTemplate("문자테스트발송", SmsType.INFORMAITONAL);
         jpaSmsTemplateRepository.save(smsTemplate);
         return smsTemplate;
-    }
-
-    private Cust createCust() {
-        Cust cust = Cust.createCust("테스트고객","01012345678",CustSmsConsentType.ALL_ALLOW);
-        jpaCustRepository.save(cust);
-        return cust;
     }
 
     @Test
@@ -125,7 +113,7 @@ class SmsApiControllerTest {
                 .toUriString();
 
         SmsSendRequestDto smsSendRequestDto = SmsSendRequestDto.builder()
-                .custIdList(List.of(1L))
+                .custIdList(List.of(custInfo))
                 .sendDt("202504042030")
                 .build();
 

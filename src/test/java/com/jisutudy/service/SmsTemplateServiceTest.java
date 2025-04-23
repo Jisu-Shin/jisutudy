@@ -3,9 +3,9 @@ package com.jisutudy.service;
 import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.TemplateVariable;
 import com.jisutudy.domain.TemplateVariableType;
-import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.domain.SmsType;
 import com.jisutudy.repository.JpaSmsTemplateRepository;
-import com.jisutudy.web.dto.SmsTemplateRequestDto;
+import com.jisutudy.dto.SmsTemplateRequestDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +61,9 @@ class SmsTemplateServiceTest {
         Long tmpltId = smsTemplateService.create(requestDto);
         SmsTemplate findTmplt = jpaSmsTemplateRepository.findById(tmpltId)
                 .orElseThrow(()->new IllegalArgumentException());
+
+        findTmplt.getTmpltVarRelList().stream()
+                .forEach(f-> System.out.println(f.getTemplateVariable().getKoText()));
 
         //then
         assertEquals(2, findTmplt.getTmpltVarRelList().size());

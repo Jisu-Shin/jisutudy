@@ -4,12 +4,10 @@ import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.SmsTmpltVarRel;
 import com.jisutudy.domain.TemplateVariable;
 import com.jisutudy.domain.TemplateVariableType;
-import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.CustSmsConsentType;
-import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.domain.SmsType;
 import com.jisutudy.service.SmsTemplateService;
-import com.jisutudy.web.dto.SmsSendRequestDto;
-import com.jisutudy.web.dto.SmsTemplateRequestDto;
+import com.jisutudy.dto.SmsSendRequestDto;
+import com.jisutudy.dto.SmsTemplateRequestDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,21 +81,15 @@ class SmsTmpltVarBindImplTest {
 
         SmsTemplate smsTemplate = em.find(SmsTemplate.class, smsTmpltId);
 
-        Cust cust = createCust("홍길동", "01012345678", CustSmsConsentType.ALL_ALLOW);
+        Long custId = 1L;
 
         //when
-        BindingDto bindingDto = BindingDto.create(cust, new SmsSendRequestDto());
+        BindingDto bindingDto = BindingDto.create(custId, new SmsSendRequestDto());
         String result = smsTmpltVarBinder.bind(smsTemplate, bindingDto);
         System.out.println(result);
 
         //then
         assertEquals("홍길동", result);
-    }
-
-    private Cust createCust(String name, String phoneNumber, CustSmsConsentType type) {
-        Cust cust = Cust.createCust(name, phoneNumber, type);
-        em.persist(cust);
-        return cust;
     }
 
     private TemplateVariable createTmpltVar(String enText, String koTet, TemplateVariableType type) {
