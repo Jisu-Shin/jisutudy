@@ -1,4 +1,4 @@
-package com.jisutudy.domain.customer;
+package com.jisutudy.domain;
 
 import lombok.Getter;
 

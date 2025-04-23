@@ -2,7 +2,7 @@ package com.jisutudy.service;
 
 import com.jisutudy.domain.TemplateVariable;
 import com.jisutudy.repository.JpaTemplateVariableRepository;
-import com.jisutudy.web.dto.TemplateVariableDto;
+import com.jisutudy.dto.TemplateVariableDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

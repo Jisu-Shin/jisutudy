@@ -1,16 +1,9 @@
 package com.jisutudy.service;
 
-import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.domain.customer.Cust;
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.service.filter.SmsFilter;
-import com.jisutudy.repository.JpaSmsTemplateRepository;
-import com.jisutudy.service.smsTemplateVarBind.BindingDto;
-import com.jisutudy.service.smsTemplateVarBind.SmsTmpltVarBinder;
-import com.jisutudy.web.dto.SmsFindListResponseDto;
-import com.jisutudy.web.dto.SmsSendRequestDto;
+import com.jisutudy.dto.SmsFindListResponseDto;
+import com.jisutudy.dto.SmsSendRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

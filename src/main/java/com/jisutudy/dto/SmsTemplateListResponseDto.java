@@ -1,7 +1,6 @@
-package com.jisutudy.web.dto;
+package com.jisutudy.dto;
 
 import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.domain.sms.SmsType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 

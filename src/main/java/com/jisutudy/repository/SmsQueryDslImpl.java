@@ -26,7 +26,7 @@ public class SmsQueryDslImpl implements SmsQueryDsl{
         }
 
         if (smsSearch.getCustId() != null) {
-            builder.and(sms.cust.id.eq(smsSearch.getCustId()));
+            builder.and(sms.custId.eq(smsSearch.getCustId()));
         }
 
         if (smsSearch.getSmsType() != null) {

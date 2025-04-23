@@ -1,8 +1,8 @@
 package com.jisutudy.api;
 
 import com.jisutudy.service.SmsTemplateService;
-import com.jisutudy.web.dto.SmsTemplateListResponseDto;
-import com.jisutudy.web.dto.SmsTemplateRequestDto;
+import com.jisutudy.dto.SmsTemplateListResponseDto;
+import com.jisutudy.dto.SmsTemplateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

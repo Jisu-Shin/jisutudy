@@ -2,8 +2,8 @@ package com.jisutudy.api;
 
 
 import com.jisutudy.service.SmsService;
-import com.jisutudy.web.dto.SmsFindListResponseDto;
-import com.jisutudy.web.dto.SmsSendRequestDto;
+import com.jisutudy.dto.SmsFindListResponseDto;
+import com.jisutudy.dto.SmsSendRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

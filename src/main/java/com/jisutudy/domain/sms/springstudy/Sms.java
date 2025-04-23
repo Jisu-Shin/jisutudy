@@ -2,8 +2,7 @@ package com.jisutudy.domain.sms.springstudy;
 
 import com.jisutudy.domain.BaseTimeEntity;
 import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.domain.sms.SmsType;
-import jakarta.persistence.*;
+import com.jisutudy.domain.SmsType;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

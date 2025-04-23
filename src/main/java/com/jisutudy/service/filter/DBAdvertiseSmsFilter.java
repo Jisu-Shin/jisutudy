@@ -2,7 +2,7 @@ package com.jisutudy.service.filter;
 
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.domain.SmsType;
 import com.jisutudy.repository.SmsSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class DBAdvertiseSmsFilter implements AdvertiseSmsFilter {
         SmsSearch smsSearch = SmsSearch.builder()
                 .startDt(startDt)
                 .endDt(endDt)
-                .custId(sms.getCust().getId())
+                .custId(sms.getCustId())
                 .smsType(SmsType.ADVERTISING)
                 .build();
         List<Sms> smsList = jpaSmsRepository.findBySendDt(smsSearch);

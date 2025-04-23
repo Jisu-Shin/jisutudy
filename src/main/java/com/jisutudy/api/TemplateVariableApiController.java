@@ -1,7 +1,7 @@
 package com.jisutudy.api;
 
 import com.jisutudy.service.TemplateVariableService;
-import com.jisutudy.web.dto.TemplateVariableDto;
+import com.jisutudy.dto.TemplateVariableDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

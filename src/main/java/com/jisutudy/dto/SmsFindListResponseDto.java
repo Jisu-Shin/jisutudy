@@ -1,12 +1,9 @@
-package com.jisutudy.web.dto;
+package com.jisutudy.dto;
 
 import com.jisutudy.domain.sms.Sms;
-import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.domain.sms.SmsType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
@@ -22,7 +19,7 @@ public class SmsFindListResponseDto {
 
     public SmsFindListResponseDto(Sms sms) {
         this.smsId = sms.getSmsId();
-        this.custName = sms.getCust().getName();
+//        this.custName = sms.getCust().getName();
         this.sendPhoneNumber = sms.getSendPhoneNumber();
         this.smsContent = sms.getSmsContent();
         this.sendDt = sms.getSendDt().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));

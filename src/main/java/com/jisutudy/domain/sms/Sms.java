@@ -2,7 +2,6 @@ package com.jisutudy.domain.sms;
 
 import com.jisutudy.domain.BaseTimeEntity;
 import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.domain.customer.Cust;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,9 +20,7 @@ public class Sms extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long smsId;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "cust_id")
-    private Cust cust;
+    private Long custId;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "sms_tmplt_id")
@@ -36,36 +33,29 @@ public class Sms extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private SmsResult smsResult;
 
-    private Sms(String smsContent, String sendDt) {
+    private Sms(Long custId, String smsContent, String sendDt, String sendPhoneNumber) {
+        this.custId = custId;
         this.smsContent = smsContent;
+        this.sendPhoneNumber = sendPhoneNumber;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         this.sendDt = LocalDateTime.parse(sendDt,formatter);
     }
 
     // == 생성 메서드 ==
-    public static Sms createSms(Cust cust, SmsTemplate smsTemplate, String smsContent, String sendDt) {
-        Sms sms = new Sms(smsContent, sendDt);
-        sms.setCust(cust);
+    public static Sms createSms(Long custId, SmsTemplate smsTemplate, String smsContent, String sendDt, String phoneNumber) {
+        Sms sms = new Sms(custId,smsContent, sendDt,phoneNumber);
         sms.setSmsTemplate(smsTemplate);
-        sms.setSendPhoneNumber(cust.getPhoneNumber());
 
         return sms;
     }
 
     // ==연관관계메서드==
-    private void setCust(Cust cust) {
-        this.cust = cust;
-    }
-
     private void setSmsTemplate(SmsTemplate smsTemplate) {
         this.smsTemplate = smsTemplate;
     }
 
     //== setter==
-    private void setSendPhoneNumber(String phoneNumber){
-        this.sendPhoneNumber = phoneNumber;
-    }
 
     public void setSmsResult(SmsResult smsResult) {
         this.smsResult = smsResult;

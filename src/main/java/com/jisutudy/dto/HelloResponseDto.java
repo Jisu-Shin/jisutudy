@@ -1,4 +1,4 @@
-package com.jisutudy.web.dto;
+package com.jisutudy.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

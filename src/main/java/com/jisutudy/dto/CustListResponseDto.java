@@ -1,7 +1,5 @@
-package com.jisutudy.web.dto;
+package com.jisutudy.dto;
 
-import com.jisutudy.domain.customer.Cust;
-import com.jisutudy.domain.customer.CustSmsConsentType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +21,4 @@ public class CustListResponseDto {
 
     @Schema(description = "고객SMS수신동의타입")
     private String consentType;
-
-    public CustListResponseDto(Cust entity) {
-        this.id = entity.getId();
-        this.name = entity.getName();
-        this.phoneNumber = entity.getPhoneNumber();
-        this.consentType = entity.getSmsConsentType().getDisplayName();
-    }
 }

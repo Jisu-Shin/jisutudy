@@ -1,6 +1,6 @@
 package com.jisutudy.repository;
 
-import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.domain.SmsType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

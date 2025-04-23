@@ -1,6 +1,5 @@
 package com.jisutudy.domain;
 
-import com.jisutudy.domain.sms.SmsType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

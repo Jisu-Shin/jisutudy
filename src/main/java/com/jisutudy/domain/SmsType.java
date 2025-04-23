@@ -1,8 +1,4 @@
-package com.jisutudy.domain.sms;
-
-import com.jisutudy.domain.customer.CustSmsConsentType;
-
-import java.util.Arrays;
+package com.jisutudy.domain;
 
 public enum SmsType {
     INFORMAITONAL("정보성 문자"), // 정보성

@@ -43,7 +43,6 @@ class SmsApiControllerTest {
     @BeforeEach
     void setUp() {
         SmsTemplate smsTemplate = createSmsTemplate();
-
         custInfo = new CustInfo(1L, "01012345678", "ALL_ALLOW");
         smsTemplateId = smsTemplate.getId();
     }

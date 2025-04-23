@@ -1,6 +1,6 @@
-package com.jisutudy.web.dto;
+package com.jisutudy.dto;
 
-import com.jisutudy.domain.sms.SmsType;
+import com.jisutudy.domain.SmsType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

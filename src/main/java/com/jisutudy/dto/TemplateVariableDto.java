@@ -1,4 +1,4 @@
-package com.jisutudy.web.dto;
+package com.jisutudy.dto;
 
 import com.jisutudy.domain.TemplateVariableType;
 import com.jisutudy.domain.TemplateVariable;

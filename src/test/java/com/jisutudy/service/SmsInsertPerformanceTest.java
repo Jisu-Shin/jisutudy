@@ -1,8 +1,6 @@
 package com.jisutudy.service;
 
-import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.domain.Sms;
-import com.jisutudy.domain.SmsType;
+
 import com.jisutudy.repository.JpaSmsRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
