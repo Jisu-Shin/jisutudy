@@ -1,0 +1,86 @@
+services:
+  eureka-server:
+    image : sjszzang0929/eureka-server:latest 
+    ports:
+    - "8761:8761"
+    container_name: eureka-server   
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/eureka/apps/"]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s 
+    mem_limit: 2g          # 최대 2GB 메모리 사용
+    mem_reservation: 1g    # 최소 1GB 메모리 예약
+
+  gateway:
+    image : sjszzang0929/gateway:latest
+    ports:
+     - "8080:8080"
+    depends_on:
+     - eureka-server
+    restart: always
+    container_name: gateway
+    mem_limit: 2g          # 최대 2GB 메모리 사용
+    mem_reservation: 1g    # 최소 1GB 메모리 예약
+
+  sms-service:
+    image : sjszzang0929/sms-service:latest
+    ports:
+      - "8081:8080"
+    depends_on:
+      - eureka-server
+      - h2-db
+    container_name: sms-service
+    restart: always
+    mem_limit: 2g          # 최대 2GB 메모리 사용
+    mem_reservation: 1g    # 최소 1GB 메모리 예약
+
+  cust-service:
+    image : sjszzang0929/cust-service:latest
+    ports:
+      - "8082:8080"
+    depends_on:
+      - eureka-server
+      - h2-db
+    container_name: cust-service
+    restart: always
+    mem_limit: 2g          # 최대 2GB 메모리 사용
+    mem_reservation: 1g    # 최소 1GB 메모리 예약
+
+  booking-service:
+    image : sjszzang0929/booking-service:latest
+    ports:
+      - "8083:8080"
+    depends_on:
+      - eureka-server
+      - h2-db
+    container_name: booking-service
+    restart: always
+    mem_limit: 2g          # 최대 2GB 메모리 사용
+    mem_reservation: 1g    # 최소 1GB 메모리 예약
+
+  view-service:
+    image : sjszzang0929/view-service:latest
+    ports:
+      - "8084:8080"
+    depends_on:
+      - eureka-server
+      - h2-db
+    container_name: view-service
+    restart: always
+    mem_limit: 2g          # 최대 2GB 메모리 사용
+    mem_reservation: 1g    # 최소 1GB 메모리 예약
+
+  h2-db:
+    image: oscarfonts/h2:latest
+    ports:
+      - "1521:1521"     # TCP 포트 : 데이터베이스 연결 포트
+      - "8090:81"     # H2 웹 콘솔
+    environment:
+      H2_OPTIONS: -ifNotExists
+    volumes:
+      - ./h2-db/:/opt/h2-data
+    restart: always
+    container_name: h2-db
+
