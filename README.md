@@ -72,7 +72,8 @@ docker-compose up -d
 
 ## 🛢️ SMS 도메인 DB 모델링
 
-SMS 서비스는 MSA 구조로 독립된 DB를 가지며, 다른 도메인(고객, 예약 등)과 약결합(Loose Coupling)된 형태로 설계되었습니다.
+SMS 서비스는 MSA 구조 내 하나의 통합 데이터베이스를 사용하며,  
+다른 도메인(고객, 예약 등)과는 약결합(Loose Coupling)된 형태로 서비스 단위만 분리하여 설계되었습니다.
 
 ### 📋 ERD
 
