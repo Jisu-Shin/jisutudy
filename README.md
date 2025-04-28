@@ -15,6 +15,13 @@ OO-SMS는 공연을 예매한 고객들에게 맞춤형 문자를 발송하기 �
 
 ---
 
+## 📚 API 문서 (Swagger)
+프로젝트의 전체 API 명세는 아래 통합 Swagger 페이지에서 확인할 수 있습니다.
+
+🔗 [OO-SMS 통합 Swagger UI 바로가기](https://jisu-shin.github.io/oo-sms-swagger-ui/)
+
+---
+
 ## 🧱 기술 스택
 
 - Java 17, Spring Boot 3.3
