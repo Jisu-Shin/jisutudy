@@ -18,10 +18,10 @@ OO-SMS는 공연을 예매한 고객들에게 맞춤형 문자를 발송하기 �
 ## 🧱 기술 스택
 
 - Java 17, Spring Boot 3.3
-- Spring Cloud (Gateway, Config Server, Eureka) (진행 중)
+- Spring Cloud (Gateway, Config Server, Eureka) 
 - Spring Data JPA, QueryDSL,  H2 Database
 - Mustache (웹 프론트)
-- Docker, Docker Compose (진행 중)
+- Docker, Docker Compose 
 - Swagger (OpenAPI 기반 API 문서 자동 생성)
 
 ---
@@ -32,26 +32,41 @@ OO-SMS는 공연을 예매한 고객들에게 맞춤형 문자를 발송하기 �
 
 ![architecture](./docs/images/architecture.png) <!-- ← 생성한 아키텍처 다이어그램 이미지 위치에 맞게 -->
 
-| 서비스 이름       | 설명                              |
-|------------------|-----------------------------------|
-| `config-server`  | 공통 설정 파일 관리                |
-| `eureka-server`  | 서비스 등록 및 디스커버리           |
-| `gateway`        | 진입점, 라우팅 처리, Mustache 웹 포함 |
-| `cust-service`   | 고객 등록 및 정보 관리              |
-| `booking-service`| 공연 등록 및 예매 처리              |
-| `sms-service`    | 문자 발송, 템플릿 및 변수 관리       |
+각 서비스는 별도 레포지토리로 관리됩니다.
+
+| 서비스명            | 설명                   | 레포지토리 링크                                     |
+|-----------------|----------------------|----------------------------------------------|
+| config-server   | 공통 설정 관리 서버          | (링크 추가 예정)                                   |
+| eureka-server   | 서비스 디스커버리 서버         | (링크 추가 예정)                                   |
+| gateway         | API Gateway 서버       | https://github.com/Jisu-Shin/SCG             |
+| sms-service     | SMS 예약 발송 도메인 서비스    | https://github.com/Jisu-Shin/jisutudy        |
+| cust-service    | 고객 관리 도메인 서비스        | https://github.com/Jisu-Shin/cust-service    |
+| booking-service | 예약 관리 도메인 서비스        | https://github.com/Jisu-Shin/booking-service |
+| view-service    | 웹 페이지 (Mustache) 서비스 | https://github.com/Jisu-Shin/view-service    |
+
 
 ---
 
-## 📦 폴더 구조 (Mono 레포 예시)
+## 🐳 Docker Compose로 실행하기
+
+OO-SMS 프로젝트는 Docker Hub에 등록된 이미지를 기반으로 Docker Compose로 실행합니다
+
+### 1. Docker Compose 파일 준비
+
+- `docker-compose.yml` 파일을 다운로드합니다.
+
+### 2. Docker Compose로 실행
 
 ```bash
-OO-SMS/
-├── booking-service/
-├── cust-service/
-├── sms-service/
-├── gateway/
-├── config-server/
-├── eureka-server/
-├── docker-compose.yml
-└── README.md
+docker-compose up -d
+```
+
+---
+
+## 🛢️ SMS 도메인 DB 모델링
+
+SMS 서비스는 MSA 구조로 독립된 DB를 가지며, 다른 도메인(고객, 예약 등)과 약결합(Loose Coupling)된 형태로 설계되었습니다.
+
+### 📋 ERD
+
+![sms-service-erd](./docs/images/sms-service-erd.png) <!-- ← ERD 이미지 저장 경로 -->
