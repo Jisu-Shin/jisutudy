@@ -1,39 +1,25 @@
 package com.jisutudy.client;
 
 import com.jisutudy.dto.CustListResponseDto;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
 public class CustApiService {
-    private final RestTemplate restTemplate;
+    private final WebClient webClient;
 
-    @Value("${service.cust}")
-    private String custUrl;
-
-    private String baseUrl;
-    private UriComponentsBuilder builder;
-
-    @PostConstruct
-    private void init() {
-        baseUrl = "http://" + custUrl + "/api/custs";
-        builder = UriComponentsBuilder.fromUriString(baseUrl);
+    @Autowired
+    public CustApiService(@Qualifier("custWebClient") WebClient webClient) {
+        this.webClient = webClient;
     }
 
-    public CustListResponseDto getCust(Long custId) {
-        builder.pathSegment(String.valueOf(custId));
-
-        ResponseEntity<CustListResponseDto> response = restTemplate.getForEntity(
-                builder.toUriString(),
-                CustListResponseDto.class
-        );
-
-        return response.getBody();
+    public Mono<CustListResponseDto> getCust(Long custId) {
+        return webClient.get()
+                .uri("/api/custs/{id}", custId)
+                .retrieve()
+                .bodyToMono(CustListResponseDto.class);
     }
 }
