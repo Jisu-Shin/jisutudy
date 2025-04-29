@@ -65,15 +65,12 @@ public class SmsTemplateService {
 
     private void addRelation(List<String> koTextList, SmsTemplate smsTemplate) {
         if (!koTextList.isEmpty()) {
-            List<TemplateVariable> tmpltVarList = new ArrayList<>();
             for (String koText : koTextList) {
                 // 템플릿 변수 검증
                 TemplateVariable tmpltVar = tmpltVarRepository.findByKoText(koText)
                         .orElseThrow(() -> new IllegalArgumentException("해당 템플릿 변수는 없습니다 : " + koText));
-                tmpltVarList.add(tmpltVar);
+                smsTemplate.addRelation(tmpltVar);
             }
-            smsTemplate.addRelation(tmpltVarList);
         }
     }
-
 }

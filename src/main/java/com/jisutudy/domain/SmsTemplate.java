@@ -13,7 +13,8 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SmsTemplate {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "sms_tmplt_id")
     private Long id;
 
@@ -22,7 +23,7 @@ public class SmsTemplate {
     @Enumerated(EnumType.STRING)
     private SmsType smsType;
 
-    @OneToMany(mappedBy = "smsTemplate")
+    @OneToMany(mappedBy = "smsTemplate", cascade = CascadeType.PERSIST)
     private List<SmsTmpltVarRel> tmpltVarRelList = new ArrayList<>();
 
     private SmsTemplate(String templateContent, SmsType smsType) {
@@ -37,9 +38,7 @@ public class SmsTemplate {
     }
 
     // ==연관 메서드==
-    public void addRelation(List<TemplateVariable> tmpltVarList) {
-        for (TemplateVariable tmpltVar : tmpltVarList) {
-            SmsTmpltVarRel smsTmpltVarRel = SmsTmpltVarRel.create(this, tmpltVar);
-        }
+    public void addRelation(TemplateVariable tmpltVar) {
+        this.tmpltVarRelList.add(SmsTmpltVarRel.create(this, tmpltVar));
     }
 }
