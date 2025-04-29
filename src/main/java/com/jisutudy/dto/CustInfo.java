@@ -13,4 +13,13 @@ public class CustInfo {
     Long custId;
     String phoneNumber;
     String custSmsConsentType;
+
+    @Override
+    public String toString() {
+        return "CustInfo{" +
+                "custId=" + custId +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", custSmsConsentType='" + custSmsConsentType + '\'' +
+                '}';
+    }
 }

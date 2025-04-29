@@ -5,6 +5,7 @@ import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.dto.SmsFindListResponseDto;
 import com.jisutudy.dto.SmsSendRequestDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -22,12 +24,15 @@ public class SmsService {
 
     @Transactional
     public boolean send(SmsSendRequestDto requestDto) {
+        log.info("@@@@@ SmsService.send requestDto {}", requestDto.toString());
 
         validateRequest(requestDto);
 
         List<Sms> smsList = smsFactory.createSmsList(requestDto);
+        log.info("@@@@@ smsFactory 완료");
 
         jpaSmsRepository.saveAll(smsList);
+        log.info("@@@@@ repository saveAll 완료");
 
         return true;
     }

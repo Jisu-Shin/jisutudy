@@ -29,4 +29,14 @@ public class SmsSendRequestDto {
         this.templateId = templateId;
         this.itemId = itemId;
     }
+
+    @Override
+    public String toString() {
+        return "SmsSendRequestDto{" +
+                "custIdList=" + custIdList +
+                ", sendDt='" + sendDt + '\'' +
+                ", templateId=" + templateId +
+                ", itemId=" + itemId +
+                '}';
+    }
 }
