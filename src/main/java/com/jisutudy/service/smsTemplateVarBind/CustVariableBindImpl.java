@@ -19,7 +19,7 @@ public class CustVariableBindImpl implements VariableBinder {
     @Override
     public Map<String, String> getValues(List<TemplateVariable> tmpltVarList, BindingDto bindingDto) {
         Map<String, String> replacements = new HashMap<>();
-        CustListResponseDto cust = custApiService.getCust(bindingDto.getCustId()).block();
+        CustListResponseDto cust = custApiService.getCust(bindingDto.getCustId());
 
         for (TemplateVariable tmpltVar : tmpltVarList) {
             if (tmpltVar.getKoText().equals("고객명")) {
