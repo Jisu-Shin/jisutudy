@@ -52,6 +52,8 @@ class SmsTemplateServiceTest {
     @Test
     public void 템플릿추가() throws Exception {
         //given
+        System.out.println("size = " + jpaSmsTemplateRepository.findAll().size());
+
         createTemplateVariable("custName", "고객명", TemplateVariableType.CUST);
         createTemplateVariable("performanceName", "공연명", TemplateVariableType.ITEM);
 
@@ -59,6 +61,10 @@ class SmsTemplateServiceTest {
 
         //when
         Long tmpltId = smsTemplateService.create(requestDto);
+
+        em.flush(); // DB insert 쿼리 넣기
+        em.clear(); // 영속성 컨텍스트 초기화해서 1차 캐시도 비움
+
         SmsTemplate findTmplt = jpaSmsTemplateRepository.findById(tmpltId)
                 .orElseThrow(()->new IllegalArgumentException());
 
@@ -72,6 +78,15 @@ class SmsTemplateServiceTest {
     private void createTemplateVariable(String enText, String koText, TemplateVariableType templateVariableType) {
         TemplateVariable tmpltVar = TemplateVariable.create(enText, koText, templateVariableType);
         em.persist(tmpltVar);
+    }
+
+    @Test
+    public void 문자발송테스트() throws Exception {
+        //given
+
+        //when
+
+        //then
     }
 
 }

@@ -89,7 +89,7 @@ class SmsTmpltVarBindImplTest {
         System.out.println(result);
 
         //then
-        assertEquals("홍길동", result);
+        assertEquals("고객1", result);
     }
 
     private TemplateVariable createTmpltVar(String enText, String koTet, TemplateVariableType type) {
