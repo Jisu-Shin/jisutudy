@@ -9,7 +9,9 @@ services:
       interval: 30s
       retries: 3
       start_period: 30s
-      timeout: 10s 
+      timeout: 10s
+    environment:
+      - TZ=Asia/Seoul
     mem_limit: 2g          # 최대 2GB 메모리 사용
     mem_reservation: 1g    # 최소 1GB 메모리 예약
 
@@ -21,6 +23,8 @@ services:
      - eureka-server
     restart: always
     container_name: gateway
+    environment:
+      - TZ=Asia/Seoul
     mem_limit: 2g          # 최대 2GB 메모리 사용
     mem_reservation: 1g    # 최소 1GB 메모리 예약
 
@@ -33,6 +37,8 @@ services:
       - h2-db
     container_name: sms-service
     restart: always
+    environment:
+      - TZ=Asia/Seoul
     mem_limit: 2g          # 최대 2GB 메모리 사용
     mem_reservation: 1g    # 최소 1GB 메모리 예약
 
@@ -45,6 +51,8 @@ services:
       - h2-db
     container_name: cust-service
     restart: always
+    environment:
+      - TZ=Asia/Seoul
     mem_limit: 2g          # 최대 2GB 메모리 사용
     mem_reservation: 1g    # 최소 1GB 메모리 예약
 
@@ -57,6 +65,8 @@ services:
       - h2-db
     container_name: booking-service
     restart: always
+    environment:
+      - TZ=Asia/Seoul
     mem_limit: 2g          # 최대 2GB 메모리 사용
     mem_reservation: 1g    # 최소 1GB 메모리 예약
 
@@ -69,6 +79,8 @@ services:
       - h2-db
     container_name: view-service
     restart: always
+    environment:
+      - TZ=Asia/Seoul
     mem_limit: 2g          # 최대 2GB 메모리 사용
     mem_reservation: 1g    # 최소 1GB 메모리 예약
 
@@ -78,9 +90,11 @@ services:
       - "1521:1521"     # TCP 포트 : 데이터베이스 연결 포트
       - "8090:81"     # H2 웹 콘솔
     environment:
-      H2_OPTIONS: -ifNotExists
+      - TZ=Asia/Seoul
+      - H2_OPTIONS=-ifNotExists
     volumes:
       - ./h2-db/:/opt/h2-data
     restart: always
     container_name: h2-db
+
 
