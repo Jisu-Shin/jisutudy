@@ -15,8 +15,32 @@ OO-SMS는 공연을 예매한 고객들에게 맞춤형 문자를 발송하기 �
 
 ---
 
+## 🐳 Docker Compose로 실행하기
+
+OO-SMS 프로젝트는 Docker Hub에 등록된 이미지를 기반으로 Docker Compose로 실행합니다
+
+### 1. Docker Compose 파일 준비
+
+- GitHub 루트 디렉토리에 있는 `docker-compose.yaml` 파일을 다운로드합니다.
+
+### 2. Docker Compose로 실행
+
+- 다운로드한 디렉토리에서 다음 명령어를 실행합니다:
+```bash
+docker-compose up -d
+```
+
+### 3. 웹페이지 접속
+```
+http://localhost:8080/view/
+```
+- Gateway를 통해 view-service로 라우팅되어 웹 페이지가 표시됩니다.
+
+---
+
 ## 📚 API 문서 (Swagger)
-프로젝트의 전체 API 명세는 아래 통합 Swagger 페이지에서 확인할 수 있습니다.
+프로젝트의 전체 API 명세는 아래 통합 Swagger 페이지에서 확인할 수 있습니다.<br>
+Docker 실행 후 각 API 엔드포인트를 Swagger UI에서 테스트할 수 있습니다.
 
 🔗 [OO-SMS 통합 Swagger UI 바로가기](https://jisu-shin.github.io/oo-sms-swagger-ui/)
 
@@ -51,22 +75,6 @@ OO-SMS는 공연을 예매한 고객들에게 맞춤형 문자를 발송하기 �
 | booking-service | 예약 관리 도메인 서비스        | https://github.com/Jisu-Shin/booking-service |
 | view-service    | 웹 페이지 (Mustache) 서비스 | https://github.com/Jisu-Shin/view-service    |
 
-
----
-
-## 🐳 Docker Compose로 실행하기
-
-OO-SMS 프로젝트는 Docker Hub에 등록된 이미지를 기반으로 Docker Compose로 실행합니다
-
-### 1. Docker Compose 파일 준비
-
-- `docker-compose.yml` 파일을 다운로드합니다.
-
-### 2. Docker Compose로 실행
-
-```bash
-docker-compose up -d
-```
 
 ---
 
