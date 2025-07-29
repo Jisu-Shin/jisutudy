@@ -14,6 +14,7 @@ public class SmsFilterImpl implements SmsFilter {
 
     private final TimeSmsFilter timeSmsFilter;
     private final AdvertiseSmsFilter advertiseSmsFilter;
+    private final CustomerSmsFilter customerSmsFilter;
 
     @Override
     public SmsResult filter(Sms sms, CustSmsConsentType type) {
@@ -26,8 +27,7 @@ public class SmsFilterImpl implements SmsFilter {
         }
 
         // 2. 고객동의
-        CustConsentFilter consentFilter = new CustConsentFilter(); // TODO OCP, DIP 위반
-        if (!consentFilter.isSendable(type, smsTemplate.getSmsType())) {
+        if (!customerSmsFilter.isSendable(type, smsTemplate.getSmsType())) {
             return SmsResult.CUST_REJECT;
         }
 

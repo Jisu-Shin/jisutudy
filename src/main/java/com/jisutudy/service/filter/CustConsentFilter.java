@@ -2,26 +2,35 @@ package com.jisutudy.service.filter;
 
 import com.jisutudy.domain.CustSmsConsentType;
 import com.jisutudy.domain.SmsType;
+import org.springframework.stereotype.Component;
 
-public class CustConsentFilter {
-    // TODO 고객 SMS 동의 유형이 추가될 때 변경 -> 그럼 매번 변경해야하는것인가?
-    public boolean isSendable(CustSmsConsentType smsConsentType, SmsType smsType) {
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-        // 0. 인증 문자는 무조건 바로 나가기
-        if (SmsType.VERIFICATION == smsType) {
-            return true;
-        }
+@Component
+public class CustConsentFilter implements CustomerSmsFilter {
+    /*
+    if-else 문은 고객 SMS 동의 유형이 새롭게 추가될 때마다 OCP 위반
+    유형이 추가될 떄마다 매번 수정하지 않게 Map 사용.
+    Map만 수정하면 새로운 조합 추가 가능
 
-        if (CustSmsConsentType.ALL_ALLOW == smsConsentType) {
-            return true;
-        }
+    ===== 징점 =====
+    OCP 준수 : enum 추가되더라도 분기 코드를 수정할 필요 없음
+    SRP 명확 : 정책은 정책대로, 로직은 로직대로 관리
+    확장성 : Map만 수정하면 새로운 조합 추가 가능
+    테스트 용이 : 정책만 따로 단위 테스트 가능
+     */
+    private final Map<CustSmsConsentType, Set<SmsType>> allowMap = new HashMap<>();
+    public CustConsentFilter() {
+        allowMap.put(CustSmsConsentType.ALL_ALLOW, EnumSet.allOf(SmsType.class));
+        allowMap.put(CustSmsConsentType.ALL_DENY, EnumSet.of(SmsType.VERIFICATION)); // 인증 문자는 항상 허용.
+        allowMap.put(CustSmsConsentType.ADVERTISE_DENY, EnumSet.of(SmsType.INFORMAITONAL, SmsType.VERIFICATION));
+    }
 
-        // 고객은 광고 거부인데 문자는 일반인경우... 나가야함
-        if (CustSmsConsentType.ADVERTISE_DENY == smsConsentType
-                && SmsType.INFORMAITONAL == smsType) {
-            return true;
-        }
-
-        return false;
+    public boolean isSendable(CustSmsConsentType custSmsConsentType, SmsType smsType) {
+        Set<SmsType> allowedType = allowMap.getOrDefault(custSmsConsentType, EnumSet.noneOf(SmsType.class));
+        return allowedType.contains(smsType);
     }
 }
