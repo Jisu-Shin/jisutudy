@@ -11,7 +11,7 @@ class ProdTimeSmsFilterTest {
 
     @Test
     @DisplayName("시간필터링 테스트 : 8시 이전")
-    void isSendableBefor8(){
+    void isSendableBefore8(){
         ProdTimeSmsFilter filter = new ProdTimeSmsFilter();
         LocalDateTime testDt = LocalDateTime.of(2024,10,29,7,30);
         boolean sendable = filter.isSendable(testDt);
