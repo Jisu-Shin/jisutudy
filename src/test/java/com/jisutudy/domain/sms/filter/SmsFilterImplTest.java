@@ -19,13 +19,13 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-//@SpringBootTest
 @SpringBootTest(properties = "spring.profiles.active=prod")
 @Transactional
 class SmsFilterImplTest {
 
     @Autowired
     SmsFilter smsFilter;
+
     @Autowired
     EntityManager em;
 
