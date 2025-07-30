@@ -1,9 +1,8 @@
-package com.jisutudy.domain.sms.filter;
+package com.jisutudy.service.filter;
 
 import com.jisutudy.domain.SmsType;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.repository.SmsSearch;
-import com.jisutudy.service.filter.AdvertiseSmsFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

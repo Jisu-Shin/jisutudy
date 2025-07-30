@@ -1,11 +1,10 @@
-package com.jisutudy.domain.sms.filter;
+package com.jisutudy.service.filter;
 
 import com.jisutudy.domain.CustSmsConsentType;
 import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.SmsType;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.service.filter.SmsFilter;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

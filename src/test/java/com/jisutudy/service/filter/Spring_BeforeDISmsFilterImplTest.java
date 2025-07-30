@@ -1,11 +1,10 @@
-package com.jisutudy.domain.sms.filter;
+package com.jisutudy.service.filter;
 
 import com.jisutudy.domain.CustSmsConsentType;
 import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.SmsType;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.service.filter.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
