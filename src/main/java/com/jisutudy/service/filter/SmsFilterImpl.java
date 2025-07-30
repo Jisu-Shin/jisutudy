@@ -54,7 +54,7 @@ public class SmsFilterImpl implements SmsFilter {
 //        }
 //
 //        // 2. 고객동의
-//        CustConsentFilter consentFilter = new CustConsentFilter(); // TODO OCP, DIP 위반
+//        CustConsentFilter consentFilter = new CustConsentFilter(); // OCP, DIP 위반
 //        if (!consentFilter.isSendable(cust.getSmsConsentType(), smsTemplate.getSmsType())) {
 //            return SmsResult.CUST_REJECT;
 //        }
