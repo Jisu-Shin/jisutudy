@@ -21,6 +21,11 @@ public class SmsFilterImpl implements SmsFilter {
         // sms 필터링
         SmsTemplate smsTemplate = sms.getSmsTemplate();
 
+        // 0. 인증문자는 항상 나가야하는 법...
+        if (SmsType.VERIFICATION == smsTemplate.getSmsType()) {
+            return SmsResult.SUCCESS;
+        }
+
         // 1. 시간
         if (!timeSmsFilter.isSendable(sms.getSendDt())) {
             return SmsResult.NOT_SEND_TIME;
@@ -37,34 +42,6 @@ public class SmsFilterImpl implements SmsFilter {
                 return SmsResult.AD_COUNT_OVER;
             }
         }
-
-        return SmsResult.SUCCESS;
-    }
-
-    @Deprecated
-    @Override
-    public SmsResult filter(Sms sms) {
-//        // sms 필터링
-//        Cust cust = sms.getCust();
-//        SmsTemplate smsTemplate = sms.getSmsTemplate();
-//
-//        // 1. 시간
-//        if (!timeSmsFilter.isSendable(sms.getSendDt())) {
-//            return SmsResult.NOT_SEND_TIME;
-//        }
-//
-//        // 2. 고객동의
-//        CustConsentFilter consentFilter = new CustConsentFilter(); // OCP, DIP 위반
-//        if (!consentFilter.isSendable(cust.getSmsConsentType(), smsTemplate.getSmsType())) {
-//            return SmsResult.CUST_REJECT;
-//        }
-//
-//        // 3. 광고 개수 제한
-//        if (SmsType.ADVERTISING == smsTemplate.getSmsType()) {
-//            if (!advertiseSmsFilter.isSendable(sms)) {
-//                return SmsResult.AD_COUNT_OVER;
-//            }
-//        }
 
         return SmsResult.SUCCESS;
     }
