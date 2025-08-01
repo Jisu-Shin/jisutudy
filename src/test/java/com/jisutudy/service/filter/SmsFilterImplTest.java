@@ -38,7 +38,7 @@ class SmsFilterImplTest {
         SmsTemplate smsTemplate = createTemplate("안녕하세요 문자발송요", SmsType.INFORMAITONAL);
         Sms sms = Sms.createSms(custId, smsTemplate, null, sendDt, "01098765412");
 
-        SmsResult smsResult = smsFilter.filter(sms);
+        SmsResult smsResult = smsFilter.filter(sms, CustSmsConsentType.ALL_ALLOW);
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.SUCCESS);
     }
 
