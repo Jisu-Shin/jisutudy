@@ -1,5 +1,6 @@
 package com.jisutudy.service.filter;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Profile("prod")
+@Primary
 @Component
 public class ProdTimeSmsFilter implements TimeSmsFilter{
     @Override

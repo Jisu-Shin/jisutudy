@@ -5,6 +5,7 @@ import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.SmsType;
 import com.jisutudy.repository.SmsSearch;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @RequiredArgsConstructor
-@Component
+@Component @Primary
 public class DBAdvertiseSmsFilter implements AdvertiseSmsFilter {
 
     // 리포지토리 버전2) JPA 리포지토리
