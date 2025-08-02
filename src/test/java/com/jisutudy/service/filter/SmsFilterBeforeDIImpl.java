@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
-@Component
 public class SmsFilterBeforeDIImpl implements SmsFilter {
 
     private final TimeSmsFilter timeSmsFilter;

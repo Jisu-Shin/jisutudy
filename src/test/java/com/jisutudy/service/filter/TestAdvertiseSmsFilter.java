@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @RequiredArgsConstructor
-@Component
 public class TestAdvertiseSmsFilter implements AdvertiseSmsFilter {
 
     @Override
