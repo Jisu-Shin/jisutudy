@@ -6,9 +6,9 @@ import com.jisutudy.service.filter.TimeSmsFilter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public class ApplicationContextExtendsFindTest {
     @Test
     @DisplayName("부모 타입으로 조회시, 자식이 둘 이상 있으면 빈 이름을 지정하면 된다")
     public void findBeanByParentTypeBeanName() throws Exception {
-        TimeSmsFilter prodTimeSmsFilter = ac.getBean("prodTimeSmsFilter", TimeSmsFilter.class);
+        TimeSmsFilter prodTimeSmsFilter = ac.getBean("test_prodTimeSmsFilter", TimeSmsFilter.class);
         assertThat(prodTimeSmsFilter).isInstanceOf(ProdTimeSmsFilter.class);
     }
 
@@ -58,16 +58,16 @@ public class ApplicationContextExtendsFindTest {
         }
     }
 
-    @Configuration
+    @TestConfiguration
     static class TestConfig {
 
         @Bean
-        public TimeSmsFilter prodTimeSmsFilter() {
+        public TimeSmsFilter test_prodTimeSmsFilter() {
             return new ProdTimeSmsFilter();
         }
 
         @Bean
-        public TimeSmsFilter testTimeSmsFilter() {
+        public TimeSmsFilter test_testTimeSmsFilter() {
             return new TestTimeSmsFilter();
         }
     }

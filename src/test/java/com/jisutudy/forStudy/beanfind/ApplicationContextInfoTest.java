@@ -1,14 +1,16 @@
 package com.jisutudy.forStudy.beanfind;
 
-import com.jisutudy.TestAppConfig;
+import com.jisutudy.IntegrationTestConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+@SpringBootTest
 public class ApplicationContextInfoTest {
 
-    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestAppConfig.class);
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(IntegrationTestConfig.class);
 
     @Test
     @DisplayName("모든 빈 출력하기")
