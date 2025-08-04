@@ -1,15 +1,12 @@
 package com.jisutudy.forStudy.autowired;
 
-import com.jisutudy.AppConfig;
+import com.jisutudy.IntegrationTestConfig;
 import com.jisutudy.service.filter.TimeSmsFilter;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Import;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,17 +16,12 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@SpringBootTest
-@SpringBootTest(properties = "spring.profiles.active=prod")
-@Import(AllBeanTest.FilterService.class)
+@SpringBootTest
 public class AllBeanTest {
-
-    @Autowired
-    ApplicationContext ac;
 
     @Test
     void findAllBean() {
-//        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class, FilterService.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(IntegrationTestConfig.class, FilterService.class);
         FilterService filterService = ac.getBean(FilterService.class);
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.of(21,00));
         boolean prodResult = filterService.filter(ldt, "prodTimeSmsFilter");
@@ -57,6 +49,4 @@ public class AllBeanTest {
             return timeSmsFilter.isSendable(ldt);
         }
     }
-
-
 }
