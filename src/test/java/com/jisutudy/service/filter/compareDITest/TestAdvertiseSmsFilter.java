@@ -1,16 +1,14 @@
-package com.jisutudy.service.filter;
+package com.jisutudy.service.filter.compareDITest;
 
 import com.jisutudy.domain.SmsType;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.repository.SmsSearch;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import com.jisutudy.service.filter.AdvertiseSmsFilter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-@RequiredArgsConstructor
 public class TestAdvertiseSmsFilter implements AdvertiseSmsFilter {
 
     @Override

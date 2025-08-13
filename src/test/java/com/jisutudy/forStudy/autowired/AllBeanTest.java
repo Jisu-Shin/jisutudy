@@ -1,12 +1,13 @@
 package com.jisutudy.forStudy.autowired;
 
-import com.jisutudy.IntegrationTestConfig;
+import com.jisutudy.service.filter.ProdTimeSmsFilter;
+import com.jisutudy.service.filter.TestTimeSmsFilter;
 import com.jisutudy.service.filter.TimeSmsFilter;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,21 +17,20 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
 public class AllBeanTest {
 
     @Test
     void findAllBean() {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(IntegrationTestConfig.class, FilterService.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ForceRegisterConfig.class, FilterService.class);
         FilterService filterService = ac.getBean(FilterService.class);
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.of(21,00));
         boolean prodResult = filterService.filter(ldt, "prodTimeSmsFilter");
         System.out.println("prodResult = " + prodResult);
         assertThat(prodResult).isFalse();
 
-//        boolean testResult = filterService.filter(ldt, "testTimeSmsFilter");
-//        System.out.println("testResult = " + testResult);
-//        assertThat(testResult).isTrue();
+        boolean testResult = filterService.filter(ldt, "testTimeSmsFilter");
+        System.out.println("testResult = " + testResult);
+        assertThat(testResult).isTrue();
 
     }
 
@@ -47,6 +47,19 @@ public class AllBeanTest {
             System.out.println("timeSmsFilter = " + timeSmsFilter);
 
             return timeSmsFilter.isSendable(ldt);
+        }
+    }
+
+    @TestConfiguration
+    static class ForceRegisterConfig {
+        @Bean
+        public ProdTimeSmsFilter prodTimeSmsFilter() {
+            return new ProdTimeSmsFilter(); // @Profile 무시하고 강제 등록
+        }
+
+        @Bean
+        public TestTimeSmsFilter testTimeSmsFilter() {
+            return new TestTimeSmsFilter();
         }
     }
 }

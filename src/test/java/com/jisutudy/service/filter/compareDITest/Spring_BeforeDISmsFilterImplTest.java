@@ -1,10 +1,11 @@
-package com.jisutudy.service.filter;
+package com.jisutudy.service.filter.compareDITest;
 
 import com.jisutudy.domain.CustSmsConsentType;
 import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.SmsType;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.SmsResult;
+import com.jisutudy.service.filter.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +18,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = Spring_AfterDISmsFilterImplTest.TestConfig.class)
+@ContextConfiguration(classes = Spring_BeforeDISmsFilterImplTest.TestConfig.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class Spring_AfterDISmsFilterImplTest {
+public class Spring_BeforeDISmsFilterImplTest {
 
     // 성능 측정 결과를 저장할 정적 변수들
-    private static List<Long> afterDIExecutionTimes = new ArrayList<>();
-    private static long totalAfterDItime = 0;
+    private static List<Long> beforeDIExecutionTimes = new ArrayList<>();
+    private static long totalBeforeDItime = 0;
 
     @Autowired
-    private SmsFilterImpl smsFilter;
+    private SmsFilter smsFilter;
 
     @AfterAll
     static void cleanUp() {
-        System.out.println("\n===DI 적용 후 테스트 완료===");
+        System.out.println("\n===DI 적용 전 테스트 완료===");
     }
 
     private Sms createTestSms() {
@@ -48,8 +47,8 @@ public class Spring_AfterDISmsFilterImplTest {
 
     @Test
     @Order(1)
-    @DisplayName("DI 적용 후 - 객체 생성 성능 테스트")
-    void testPerformanceAfterDI() {
+    @DisplayName("DI 적용 전 - 객체 생성 성능 테스트")
+    void testPerformanceBeforeDI() {
         //given
         Sms sms = createTestSms();
 
@@ -60,7 +59,7 @@ public class Spring_AfterDISmsFilterImplTest {
 
         long duration = endTime - startTime;
         System.out.println("객체 생성 성능 테스트");
-        System.out.println("DI 적용 후 실행시간: " + duration / 1_000_000.0 + "ms");
+        System.out.println("DI 적용 전 실행시간: " + duration / 1_000_000.0 + "ms");
 
         //then
         Assertions.assertEquals(SmsResult.SUCCESS, result);
@@ -68,7 +67,7 @@ public class Spring_AfterDISmsFilterImplTest {
 
     @RepeatedTest(100)
     @Order(2)
-    @DisplayName("DI 적용 후 - 100회 반복 성능 측정")
+    @DisplayName("DI 적용 전 - 100회 반복 성능 측정")
     public void testRepeatedExecutionPerformance(RepetitionInfo repetitionInfo) throws Exception {
         //given
         Sms sms = createTestSms();
@@ -80,29 +79,29 @@ public class Spring_AfterDISmsFilterImplTest {
 
         //then
         long duration = endTime - startTime;
-        afterDIExecutionTimes.add(duration);
-        totalAfterDItime += duration;
+        beforeDIExecutionTimes.add(duration);
+        totalBeforeDItime += duration;
 
         //then
         Assertions.assertEquals(SmsResult.SUCCESS, result);
 
         // 마지막 반복에서 통계 출력
         if (repetitionInfo.getCurrentRepetition() == repetitionInfo.getTotalRepetitions()) {
-            double averageTime = totalAfterDItime / (double) afterDIExecutionTimes.size();
-            long minTime = afterDIExecutionTimes.stream().min(Long::compareTo).orElse(0L);
-            long maxTime = afterDIExecutionTimes.stream().max(Long::compareTo).orElse(0L);
+            double averageTime = totalBeforeDItime / (double) beforeDIExecutionTimes.size();
+            long minTime = beforeDIExecutionTimes.stream().min(Long::compareTo).orElse(0L);
+            long maxTime = beforeDIExecutionTimes.stream().max(Long::compareTo).orElse(0L);
 
-            System.out.println("\n=== DI 적용 후 성능 통계 (100회 실행) ===");
+            System.out.println("\n=== DI 적용 전 성능 통계 (100회 실행) ===");
             System.out.println("평균 실행시간: " + averageTime / 1_000_000.0 + "ms");
             System.out.println("최소 실행시간: " + minTime / 1_000_000.0 + "ms");
             System.out.println("최대 실행시간: " + maxTime / 1_000_000.0 + "ms");
-            System.out.println("총 실행시간: " + totalAfterDItime / 1_000_000.0 + "ms");
+            System.out.println("총 실행시간: " + totalBeforeDItime / 1_000_000.0 + "ms");
         }
     }
 
     @Test
     @Order(3)
-    @DisplayName("DI 적용 후 - 메모리 사용량 추정")
+    @DisplayName("DI 적용 전 - 메모리 사용량 추정")
     public void testMemoryUsage() throws Exception {
         //given
         Sms sms = createTestSms();
@@ -114,7 +113,7 @@ public class Spring_AfterDISmsFilterImplTest {
         //when - 여러 번 실행하여 객체 생성 비용 측정
         for (int i = 0; i < 1000; i++) {
             smsFilter.filter(sms, CustSmsConsentType.ALL_ALLOW);
-            // 1번 new CustConsentFilter() 실행됨
+            // 1000번 new CustConsentFilter() 실행됨
         }
 
         runtime.gc(); // 가비지 컬렉션 실행
@@ -122,7 +121,7 @@ public class Spring_AfterDISmsFilterImplTest {
 
         //then
         long memoryUsed = afterMemory - beforeMemory;
-        System.out.println("\nDI 적용 후 메모리 사용량 (1000회): " + memoryUsed / 1024.0 + "KB");
+        System.out.println("\nDI 적용 전 메모리 사용량 (1000회): " + memoryUsed / 1024.0 + "KB");
     }
 
     static class TestConfig {
@@ -132,18 +131,13 @@ public class Spring_AfterDISmsFilterImplTest {
         }
 
         @Bean
-        public CustomerSmsFilter customerSmsFilter() {
-            return new CustConsentFilter();
-        }
-
-        @Bean
         public AdvertiseSmsFilter advertiseSmsFilter() {
             return new TestAdvertiseSmsFilter();
         }
 
         @Bean
-        public SmsFilterImpl smsFilter(TimeSmsFilter timeSmsFilter, AdvertiseSmsFilter advertiseSmsFilter, CustomerSmsFilter customerSmsFilter) {
-            return new SmsFilterImpl(timeSmsFilter, advertiseSmsFilter, customerSmsFilter); // 생성자주입
+        public SmsFilter smsFilter(TimeSmsFilter timeSmsFilter, AdvertiseSmsFilter advertiseSmsFilter) {
+            return new SmsFilterBeforeDIImpl(timeSmsFilter, advertiseSmsFilter);
         }
 
     }

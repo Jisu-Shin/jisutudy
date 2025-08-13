@@ -1,23 +1,21 @@
 package com.jisutudy.forStudy.scan;
 
-import com.jisutudy.IntegrationTestConfig;
+import com.jisutudy.AppConfig;
+//import com.jisutudy.IntegrationTestConfig;
 import com.jisutudy.service.SmsService;
 import com.jisutudy.service.SmsTemplateService;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Import;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
-@Import(IntegrationTestConfig.class)
 public class AppConfigTest {
 
     @Test
     void basicScan() {
-        ApplicationContext ac = new AnnotationConfigApplicationContext(IntegrationTestConfig.class);
+//        ApplicationContext ac = new AnnotationConfigApplicationContext(IntegrationTestConfig.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         SmsService smsService = ac.getBean(SmsService.class);
         SmsTemplateService smsTemplateService = ac.getBean(SmsTemplateService.class);
 
