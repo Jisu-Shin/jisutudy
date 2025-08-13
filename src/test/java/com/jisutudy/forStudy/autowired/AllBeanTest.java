@@ -54,7 +54,7 @@ public class AllBeanTest {
     static class TestAppConfig {
         @Bean
         public ProdTimeSmsFilter prodTimeSmsFilter() {
-            return new ProdTimeSmsFilter(); // @Profile 무시하고 강제 등록
+            return new ProdTimeSmsFilter();
         }
 
         @Bean

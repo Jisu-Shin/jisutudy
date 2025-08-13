@@ -1,35 +1,25 @@
-package com.jisutudy.service;
+package com.jisutudy.forStudy.dependencyInjection;
 
 import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.TemplateVariable;
-import com.jisutudy.repository.*;
-import com.jisutudy.dto.SmsTemplateListResponseDto;
 import com.jisutudy.dto.SmsTemplateRequestDto;
-import lombok.RequiredArgsConstructor;
+import com.jisutudy.repository.JpaSmsTemplateRepository;
+import com.jisutudy.repository.JpaTemplateVariableRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-@Service
 @Slf4j
-@Transactional(readOnly = true)
-public class SmsTemplateService {
+public class FieldInjectionSmsTmpltService {
+    @Autowired private JpaSmsTemplateRepository smsTmpltRepository;
+    @Autowired private JpaTemplateVariableRepository tmpltVarRepository;
 
-    private final JpaSmsTemplateRepository smsTmpltRepository;
-    private final JpaTemplateVariableRepository tmpltVarRepository;
-
-    @Autowired
-    public SmsTemplateService(JpaSmsTemplateRepository smsTmpltRepository, JpaTemplateVariableRepository tmpltVarRepository) {
-        this.smsTmpltRepository = smsTmpltRepository;
-        this.tmpltVarRepository = tmpltVarRepository;
-        log.info("=== 생성자 주입 완료 - {} === ", System.nanoTime());
+    public FieldInjectionSmsTmpltService() {
     }
 
     // 템플릿 추가
@@ -43,18 +33,6 @@ public class SmsTemplateService {
 
         smsTmpltRepository.save(smsTemplate);
         return smsTemplate.getId();
-    }
-
-    // 템플릿 수정
-    @Transactional
-    public void update() {
-
-    }
-
-    public List<SmsTemplateListResponseDto> findAll() {
-        return smsTmpltRepository.findAll().stream()
-                .map(SmsTemplateListResponseDto::new)
-                .collect(Collectors.toList());
     }
 
     private List<String> findVariableByTemplateContent(String content) {
