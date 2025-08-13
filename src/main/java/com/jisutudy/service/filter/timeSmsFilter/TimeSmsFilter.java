@@ -1,4 +1,4 @@
-package com.jisutudy.service.filter;
+package com.jisutudy.service.filter.timeSmsFilter;
 
 import java.time.LocalDateTime;
 

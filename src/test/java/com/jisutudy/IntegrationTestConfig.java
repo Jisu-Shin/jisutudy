@@ -1,9 +1,9 @@
 package com.jisutudy;
 
-import com.jisutudy.service.filter.CustConsentFilter;
-import com.jisutudy.service.filter.CustomerSmsFilter;
-import com.jisutudy.service.filter.ProdTimeSmsFilter;
-import com.jisutudy.service.filter.TimeSmsFilter;
+import com.jisutudy.service.filter.customerSmsFilter.CustConsentFilter;
+import com.jisutudy.service.filter.customerSmsFilter.CustomerSmsFilter;
+import com.jisutudy.service.filter.timeSmsFilter.ProdTimeSmsFilter;
+import com.jisutudy.service.filter.timeSmsFilter.TimeSmsFilter;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.*;
 

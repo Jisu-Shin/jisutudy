@@ -1,7 +1,7 @@
 package com.jisutudy.forStudy.singleton;
 
 import com.jisutudy.LiteTestConfig;
-import com.jisutudy.service.filter.TimeSmsFilter;
+import com.jisutudy.service.filter.timeSmsFilter.TimeSmsFilter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;

@@ -1,8 +1,8 @@
 package com.jisutudy.forStudy.autowired;
 
-import com.jisutudy.service.filter.ProdTimeSmsFilter;
-import com.jisutudy.service.filter.TestTimeSmsFilter;
-import com.jisutudy.service.filter.TimeSmsFilter;
+import com.jisutudy.service.filter.timeSmsFilter.ProdTimeSmsFilter;
+import com.jisutudy.service.filter.timeSmsFilter.TestTimeSmsFilter;
+import com.jisutudy.service.filter.timeSmsFilter.TimeSmsFilter;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -21,7 +21,7 @@ public class AllBeanTest {
 
     @Test
     void findAllBean() {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(ForceRegisterConfig.class, FilterService.class);
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestAppConfig.class, FilterService.class);
         FilterService filterService = ac.getBean(FilterService.class);
         LocalDateTime ldt = LocalDateTime.of(LocalDate.now(), LocalTime.of(21,00));
         boolean prodResult = filterService.filter(ldt, "prodTimeSmsFilter");
@@ -51,7 +51,7 @@ public class AllBeanTest {
     }
 
     @TestConfiguration
-    static class ForceRegisterConfig {
+    static class TestAppConfig {
         @Bean
         public ProdTimeSmsFilter prodTimeSmsFilter() {
             return new ProdTimeSmsFilter(); // @Profile 무시하고 강제 등록

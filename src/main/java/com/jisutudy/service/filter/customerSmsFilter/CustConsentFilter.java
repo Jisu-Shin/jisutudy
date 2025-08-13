@@ -1,4 +1,4 @@
-package com.jisutudy.service.filter;
+package com.jisutudy.service.filter.customerSmsFilter;
 
 import com.jisutudy.domain.CustSmsConsentType;
 import com.jisutudy.domain.SmsType;

@@ -3,7 +3,7 @@ package com.jisutudy.service.filter.compareDITest;
 import com.jisutudy.domain.SmsType;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.repository.SmsSearch;
-import com.jisutudy.service.filter.AdvertiseSmsFilter;
+import com.jisutudy.service.filter.advertiseSmsFilter.AdvertiseSmsFilter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

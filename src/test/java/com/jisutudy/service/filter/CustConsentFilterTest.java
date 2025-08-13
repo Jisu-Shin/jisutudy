@@ -2,6 +2,7 @@ package com.jisutudy.service.filter;
 
 import com.jisutudy.domain.CustSmsConsentType;
 import com.jisutudy.domain.SmsType;
+import com.jisutudy.service.filter.customerSmsFilter.CustConsentFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

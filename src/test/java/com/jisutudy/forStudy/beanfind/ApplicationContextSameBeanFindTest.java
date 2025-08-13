@@ -1,14 +1,13 @@
 package com.jisutudy.forStudy.beanfind;
 
-import com.jisutudy.service.filter.CustConsentFilter;
-import com.jisutudy.service.filter.CustomerSmsFilter;
+import com.jisutudy.service.filter.customerSmsFilter.CustConsentFilter;
+import com.jisutudy.service.filter.customerSmsFilter.CustomerSmsFilter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 

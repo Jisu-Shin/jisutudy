@@ -1,4 +1,4 @@
-package com.jisutudy.service.filter;
+package com.jisutudy.service.filter.advertiseSmsFilter;
 
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;

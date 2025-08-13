@@ -5,10 +5,10 @@ import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.domain.SmsType;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.domain.sms.SmsResult;
-import com.jisutudy.service.filter.AdvertiseSmsFilter;
-import com.jisutudy.service.filter.CustConsentFilter;
+import com.jisutudy.service.filter.advertiseSmsFilter.AdvertiseSmsFilter;
+import com.jisutudy.service.filter.customerSmsFilter.CustConsentFilter;
 import com.jisutudy.service.filter.SmsFilter;
-import com.jisutudy.service.filter.TimeSmsFilter;
+import com.jisutudy.service.filter.timeSmsFilter.TimeSmsFilter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

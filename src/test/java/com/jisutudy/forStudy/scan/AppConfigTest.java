@@ -1,7 +1,6 @@
 package com.jisutudy.forStudy.scan;
 
 import com.jisutudy.AppConfig;
-//import com.jisutudy.IntegrationTestConfig;
 import com.jisutudy.service.SmsService;
 import com.jisutudy.service.SmsTemplateService;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ public class AppConfigTest {
 
     @Test
     void basicScan() {
-//        ApplicationContext ac = new AnnotationConfigApplicationContext(IntegrationTestConfig.class);
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         SmsService smsService = ac.getBean(SmsService.class);
         SmsTemplateService smsTemplateService = ac.getBean(SmsTemplateService.class);

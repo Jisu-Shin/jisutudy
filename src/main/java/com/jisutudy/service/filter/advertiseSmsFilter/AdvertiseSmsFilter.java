@@ -1,4 +1,4 @@
-package com.jisutudy.service.filter;
+package com.jisutudy.service.filter.advertiseSmsFilter;
 
 import com.jisutudy.domain.sms.Sms;
 
