@@ -19,18 +19,12 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class SmsTemplateService {
 
     private final JpaSmsTemplateRepository smsTmpltRepository;
     private final JpaTemplateVariableRepository tmpltVarRepository;
-
-    @Autowired
-    public SmsTemplateService(JpaSmsTemplateRepository smsTmpltRepository, JpaTemplateVariableRepository tmpltVarRepository) {
-        this.smsTmpltRepository = smsTmpltRepository;
-        this.tmpltVarRepository = tmpltVarRepository;
-        log.info("=== 생성자 주입 완료 - {} === ", System.nanoTime());
-    }
 
     // 템플릿 추가
     @Transactional

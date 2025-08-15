@@ -1,32 +1,37 @@
 package com.jisutudy.forStudy.dependencyInjection;
 
+import com.jisutudy.repository.JpaSmsTemplateRepository;
+import com.jisutudy.repository.JpaTemplateVariableRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.test.context.TestComponent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 
 @TestConfiguration
-@ComponentScan(
-        basePackages = "com.jisutudy",
-        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = TestConfiguration.class)
-)
 @Slf4j
 public class DITestConfig {
 
+    @Autowired
+    JpaSmsTemplateRepository jpaSmsTemplateRepository;
+
+    @Autowired
+    JpaTemplateVariableRepository jpaTemplateVariableRepository;
+
     @Bean
-    public SetterInjectionSmsTmpltService setterInjectionSmsTmpltService() {
-        return new SetterInjectionSmsTmpltService();
+    public ConstructorInjectionService constructorInjectionService() {return new ConstructorInjectionService(jpaSmsTemplateRepository, jpaTemplateVariableRepository); }
+
+    @Bean
+    public SetterInjectionService setterInjectionSmsTmpltService() {
+        return new SetterInjectionService();
     }
 
     @Bean
-    public FieldInjectionSmsTmpltService fieldInjectionSmsTmpltService() {
-        return new FieldInjectionSmsTmpltService();
+    public FieldInjectionService fieldInjectionSmsTmpltService() {
+        return new FieldInjectionService();
     }
 
     @Bean
-    public MethodInjectionSmsTmpltService methodInjectionSmsTmpltService() {
-        return new MethodInjectionSmsTmpltService();
+    public MethodInjectionService methodInjectionSmsTmpltService() {
+        return new MethodInjectionService();
     }
 }
