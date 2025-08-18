@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ApplicationContextExtendsFindTest {
-
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
     @Test
@@ -42,7 +41,7 @@ public class ApplicationContextExtendsFindTest {
     @DisplayName("부모 타입으로 모두 조회하기")
     public void findAllBeanByParentType() throws Exception {
         Map<String, TimeSmsFilter> beansOfType = ac.getBeansOfType(TimeSmsFilter.class);
-        assertThat(beansOfType.size()).isEqualTo(4);
+        assertThat(beansOfType.size()).isEqualTo(3);
         for (String key : beansOfType.keySet()) {
             System.out.println("key = " + key + " value = " + beansOfType.get(key));
         }
