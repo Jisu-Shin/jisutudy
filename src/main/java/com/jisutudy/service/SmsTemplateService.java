@@ -5,16 +5,13 @@ import com.jisutudy.domain.TemplateVariable;
 import com.jisutudy.repository.*;
 import com.jisutudy.dto.SmsTemplateListResponseDto;
 import com.jisutudy.dto.SmsTemplateRequestDto;
+import com.jisutudy.service.smsTemplateVarBind.TemplateVariableUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,14 +29,14 @@ public class SmsTemplateService {
         SmsTemplate smsTemplate = SmsTemplate.createSmsTemplate(requestDto.getTemplateContent(), requestDto.getSmsType());
 
         // sms템플릿에서 변수찾기
-        List<String> koTextList = findVariableByTemplateContent(requestDto.getTemplateContent());
+        List<String> koTextList = TemplateVariableUtils.extractVariabels(requestDto.getTemplateContent());
         addRelation(koTextList, smsTemplate);
 
         smsTmpltRepository.save(smsTemplate);
         return smsTemplate.getId();
     }
 
-    // 템플릿 수정
+    // todo 템플릿 수정
     @Transactional
     public void update() {
 
@@ -49,21 +46,6 @@ public class SmsTemplateService {
         return smsTmpltRepository.findAll().stream()
                 .map(SmsTemplateListResponseDto::new)
                 .collect(Collectors.toList());
-    }
-
-    private List<String> findVariableByTemplateContent(String content) {
-        List<String> varList = new ArrayList<>();
-
-        String regEx = "#\\{(.*?)\\}";
-        Pattern pattern = Pattern.compile(regEx);
-        Matcher matcher = pattern.matcher(content);
-
-        //when
-        while(matcher.find()) {
-            varList.add(matcher.group(1));
-        }
-
-        return varList;
     }
 
     private void addRelation(List<String> koTextList, SmsTemplate smsTemplate) {
