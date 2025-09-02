@@ -1,5 +1,7 @@
 package com.jisutudy.service;
 
+import com.jisutudy.domain.sms.SmsFactory;
+import com.jisutudy.dto.CustInfo;
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.dto.SmsFindListResponseDto;
@@ -40,6 +42,12 @@ public class SmsService {
     private void validateRequest(SmsSendRequestDto requestDto) {
         if(requestDto.getCustIdList().isEmpty()) {
             throw new IllegalArgumentException("sms 발송할 고객이 없습니다.");
+        }
+
+        for (CustInfo custInfo : requestDto.getCustIdList()) {
+            if (custInfo.getPhoneNumber().isEmpty()) {
+                throw new IllegalArgumentException("고객의 전화번호가 비어있습니다");
+            }
         }
     }
 

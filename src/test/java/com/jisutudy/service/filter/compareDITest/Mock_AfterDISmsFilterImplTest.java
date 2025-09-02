@@ -42,8 +42,12 @@ class Mock_AfterDISmsFilterImplTest {
     // 정보성문자
     private Sms createInformationSms() {
         SmsTemplate template = SmsTemplate.createSmsTemplate("정보성문자", SmsType.INFORMAITONAL);
-        Sms sms = Sms.createSms(1L, template, null,
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")), "01012345678");
+        Sms sms = Sms.builder()
+                .custId(1L)
+                .smsTemplate(template)
+                .sendDt(LocalDateTime.now())
+                .sendPhoneNumber("01012345678")
+                .build();
 
         return sms;
     }
@@ -51,8 +55,12 @@ class Mock_AfterDISmsFilterImplTest {
     // 인증성문자
     private Sms createVerificationSms() {
         SmsTemplate template = SmsTemplate.createSmsTemplate("인증문자입니다 ****", SmsType.VERIFICATION);
-        Sms sms = Sms.createSms(1L, template, null,
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")), "01012345678");
+        Sms sms = Sms.builder()
+                .custId(1L)
+                .smsTemplate(template)
+                .sendDt(LocalDateTime.now())
+                .sendPhoneNumber("01012345678")
+                .build();
 
         return sms;
     }
@@ -60,8 +68,12 @@ class Mock_AfterDISmsFilterImplTest {
     // 광고성문자
     private Sms createAdvertisingSms() {
         SmsTemplate template = SmsTemplate.createSmsTemplate("광고문자입니다", SmsType.ADVERTISING);
-        Sms sms = Sms.createSms(1L, template, null,
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")), "01012345678");
+        Sms sms = Sms.builder()
+                .custId(1L)
+                .smsTemplate(template)
+                .sendDt(LocalDateTime.now())
+                .sendPhoneNumber("01012345678")
+                .build();
 
         return sms;
     }
@@ -143,9 +155,8 @@ class Mock_AfterDISmsFilterImplTest {
 
     @Test
     void 동의하지_않은_고객이면_CUST_REJECT() {
-        SmsTemplate adTemplate = SmsTemplate.createSmsTemplate("광고문자", SmsType.ADVERTISING);
-        Sms sms = Sms.createSms(1L, adTemplate, null,
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmm")), "01012345678");
+        Sms sms = createAdvertisingSms();
+
         when(timeSmsFilter.isSendable(any())).thenReturn(true);
 
         SmsResult result = smsFilter.filter(sms, CustSmsConsentType.ALL_DENY);

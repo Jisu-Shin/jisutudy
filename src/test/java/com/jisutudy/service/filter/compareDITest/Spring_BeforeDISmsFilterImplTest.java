@@ -41,11 +41,15 @@ public class Spring_BeforeDISmsFilterImplTest {
     private Sms createTestSms() {
         SmsTemplate template = SmsTemplate.createSmsTemplate("문자발송테스트", SmsType.INFORMAITONAL);
 
-        //todo null 사용안하는 방법
         long custId = 1L;
 
-        String sendDt = LocalDateTime.of(2025, 7, 29, 19, 00).format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
-        return Sms.createSms(custId, template, null, sendDt, "01012345678");
+        LocalDateTime sendDt = LocalDateTime.of(2025, 7, 29, 19, 00);
+        return Sms.builder()
+                .custId(custId)
+                .smsTemplate(template)
+                .sendDt(sendDt)
+                .sendPhoneNumber("01012345678")
+                .build();
     }
 
     @Test

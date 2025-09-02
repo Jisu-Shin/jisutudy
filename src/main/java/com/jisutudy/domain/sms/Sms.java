@@ -4,6 +4,7 @@ import com.jisutudy.domain.BaseTimeEntity;
 import com.jisutudy.domain.SmsTemplate;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,31 +34,21 @@ public class Sms extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private SmsResult smsResult;
 
-    private Sms(Long custId, String smsContent, String sendDt, String sendPhoneNumber) {
+
+    @Builder
+    private Sms(Long custId, SmsTemplate smsTemplate, String smsContent, LocalDateTime sendDt, String sendPhoneNumber) {
         this.custId = custId;
+        this.smsTemplate = smsTemplate;
         this.smsContent = smsContent;
         this.sendPhoneNumber = sendPhoneNumber;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-        this.sendDt = LocalDateTime.parse(sendDt,formatter);
-    }
-
-    // == 생성 메서드 ==
-    public static Sms createSms(Long custId, SmsTemplate smsTemplate, String smsContent, String sendDt, String phoneNumber) {
-        Sms sms = new Sms(custId,smsContent, sendDt,phoneNumber);
-        sms.setSmsTemplate(smsTemplate);
-
-        return sms;
-    }
-
-    // ==연관관계메서드==
-    private void setSmsTemplate(SmsTemplate smsTemplate) {
-        this.smsTemplate = smsTemplate;
+//        this.sendDt = LocalDateTime.parse(sendDt,formatter);
+        this.sendDt = sendDt;
     }
 
     //== setter==
-
-    public void setSmsResult(SmsResult smsResult) {
+    void setSmsResult(SmsResult smsResult) {
         this.smsResult = smsResult;
     }
 }

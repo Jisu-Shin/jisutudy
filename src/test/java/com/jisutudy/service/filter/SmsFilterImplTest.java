@@ -36,7 +36,12 @@ class SmsFilterImplTest {
 
         Long custId = 1L;
         SmsTemplate smsTemplate = createTemplate("안녕하세요 문자발송요", SmsType.INFORMAITONAL);
-        Sms sms = Sms.createSms(custId, smsTemplate, null, sendDt, "01098765412");
+        Sms sms = Sms.builder()
+                .custId(custId)
+                .smsTemplate(smsTemplate)
+                .sendDt(ldt)
+                .sendPhoneNumber("01098765432")
+                .build();
 
         SmsResult smsResult = smsFilter.filter(sms, CustSmsConsentType.ALL_ALLOW);
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.SUCCESS);
@@ -50,7 +55,12 @@ class SmsFilterImplTest {
 
         Long custId = 1L;
         SmsTemplate smsTemplate = createTemplate("안녕하세요 문자발송요", SmsType.INFORMAITONAL);
-        Sms sms = Sms.createSms(custId, smsTemplate, null, sendDt, "01098765412");
+        Sms sms = Sms.builder()
+                .custId(custId)
+                .smsTemplate(smsTemplate)
+                .sendDt(ldt)
+                .sendPhoneNumber("01098765432")
+                .build();
 
         SmsResult smsResult = smsFilter.filter(sms, CustSmsConsentType.ALL_ALLOW);
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.NOT_SEND_TIME);
@@ -64,7 +74,12 @@ class SmsFilterImplTest {
 
         Long custId = 1L;
         SmsTemplate smsTemplate = createTemplate("안녕하세요 문자발송요", SmsType.INFORMAITONAL);
-        Sms sms = Sms.createSms(custId, smsTemplate, null, sendDt, "01098765412");
+        Sms sms = Sms.builder()
+                .custId(custId)
+                .smsTemplate(smsTemplate)
+                .sendDt(ldt)
+                .sendPhoneNumber("01098765432")
+                .build();
 
         SmsResult smsResult = smsFilter.filter(sms, CustSmsConsentType.ALL_DENY);
 
@@ -79,12 +94,32 @@ class SmsFilterImplTest {
 
         Long custId = 1L;
         SmsTemplate smsTemplate = createTemplate("광고문자입니다~", SmsType.ADVERTISING);
-        Sms sms1 = Sms.createSms(custId, smsTemplate, smsTemplate.getTemplateContent()+"1", sendDt, "01098765412");
-        Sms sms2 = Sms.createSms(custId, smsTemplate, smsTemplate.getTemplateContent()+"2", sendDt, "01098765412");
+        Sms sms1 = Sms.builder()
+                .custId(custId)
+                .smsTemplate(smsTemplate)
+                .smsContent(smsTemplate.getTemplateContent()+"1")
+                .sendDt(ldt)
+                .sendPhoneNumber("01098765432")
+                .build();
+
+        Sms sms2 = Sms.builder()
+                .custId(custId)
+                .smsTemplate(smsTemplate)
+                .smsContent(smsTemplate.getTemplateContent()+"2")
+                .sendDt(ldt)
+                .sendPhoneNumber("01098765432")
+                .build();
+
         em.persist(sms1);
         em.persist(sms2);
 
-        Sms sms3 = Sms.createSms(custId, smsTemplate, smsTemplate.getTemplateContent()+"3", sendDt, "01098765412");
+        Sms sms3 = Sms.builder()
+                .custId(custId)
+                .smsTemplate(smsTemplate)
+                .smsContent(smsTemplate.getTemplateContent()+"3")
+                .sendDt(ldt)
+                .sendPhoneNumber("01098765432")
+                .build();
         SmsResult smsResult = smsFilter.filter(sms3, CustSmsConsentType.ALL_ALLOW);
 
         Assertions.assertThat(smsResult).isEqualTo(SmsResult.AD_COUNT_OVER);

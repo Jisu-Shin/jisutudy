@@ -14,6 +14,7 @@ import com.jisutudy.service.filter.timeSmsFilter.TimeSmsFilter;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -45,11 +46,15 @@ public class Spring_AfterDISmsFilterImplTest {
     private Sms createTestSms() {
         SmsTemplate template = SmsTemplate.createSmsTemplate("문자발송테스트", SmsType.INFORMAITONAL);
 
-        //todo null 사용안하는 방법
         long custId = 1L;
 
-        String sendDt = LocalDateTime.of(2025, 7, 29, 19, 00).format(DateTimeFormatter.ofPattern("yyyyMMddHHmm"));
-        return Sms.createSms(custId, template, null, sendDt, "01012345678");
+        LocalDateTime sendDt = LocalDateTime.of(2025, 7, 29, 19, 00);
+        return Sms.builder()
+                .custId(custId)
+                .smsTemplate(template)
+                .sendDt(sendDt)
+                .sendPhoneNumber("01012345678")
+                .build();
     }
 
     @Test
