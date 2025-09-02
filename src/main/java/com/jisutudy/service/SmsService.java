@@ -1,11 +1,12 @@
 package com.jisutudy.service;
 
-import com.jisutudy.domain.sms.SmsFactory;
+import com.jisutudy.domain.SmsTemplate;
 import com.jisutudy.dto.CustInfo;
 import com.jisutudy.repository.JpaSmsRepository;
 import com.jisutudy.domain.sms.Sms;
 import com.jisutudy.dto.SmsFindListResponseDto;
 import com.jisutudy.dto.SmsSendRequestDto;
+import com.jisutudy.repository.JpaSmsTemplateRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class SmsService {
+    private final JpaSmsTemplateRepository jpaSmsTemplateRepository;
     private final JpaSmsRepository jpaSmsRepository;
     private final SmsFactory smsFactory;
 
@@ -30,7 +32,9 @@ public class SmsService {
 
         validateRequest(requestDto);
 
-        List<Sms> smsList = smsFactory.createSmsList(requestDto);
+        SmsTemplate smsTemplate = getSmsTemplate(requestDto.getTemplateId());
+
+        List<Sms> smsList = smsFactory.createSmsList(smsTemplate, requestDto);
         log.info("@@@@@ smsFactory 완료");
 
         jpaSmsRepository.saveAll(smsList);
@@ -65,5 +69,10 @@ public class SmsService {
         return jpaSmsRepository.findAllBySendDtBetween(startLdt, endLdt).stream()
                 .map(SmsFindListResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    private SmsTemplate getSmsTemplate(Long templateId) {
+        return jpaSmsTemplateRepository.findById(templateId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 SMS 템플릿이 없습니다: " + templateId));
     }
 }

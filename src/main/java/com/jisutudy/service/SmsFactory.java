@@ -1,8 +1,9 @@
-package com.jisutudy.domain.sms;
+package com.jisutudy.service;
 
 import com.jisutudy.domain.CustSmsConsentType;
 import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.repository.JpaSmsTemplateRepository;
+import com.jisutudy.domain.sms.Sms;
+import com.jisutudy.domain.sms.SmsResult;
 import com.jisutudy.service.filter.SmsFilter;
 import com.jisutudy.service.smsTemplateVarBind.BindingDto;
 import com.jisutudy.service.smsTemplateVarBind.SmsTmpltVarBinder;
@@ -21,15 +22,10 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class SmsFactory {
-    private final JpaSmsTemplateRepository jpaSmsTemplateRepository;
     private final SmsFilter smsFilter;
     private final SmsTmpltVarBinder smsTmpltVarBinder;
 
-    public List<Sms> createSmsList(SmsSendRequestDto requestDto) {
-        SmsTemplate smsTemplate = getSmsTemplate(requestDto);
-
-        log.info("@@@@@ SmsFactory.createSmsList / 템플릿조회완료 ");
-
+    public List<Sms> createSmsList(SmsTemplate smsTemplate, SmsSendRequestDto requestDto) {
         return requestDto.getCustIdList().stream()
                 .map(custInfo -> create(custInfo, smsTemplate, requestDto))
                 .collect(Collectors.toList());
@@ -63,10 +59,4 @@ public class SmsFactory {
 
         return sms;
     }
-
-    private SmsTemplate getSmsTemplate(SmsSendRequestDto requestDto) {
-        return jpaSmsTemplateRepository.findById(requestDto.getTemplateId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 SMS 템플릿이 없습니다: " + requestDto.getTemplateId()));
-    }
-
 }

@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static jakarta.persistence.FetchType.*;
 
@@ -41,14 +40,11 @@ public class Sms extends BaseTimeEntity {
         this.smsTemplate = smsTemplate;
         this.smsContent = smsContent;
         this.sendPhoneNumber = sendPhoneNumber;
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-//        this.sendDt = LocalDateTime.parse(sendDt,formatter);
         this.sendDt = sendDt;
     }
 
     //== setter==
-    void setSmsResult(SmsResult smsResult) {
+    public void setSmsResult(SmsResult smsResult) {
         this.smsResult = smsResult;
     }
 }
