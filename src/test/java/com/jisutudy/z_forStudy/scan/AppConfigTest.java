@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.scan;
+package com.jisutudy.z_forStudy.scan;
 
 import com.jisutudy.AppConfig;
 import com.jisutudy.service.SmsService;

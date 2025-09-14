@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.lifecycle;
+package com.jisutudy.z_forStudy.lifecycle;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ConfigurableApplicationContext;

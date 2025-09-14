@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.autowired;
+package com.jisutudy.z_forStudy.autowired;
 
 import com.jisutudy.service.filter.timeSmsFilter.ProdTimeSmsFilter;
 import com.jisutudy.service.filter.timeSmsFilter.TestTimeSmsFilter;

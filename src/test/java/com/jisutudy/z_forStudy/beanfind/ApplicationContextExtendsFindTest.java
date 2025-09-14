@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.beanfind;
+package com.jisutudy.z_forStudy.beanfind;
 
 import com.jisutudy.AppConfig;
 import com.jisutudy.service.filter.timeSmsFilter.ProdTimeSmsFilter;

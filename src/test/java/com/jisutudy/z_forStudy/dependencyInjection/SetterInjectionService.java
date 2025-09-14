@@ -1,7 +1,5 @@
-package com.jisutudy.forStudy.dependencyInjection;
+package com.jisutudy.z_forStudy.dependencyInjection;
 
-import com.jisutudy.domain.SmsTemplate;
-import com.jisutudy.domain.SmsType;
 import com.jisutudy.repository.JpaSmsTemplateRepository;
 import com.jisutudy.repository.JpaTemplateVariableRepository;
 import jakarta.annotation.PostConstruct;

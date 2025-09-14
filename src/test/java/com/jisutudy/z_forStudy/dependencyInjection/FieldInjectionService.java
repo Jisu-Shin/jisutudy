@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.dependencyInjection;
+package com.jisutudy.z_forStudy.dependencyInjection;
 
 
 import com.jisutudy.repository.JpaSmsTemplateRepository;

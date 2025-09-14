@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.singleton;
+package com.jisutudy.z_forStudy.singleton;
 
 import com.jisutudy.service.filter.timeSmsFilter.ProdTimeSmsFilter;
 import com.jisutudy.service.filter.timeSmsFilter.TimeSmsFilter;

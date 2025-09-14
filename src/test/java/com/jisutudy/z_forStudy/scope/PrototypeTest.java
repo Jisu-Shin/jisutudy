@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.scope;
+package com.jisutudy.z_forStudy.scope;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;

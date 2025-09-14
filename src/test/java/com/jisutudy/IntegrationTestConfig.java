@@ -9,14 +9,9 @@ import org.springframework.context.annotation.*;
 
 @TestConfiguration
 @ComponentScan(
-        basePackages = "com.jisutudy")
+        basePackages = "com.jisutudy.service.filter")
 @PropertySource("classpath:application.properties")
 public class IntegrationTestConfig {
-
-//    @Bean
-//    public static PropertySourcesPlaceholderConfigurer propertyConfig() {
-//        return new PropertySourcesPlaceholderConfigurer();
-//    }
 
     @Bean
     public TimeSmsFilter timeSmsFilter() {

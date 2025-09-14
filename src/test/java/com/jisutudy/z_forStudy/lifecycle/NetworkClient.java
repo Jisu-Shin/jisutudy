@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.lifecycle;
+package com.jisutudy.z_forStudy.lifecycle;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;

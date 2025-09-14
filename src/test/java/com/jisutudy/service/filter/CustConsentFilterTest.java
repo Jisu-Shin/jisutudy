@@ -7,14 +7,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class CustConsentFilterTest {
 
-    CustConsentFilter custConsentFilter;
-
-    @BeforeEach
-    void setUp() {
-        custConsentFilter = new CustConsentFilter();
-    }
+    CustConsentFilter custConsentFilter = new CustConsentFilter();
 
     @Test
     public void 모두허용() throws Exception {
@@ -26,9 +23,9 @@ class CustConsentFilterTest {
         boolean sendable3 = custConsentFilter.isSendable(CustSmsConsentType.ALL_ALLOW, SmsType.ADVERTISING);
 
         //then
-        Assertions.assertEquals(true, sendable);
-        Assertions.assertEquals(true, sendable2);
-        Assertions.assertEquals(true, sendable3);
+        assertEquals(true, sendable);
+        assertEquals(true, sendable2);
+        assertEquals(true, sendable3);
     }
 
     @Test
@@ -41,9 +38,9 @@ class CustConsentFilterTest {
         boolean adverResult = custConsentFilter.isSendable(CustSmsConsentType.ALL_DENY, SmsType.ADVERTISING);
 
         //then
-        Assertions.assertEquals(false, infoResult);
-        Assertions.assertEquals(true, verifResult); // 인증은 항상 나가야 함
-        Assertions.assertEquals(false, adverResult);
+        assertEquals(false, infoResult);
+        assertEquals(true, verifResult); // 인증은 항상 나가야 함
+        assertEquals(false, adverResult);
     }
 
     @Test
@@ -56,9 +53,9 @@ class CustConsentFilterTest {
         boolean adverResult = custConsentFilter.isSendable(CustSmsConsentType.ADVERTISE_DENY, SmsType.ADVERTISING);
 
         //then
-        Assertions.assertEquals(true, infoResult);
-        Assertions.assertEquals(true, verifResult);
-        Assertions.assertEquals(false, adverResult);
+        assertEquals(true, infoResult);
+        assertEquals(true, verifResult);
+        assertEquals(false, adverResult);
     }
 
 }

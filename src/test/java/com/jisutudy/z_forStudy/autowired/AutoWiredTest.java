@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.autowired;
+package com.jisutudy.z_forStudy.autowired;
 
 import com.jisutudy.domain.sms.Sms;
 import jakarta.annotation.Nullable;

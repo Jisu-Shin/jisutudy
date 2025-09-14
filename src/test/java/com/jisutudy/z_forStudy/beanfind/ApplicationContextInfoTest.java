@@ -1,4 +1,4 @@
-package com.jisutudy.forStudy.beanfind;
+package com.jisutudy.z_forStudy.beanfind;
 
 import com.jisutudy.AppConfig;
 import org.junit.jupiter.api.DisplayName;
