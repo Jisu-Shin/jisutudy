@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SmsTemplateRequestDto {
 
+    private Long id;
     private String templateContent;
     private SmsType smsType;
 
@@ -22,8 +23,9 @@ public class SmsTemplateRequestDto {
     @Override
     public String toString() {
         return "SmsTemplateRequestDto{" +
-                "templateContent='" + templateContent + '\'' +
-                ", smsType='" + smsType + '\'' +
+                "id=" + id +
+                ", templateContent='" + templateContent + '\'' +
+                ", smsType=" + smsType +
                 '}';
     }
 }

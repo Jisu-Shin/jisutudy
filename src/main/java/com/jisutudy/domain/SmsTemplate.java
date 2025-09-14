@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,7 @@ public class SmsTemplate {
     @Enumerated(EnumType.STRING)
     private SmsType smsType;
 
+    //todo cascade 확인하기
     @OneToMany(mappedBy = "smsTemplate", cascade = CascadeType.PERSIST)
     private List<SmsTmpltVarRel> tmpltVarRelList = new ArrayList<>();
 
@@ -40,5 +42,14 @@ public class SmsTemplate {
     // ==연관 메서드==
     public void addRelation(TemplateVariable tmpltVar) {
         this.tmpltVarRelList.add(SmsTmpltVarRel.create(this, tmpltVar));
+    }
+
+    public void update(String templateContent, SmsType smsType) {
+        this.templateContent = templateContent;
+        this.smsType = smsType;
+    }
+
+    public void resetRelList() {
+        this.tmpltVarRelList = Collections.emptyList();
     }
 }

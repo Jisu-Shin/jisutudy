@@ -41,7 +41,6 @@ public class SmsTmpltVarRel {
     // == 연관관계 메서드 ==
     private void setSmsTemplate(SmsTemplate smsTemplate) {
         this.smsTemplate = smsTemplate;
-        this.smsTemplate.getTmpltVarRelList().add(this);
     }
 
     private void setTemplateVariable(TemplateVariable templateVariable) {

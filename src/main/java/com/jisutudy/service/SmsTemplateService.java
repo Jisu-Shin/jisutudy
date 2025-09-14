@@ -36,10 +36,20 @@ public class SmsTemplateService {
         return smsTemplate.getId();
     }
 
-    // todo 템플릿 수정
+    // 템플릿 수정
     @Transactional
-    public void update() {
+    public Long update(SmsTemplateRequestDto requestDto) {
+        SmsTemplate smsTemplate = smsTmpltRepository.findById(requestDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 템플릿은 없습니다 : " + requestDto.getId()));
 
+        smsTemplate.update(requestDto.getTemplateContent(), requestDto.getSmsType());
+
+        smsTemplate.resetRelList();
+
+        List<String> koTextList = TemplateVariableUtils.extractVariabels(requestDto.getTemplateContent());
+        addRelation(koTextList, smsTemplate);
+
+        return smsTemplate.getId();
     }
 
     public List<SmsTemplateListResponseDto> findAll() {
@@ -49,13 +59,11 @@ public class SmsTemplateService {
     }
 
     private void addRelation(List<String> koTextList, SmsTemplate smsTemplate) {
-        if (!koTextList.isEmpty()) {
-            for (String koText : koTextList) {
-                // 템플릿 변수 검증
-                TemplateVariable tmpltVar = tmpltVarRepository.findByKoText(koText)
-                        .orElseThrow(() -> new IllegalArgumentException("해당 템플릿 변수는 없습니다 : " + koText));
-                smsTemplate.addRelation(tmpltVar);
-            }
+        for (String koText : koTextList) {
+            // 템플릿 변수 검증
+            TemplateVariable tmpltVar = tmpltVarRepository.findByKoText(koText)
+                    .orElseThrow(() -> new IllegalArgumentException("해당 템플릿 변수는 없습니다 : " + koText));
+            smsTemplate.addRelation(tmpltVar);
         }
     }
 }
