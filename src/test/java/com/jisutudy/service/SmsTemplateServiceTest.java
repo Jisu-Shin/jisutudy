@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -107,12 +108,22 @@ class SmsTemplateServiceTest {
     }
 
     @Test
+    @Transactional
     public void 템플릿수정() throws Exception {
         //given
+        setUp();
+        String templateContent = "정보성 템플릿 저장 #{고객명}님께 안내해드리는~";
+        SmsTemplateRequestDto requestDto = new SmsTemplateRequestDto(templateContent, SmsType.INFORMAITONAL);
+        requestDto.setId(createdTemplateId);
 
         //when
+        Long updateId = smsTemplateService.update(requestDto);
 
         //then
+        SmsTemplate updatedTemplate = jpaSmsTemplateRepository.findById(updateId)
+                .orElseThrow(() -> new IllegalArgumentException("템플릿을 찾을 수 없습니다"));
+        assertThat(updatedTemplate.getTmpltVarRelList()).hasSize(1);
+        assertThat(updatedTemplate.getTemplateContent()).isEqualTo(templateContent);
     }
 
 }

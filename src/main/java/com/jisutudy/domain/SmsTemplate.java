@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -49,7 +48,7 @@ public class SmsTemplate {
         this.smsType = smsType;
     }
 
-    public void resetRelList() {
-        this.tmpltVarRelList = Collections.emptyList();
+    public void clearRelList() {
+        this.tmpltVarRelList.clear();
     }
 }

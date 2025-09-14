@@ -44,7 +44,7 @@ public class SmsTemplateService {
 
         smsTemplate.update(requestDto.getTemplateContent(), requestDto.getSmsType());
 
-        smsTemplate.resetRelList();
+        smsTemplate.clearRelList();
 
         List<String> koTextList = TemplateVariableUtils.extractVariabels(requestDto.getTemplateContent());
         addRelation(koTextList, smsTemplate);
