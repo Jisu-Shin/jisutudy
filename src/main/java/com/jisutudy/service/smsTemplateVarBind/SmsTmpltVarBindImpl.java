@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,15 +48,6 @@ public class SmsTmpltVarBindImpl implements SmsTmpltVarBinder {
                     return binder.getValues(entry.getValue(), bindingDto).entrySet().stream();
                 })
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-        for (Map.Entry<TemplateVariableType, List<TemplateVariable>> entry : grouping.entrySet()) {
-            if (entry.getValue().size() > 0) {
-                VariableBinder variableBinding = variableBinderMap.get(entry.getKey().getClassName());
-                log.info("@@@@@ 바인드임플에서 값 가져오기 전");
-                variableBinding.getValues(entry.getValue(), bindingDto).forEach((k, v) -> replacements.put(k, v));
-                log.info("@@@@@ 바인드임플에서 값 가져온 후 ");
-            }
-        }
 
         String messageContent = TemplateVariableUtils.replaceVariables(smsTemplate.getTemplateContent(), replacements);
         return messageContent;
