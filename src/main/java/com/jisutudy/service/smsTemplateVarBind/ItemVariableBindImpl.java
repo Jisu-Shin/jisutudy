@@ -25,9 +25,11 @@ public class ItemVariableBindImpl implements VariableBinder{
             if (tmpltVar.getKoText().equals("공연명")) {
                 replacements.put("공연명", item.getName());
             }
-
-            if (tmpltVar.getKoText().equals("공연가격")) {
+            else if (tmpltVar.getKoText().equals("공연가격")) {
                 replacements.put("공연가격", String.valueOf(item.getPrice()));
+            }
+            else {
+                throw new IllegalStateException("템플릿 변수 치환값이 없습니다: " + tmpltVar.getKoText());
             }
         }
 

@@ -25,6 +25,9 @@ public class CustVariableBindImpl implements VariableBinder {
             if (tmpltVar.getKoText().equals("고객명")) {
                 replacements.put("고객명", cust.getName());
             }
+            else {
+                throw new IllegalStateException("템플릿 변수 치환값이 없습니다: " + tmpltVar.getKoText());
+            }
         }
 
         return replacements;
